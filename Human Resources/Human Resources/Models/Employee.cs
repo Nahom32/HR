@@ -25,7 +25,6 @@ namespace Human_Resources.Models
         public Position Position { get; set; }
         //public int DepartmentId { get; set; }
         //[ForeignKey("DepartmentId")]
-        //[Required(ErrorMessage = "Department is Required")]
         //public Department Department { get; set; }
         public int BranchId { get; set; }
         [ForeignKey("BranchId")]

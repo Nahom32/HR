@@ -15,7 +15,7 @@ namespace Human_Resources.Models
         [Display(Name = "Department Name")]
         public string DepartmentName { get; set; }
         //Relations
-        public List<Employee> Employees{ get; set; }
+        //public List<Employee> Employees{ get; set; }
         public List<Branch> Branches { get; set; }
     }
 }

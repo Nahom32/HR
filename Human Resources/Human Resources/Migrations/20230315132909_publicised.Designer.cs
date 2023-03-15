@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Human_Resources.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230315124729_first")]
-    partial class first
+    [Migration("20230315132909_publicised")]
+    partial class publicised
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -125,9 +125,6 @@ namespace Human_Resources.Migrations
                     b.Property<int>("BranchId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DepartmentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -152,8 +149,6 @@ namespace Human_Resources.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BranchId");
-
-                    b.HasIndex("DepartmentId");
 
                     b.HasIndex("PositionId");
 
@@ -489,10 +484,6 @@ namespace Human_Resources.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Human_Resources.Models.Department", null)
-                        .WithMany("Employees")
-                        .HasForeignKey("DepartmentId");
-
                     b.HasOne("Human_Resources.Models.Position", "Position")
                         .WithMany()
                         .HasForeignKey("PositionId")
@@ -591,8 +582,6 @@ namespace Human_Resources.Migrations
             modelBuilder.Entity("Human_Resources.Models.Department", b =>
                 {
                     b.Navigation("Branches");
-
-                    b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
         }

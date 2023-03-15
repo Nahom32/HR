@@ -4,9 +4,14 @@ namespace Human_Resources.Data.Services
 {
     public class DepartmentService : IDepartmentService
     {
-        public Task AddDepartment(Department department)
+        private readonly AppDbContext _context;
+        public DepartmentService(AppDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public async Task AddDepartment(Department department)
+        {
+             _context.Departments.Add(department);
         }
 
         public Task DeleteDepartment(int id)

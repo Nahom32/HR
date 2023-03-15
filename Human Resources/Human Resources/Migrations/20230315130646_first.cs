@@ -236,8 +236,7 @@ namespace Human_Resources.Migrations
                     PhotoURL = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Sex = table.Column<int>(type: "int", nullable: false),
                     PositionId = table.Column<int>(type: "int", nullable: false),
-                    BranchId = table.Column<int>(type: "int", nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: true)
+                    BranchId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -248,11 +247,6 @@ namespace Human_Resources.Migrations
                         principalTable: "Branches",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Employees_Departments_DepartmentId",
-                        column: x => x.DepartmentId,
-                        principalTable: "Departments",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Employees_Positions_PositionId",
                         column: x => x.PositionId,
@@ -401,11 +395,6 @@ namespace Human_Resources.Migrations
                 name: "IX_Employees_BranchId",
                 table: "Employees",
                 column: "BranchId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Employees_DepartmentId",
-                table: "Employees",
-                column: "DepartmentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_PositionId",

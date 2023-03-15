@@ -23,15 +23,15 @@ namespace Human_Resources.Data
         //    .OnDelete(DeleteBehavior.Restrict);
 
         //}
-        DbSet<Employee> Employees { get; set; }
-        DbSet<Branch> Branches { get; set; }
-        DbSet<EducationalField> EducationalFields { get; set; }
-        DbSet<Grade> Grades { get; set; }
-        DbSet<Position> Positions { get; set; }
-        DbSet<Message> Messages { get; set; }
-        DbSet<GradeCategory> GradeCategories { get; set; }
-        DbSet<Allowance> Allowances { get; set; }
-        DbSet<Department> Departments { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Branch> Branches { get; set; }
+        public DbSet<EducationalField> EducationalFields { get; set; }
+        public DbSet<Grade> Grades { get; set; }
+        public DbSet<Position> Positions { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<GradeCategory> GradeCategories { get; set; }
+        public DbSet<Allowance> Allowances { get; set; }
+        public DbSet<Department> Departments { get; set; }
 
 
     }
