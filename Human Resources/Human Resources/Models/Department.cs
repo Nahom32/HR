@@ -16,5 +16,6 @@ namespace Human_Resources.Models
         public string DepartmentName { get; set; }
         //Relations
         public List<Employee> Employees{ get; set; }
+        public List<Branch> Branches { get; set; }
     }
 }

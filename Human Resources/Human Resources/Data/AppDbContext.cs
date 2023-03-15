@@ -1,6 +1,8 @@
 ﻿using Human_Resources.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace Human_Resources.Data
 {
@@ -10,8 +12,15 @@ namespace Human_Resources.Data
         {
             
         }
-        //protected override void onmodelcreating(modelbuilder modelbuilder)
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
+        //    modelBuilder.Entity<IdentityUserLogin<string>>().HasNoKey();
+        //    modelBuilder.Entity<Branch>()
+        //    .HasOne(b => b.Department)
+        //    .WithMany(d => d.Branches)
+        //    .HasForeignKey(b => b.DepartmentId)
+        //    .IsRequired(false)
+        //    .OnDelete(DeleteBehavior.Restrict);
 
         //}
         DbSet<Employee> Employees { get; set; }

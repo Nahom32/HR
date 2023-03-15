@@ -23,10 +23,13 @@ namespace Human_Resources.Models
         [ForeignKey("PositionId")]
         [Required(ErrorMessage = "Position is Required")]
         public Position Position { get; set; }
-        public int DepartmentId { get; set; }
-        [ForeignKey("DepartemntId")]
-        [Required(ErrorMessage = "Department is Required")]
-        public Department Department { get; set; }
+        //public int DepartmentId { get; set; }
+        //[ForeignKey("DepartmentId")]
+        //[Required(ErrorMessage = "Department is Required")]
+        //public Department Department { get; set; }
+        public int BranchId { get; set; }
+        [ForeignKey("BranchId")]
+        public Branch Branch { get; set; }
 
     }
 }

@@ -59,7 +59,12 @@ namespace Human_Resources.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("Branches");
                 });
@@ -114,10 +119,10 @@ namespace Human_Resources.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DepartemntId")
+                    b.Property<int>("BranchId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int?>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -143,7 +148,9 @@ namespace Human_Resources.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DepartemntId");
+                    b.HasIndex("BranchId");
+
+                    b.HasIndex("DepartmentId");
 
                     b.HasIndex("PositionId");
 
@@ -180,11 +187,16 @@ namespace Human_Resources.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("BranchId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BranchId");
 
                     b.ToTable("GradeCategories");
                 });
@@ -444,6 +456,17 @@ namespace Human_Resources.Migrations
                     b.Navigation("Employee");
                 });
 
+            modelBuilder.Entity("Human_Resources.Models.Branch", b =>
+                {
+                    b.HasOne("Human_Resources.Models.Department", "Department")
+                        .WithMany("Branches")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
             modelBuilder.Entity("Human_Resources.Models.EducationalField", b =>
                 {
                     b.HasOne("Human_Resources.Models.Position", "Position")
@@ -457,11 +480,15 @@ namespace Human_Resources.Migrations
 
             modelBuilder.Entity("Human_Resources.Models.Employee", b =>
                 {
-                    b.HasOne("Human_Resources.Models.Department", "Department")
-                        .WithMany("Employees")
-                        .HasForeignKey("DepartemntId")
+                    b.HasOne("Human_Resources.Models.Branch", "Branch")
+                        .WithMany()
+                        .HasForeignKey("BranchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Human_Resources.Models.Department", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("DepartmentId");
 
                     b.HasOne("Human_Resources.Models.Position", "Position")
                         .WithMany()
@@ -469,7 +496,7 @@ namespace Human_Resources.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Department");
+                    b.Navigation("Branch");
 
                     b.Navigation("Position");
                 });
@@ -483,6 +510,17 @@ namespace Human_Resources.Migrations
                         .IsRequired();
 
                     b.Navigation("GradeCategory");
+                });
+
+            modelBuilder.Entity("Human_Resources.Models.GradeCategory", b =>
+                {
+                    b.HasOne("Human_Resources.Models.Branch", "Branch")
+                        .WithMany()
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Branch");
                 });
 
             modelBuilder.Entity("Human_Resources.Models.Message", b =>
@@ -549,6 +587,8 @@ namespace Human_Resources.Migrations
 
             modelBuilder.Entity("Human_Resources.Models.Department", b =>
                 {
+                    b.Navigation("Branches");
+
                     b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
