@@ -6,7 +6,10 @@ namespace Human_Resources.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required]
+        [Display(Name ="Branch Name")]
         public string BranchName { get; set; }
+        //Relations
         List<Employee> Employees { get; set; }
 
     }

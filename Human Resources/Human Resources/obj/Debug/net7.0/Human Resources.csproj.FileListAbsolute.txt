@@ -1,0 +1,81 @@
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\appsettings.Development.json
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\appsettings.json
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Human Resources.staticwebassets.runtime.json
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Human Resources.exe
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Human Resources.deps.json
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Human Resources.runtimeconfig.json
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Human Resources.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Human Resources.pdb
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Azure.Core.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Azure.Identity.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Humanizer.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.Identity.Client.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Mono.TextTemplating.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\System.CodeDom.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\System.Drawing.Common.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\System.Memory.Data.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\System.Runtime.Caching.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\System.Security.Permissions.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\System.Windows.Extensions.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\Human Resources.csproj.AssemblyReference.cache
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\Human Resources.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\Human Resources.AssemblyInfoInputs.cache
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\Human Resources.AssemblyInfo.cs
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\Human Resources.csproj.CoreCompileInputs.cache
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\Human Resources.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\Human Resources.RazorAssemblyInfo.cache
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\Human Resources.RazorAssemblyInfo.cs
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\staticwebassets\msbuild.Human Resources.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\staticwebassets\msbuild.build.Human Resources.props
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.Human Resources.props
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.Human Resources.props
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\scopedcss\bundle\Human Resources.styles.css
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\scopedcss\projectbundle\Human Resources.bundle.scp.css
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\Human Resources.csproj.CopyComplete
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\Human Resources.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\refint\Human Resources.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\Human Resources.pdb
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\Human Resources.genruntimeconfig.cache
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\ref\Human Resources.dll
