@@ -14,5 +14,6 @@ namespace Human_Resources.Models
         [ForeignKey("PositionId")]
         public Position Position { get; set; }
 
+
     }
 }
