@@ -18,17 +18,17 @@ namespace Human_Resources.Data.Services
             await _context.SaveChangesAsync();
         }
         
-        public async Task DeleteDepartment(int id)
+        public void DeleteDepartment(Department department)
         {
-            var retval = await _context.Departments.FindAsync(id);
-            if (retval != null)
+            
+            if (department != null)
             {
-                _context.Departments.Remove(retval);
+                _context.Departments.Remove(department);
                 _context.SaveChanges();   
             }
             else
             {
-                throw new Exception($"The Value was not found with an id {id}");
+                throw new Exception($"The Value was not found ");
             }
         }
 
@@ -52,9 +52,11 @@ namespace Human_Resources.Data.Services
             }
         }
 
-        public Task UpdateDepartment(int id, Department department)
+        public void UpdateDepartment(Department department)
         {
-            throw new NotImplementedException();
+            _context.Departments.Update(department);
+            _context.SaveChanges();
+
         }
     }
 }

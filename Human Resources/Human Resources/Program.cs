@@ -1,4 +1,5 @@
 using Human_Resources.Data;
+using Human_Resources.Data.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
 ));
+builder.Services.AddScoped<IDepartmentService,DepartmentService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,6 +30,5 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
+    pattern: "{controller=Department}/{action=Index}/{id?}");
 app.Run();
