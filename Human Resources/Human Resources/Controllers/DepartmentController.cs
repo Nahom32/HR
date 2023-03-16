@@ -1,12 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Human_Resources.Data.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Human_Resources.Controllers
 {
     public class DepartmentController : Controller
     {
-        public IActionResult Index()
+        private readonly IDepartmentService _service;
+        public DepartmentController(IDepartmentService service)
         {
-            return View();
+            _service = service;  
         }
+        [HttpGet]
+        public async  Task<IActionResult> Index()
+        {
+            var allBranches = await _service.GetAll();
+
+            return View(allBranches);
+        }
+
     }
 }

@@ -8,14 +8,12 @@ namespace Human_Resources.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required(ErrorMessage = "Number of Employees field is Required")]
-        [Display(Name ="Number Of Employees")]
-        public int NoOfEmployees { get; set; }
+        [Required(ErrorMessage = "The description of the department is required")]
+        [Display(Name ="Department Description")]
+        public string DepartmentDescription { get; set; }
         [Required(ErrorMessage = "Department Name is Required")]
         [Display(Name = "Department Name")]
         public string DepartmentName { get; set; }
-        //Relations
-        //public List<Employee> Employees{ get; set; }
         public List<Branch> Branches { get; set; }
     }
 }
