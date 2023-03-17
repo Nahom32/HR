@@ -1,4 +1,5 @@
 ﻿using Human_Resources.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Human_Resources.Data.Services
 {
@@ -10,29 +11,48 @@ namespace Human_Resources.Data.Services
         {
             _context = context;  
         }
-        public Task AddEmployee(Employee employee)
+        public async Task AddEmployee(Employee employee)
         {
-            throw new NotImplementedException();
+            await _context.Employees.AddAsync(employee);
+            await _context.SaveChangesAsync();
         }
 
         public void DeleteDepartment(Employee employee)
         {
-            throw new NotImplementedException();
+            if (employee != null)
+            {
+                _context.Employees.Remove(employee);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("The Value was not found ");
+            }
         }
 
-        public Task<List<Employee>> GetAll()
+        public async Task<List<Employee>> GetAll()
         {
-            throw new NotImplementedException();
+            var retLis = await _context.Employees.ToListAsync();
+            return retLis;
         }
 
-        public Task<Employee> GetById(int id)
+        public async Task<Employee> GetById(int id)
         {
-            throw new NotImplementedException();
+            var retval = await _context.Employees.FindAsync(id);
+            if (retval != null)
+            {
+                return retval;
+            }
+            else
+            {
+                throw new Exception($"The Value was not found with an id {id}");
+            }
         }
 
         public void UpdateDepartment(Employee employee)
         {
-            throw new NotImplementedException();
+            _context.Employees.Update(employee);
+            _context.SaveChanges();
         }
     }
 }
