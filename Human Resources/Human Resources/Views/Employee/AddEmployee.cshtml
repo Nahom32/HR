@@ -1,0 +1,73 @@
+﻿@model Employee
+
+@{
+    ViewData["Title"] = "Employee Form";
+}
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1>@ViewData["Title"]</h1>
+            <div class="form-group text-center">
+                <img id="ProfilePicturePreview" class="border-info rounded-circle" style="max-width: 150px" />
+            </div>
+            <form method="post" asp-action="AddDepartment">
+                <div class="form-group">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <textarea asp-for="Email" class="form-control form-control-lg"></textarea>
+                    <span asp-validation-for="Email " class="text-danger"></span>
+                </div>
+                @*dlkf*@
+                <div class="form-group mb-3">
+                    <label asp-for="Sex" class="form-label"></label>
+                    <textarea asp-for="Sex" class="form-control form-control-lg"></textarea>
+                    <span asp-validation-for="Email " class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="PhotoURL" class="form-label"></label>
+                    <input type="file" asp-for="PhotoURL" />
+                    <span asp-validation-for="PhotoURL" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label asp-for="Sex" class="form-label"></label>
+                    <select asp-for="Sex" class="form-label">
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                    <span asp-validation-for="Sex" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="MaritalStatus" class="form-label"></label>
+                    <select asp-for="MaritalStatus" class="form-label">
+                        <option>Married</option>
+                        <option>UnMarried</option>
+                    </select>
+                    <span asp-validation-for="MaritalStatus" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <input type="submit" class="btn btn-primary" value="Add Employee">
+                    <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $("#ProfilePictureURL").val();
+        })
+        $("#ProfilePictureURL").on("change", function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $(this).val();
+        })
+    </script>
+}

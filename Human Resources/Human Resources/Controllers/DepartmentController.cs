@@ -31,13 +31,13 @@ namespace Human_Resources.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddDepartment([Bind("DepartmentName,DepartmentDescription")]Department department)
+        public async Task<IActionResult> AddDepartment([Bind("DepartmentName,DepartmentDescription")]Department department)
         {
             _logger.LogInformation(ModelState.IsValid.ToString());
             
             if (ModelState.IsValid)
             {
-                _service.AddDepartment(department);
+                await _service.AddDepartment(department);
                 _logger.LogInformation("success");
                 return RedirectToAction("index");
             }
