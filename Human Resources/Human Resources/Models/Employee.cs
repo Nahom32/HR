@@ -6,6 +6,7 @@ namespace Human_Resources.Models
 {
     public class Employee
     {
+        //1 Employee with a lot of educational field
         [Key]
         public int Id { get; set; }
         [Required(ErrorMessage = "Name is Required")]

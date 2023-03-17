@@ -2,6 +2,7 @@
 using Human_Resources.Data.Services;
 using Human_Resources.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Human_Resources.Controllers
 {
@@ -25,31 +26,39 @@ namespace Human_Resources.Controllers
         [HttpGet]
         public IActionResult AddDepartment()
         {
-            var department = new Department();
-            return View(department);
+            
+            return View();
         }
         [HttpPost]
-        public async Task<IActionResult> AddDepartment(Department department)
+        [ValidateAntiForgeryToken]
+        public IActionResult AddDepartment([Bind("DepartmentName,DepartmentDescription")]Department department)
         {
-            //if (Model.IsValid)
-            //{
-            await _service.AddDepartment(department);
-            _logger.LogInformation("success");
-
-            return RedirectToAction("index");
-       // }
-            //else
-            //{
-            //    _logger.LogInformation("failure");
-            //    _logger.LogInformation($"{department.Id},{department.DepartmentName},{department.DepartmentDescription}");
-            //    return View(department);
-            //}
+            _logger.LogInformation(ModelState.IsValid.ToString());
             
+            if (ModelState.IsValid)
+            {
+                _service.AddDepartment(department);
+                _logger.LogInformation("success");
+                return RedirectToAction("index");
+            }
+            else
+            {
+                _logger.LogInformation("failure");
+                var errorList = ModelState.Values.SelectMany(v => v.Errors)
+                                          .Select(e => e.ErrorMessage)
+                                          .ToList();
+                var errorString = string.Join("; ", errorList);
+                _logger.LogInformation(errorString);
+                _logger.LogInformation($"{department.Id},{department.DepartmentName},{department.DepartmentDescription}");
+                return View(department);
+            }
+           
+
         }
         [HttpGet]
-        public IActionResult EditDepartment(int id)
+        public async Task<IActionResult> EditDepartment(int id)
         {
-            var dept = _service.GetById(id);
+            var dept = await _service.GetById(id);
             if (dept == null)
             {
                 return View("department not found");

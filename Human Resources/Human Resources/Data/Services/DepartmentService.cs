@@ -8,9 +8,11 @@ namespace Human_Resources.Data.Services
     public class DepartmentService : IDepartmentService
     {
         private readonly AppDbContext _context;
-        public DepartmentService(AppDbContext context)
+        private readonly ILogger<DepartmentService> _logger;
+        public DepartmentService(AppDbContext context, ILogger<DepartmentService> logger)
         {
             _context = context;
+            _logger = logger;
         }
         public async Task AddDepartment(Department department)
         {
@@ -28,7 +30,7 @@ namespace Human_Resources.Data.Services
             }
             else
             {
-                throw new Exception($"The Value was not found ");
+                throw new Exception("The Value was not found ");
             }
         }
 
@@ -42,6 +44,7 @@ namespace Human_Resources.Data.Services
         public async Task<Department> GetById(int id)
         {
             var retval = await _context.Departments.FindAsync(id);
+            _logger.LogInformation(retval.GetType().ToString());
             if (retval != null)
             {
                 return retval;

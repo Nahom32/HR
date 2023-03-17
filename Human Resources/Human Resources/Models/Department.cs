@@ -17,8 +17,7 @@ namespace Human_Resources.Models
         [Display(Name = "Department Description")]
         [Required(ErrorMessage = "The description of the department is required")]
         public string DepartmentDescription { get; set; }
-       
-        
+    
         public List<Branch> Branches { get; set; }
     }
 }
