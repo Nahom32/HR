@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Human_Resources.Models
 {
@@ -13,8 +14,11 @@ namespace Human_Resources.Models
         public string PositionName { get; set; }
         [Display(Name = "Position Salary")]
         public double PositionSalary { get; set; }
+
         //Relations
-        
+        public int EmployeeId { get; set; }
+        [ForeignKey("EmployeeId")]
+        public Employee Employee { get; set; }
 
     }
 }

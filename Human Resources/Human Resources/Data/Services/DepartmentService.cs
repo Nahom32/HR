@@ -1,4 +1,5 @@
 ﻿using Human_Resources.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -19,6 +20,7 @@ namespace Human_Resources.Data.Services
             await _context.Departments.AddAsync(department);
             await _context.SaveChangesAsync();
         }
+        
         
         public void DeleteDepartment(Department department)
         {
@@ -44,7 +46,6 @@ namespace Human_Resources.Data.Services
         public async Task<Department> GetById(int id)
         {
             var retval = await _context.Departments.FindAsync(id);
-            _logger.LogInformation(retval.GetType().ToString());
             if (retval != null)
             {
                 return retval;

@@ -20,10 +20,11 @@
                 @dept.DepartmentDescription
             </td>
             <td class="align-middle">
-                <button class="btn btn-outline-primary" asp-action="EditDepartment" asp-route-Id ="@dept.Id"><i class="bi bi-pencil-square"></i>Edit</button> |
-                <button class="btn btn-outline-info"><i class="bi bi-eye"></i>Details</button> |
-                <button class="btn btn-danger text-white"><i class="bi bi-trash"></i>Delete</button>
+                <a class="btn btn-outline-primary" asp-action="EditDepartment" asp-route-Id ="@dept.Id"><i class="bi bi-pencil-square"></i>Edit</a> |
+                <a class="btn btn-outline-info"><i class="bi bi-eye"></i>Details</a> |
+                    <a class="btn btn-danger text-white" asp-action="DeleteDepartment" asp-route-Id="@dept.Id"><i class="bi bi-trash"></i>Delete</a>
             </td>
+
         </tr>
 
     }

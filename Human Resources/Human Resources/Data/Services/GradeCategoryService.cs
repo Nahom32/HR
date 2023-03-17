@@ -1,6 +1,7 @@
 ﻿namespace Human_Resources.Data.Services
 {
-    public class GradeCategoryService
+    public class GradeCategoryService: IGradeCategoryService
     {
+        
     }
 }

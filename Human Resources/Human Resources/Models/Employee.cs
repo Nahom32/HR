@@ -6,7 +6,7 @@ namespace Human_Resources.Models
 {
     public class Employee
     {
-        //1 Employee with a lot of educational field
+        
         [Key]
         public int Id { get; set; }
         [Required(ErrorMessage = "Name is Required")]
@@ -20,16 +20,9 @@ namespace Human_Resources.Models
         public string  PhotoURL { get; set; }
         [Required(ErrorMessage ="Sex is Required")]
         public Sex Sex { get; set; }
-        public int PositionId { get; set; }
-        [ForeignKey("PositionId")]
-        [Required(ErrorMessage = "Position is Required")]
-        public Position Position { get; set; }
-        //public int DepartmentId { get; set; }
-        //[ForeignKey("DepartmentId")]
-        //public Department Department { get; set; }
-        public int BranchId { get; set; }
-        [ForeignKey("BranchId")]
-        public Branch Branch { get; set; }
+        public int DepartmentId { get; set; }
+        [ForeignKey("DepartmentId")]
+        public Department Department { get; set; }
 
     }
 }

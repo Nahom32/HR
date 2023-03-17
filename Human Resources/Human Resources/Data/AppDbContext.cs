@@ -24,7 +24,6 @@ namespace Human_Resources.Data
 
         //}
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<Branch> Branches { get; set; }
         public DbSet<EducationalField> EducationalFields { get; set; }
         public DbSet<Grade> Grades { get; set; }
         public DbSet<Position> Positions { get; set; }

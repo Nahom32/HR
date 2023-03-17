@@ -73,15 +73,17 @@ namespace Human_Resources.Controllers
         {
             if (ModelState.IsValid)
             {
+                _logger.LogInformation("success");
                 _service.UpdateDepartment(department);
-                return RedirectToAction(nameof(EditDepartment));
-        }
+                return RedirectToAction("Index");
+            }
+            _logger.LogInformation("failure");
             return View(department);
     }
         [HttpGet]
-        public IActionResult DeleteDepartment(int id)
+        public async Task<IActionResult> DeleteDepartment(int id)
         {
-            var deleteValue = _service.GetById(id);
+            var deleteValue = await _service.GetById(id);
             if (deleteValue == null)
             {
                 return View("Value not found");
@@ -91,16 +93,25 @@ namespace Human_Resources.Controllers
                 return View(deleteValue);
             }
         }
-        [HttpPost]
-        public IActionResult DeleteDepartment(Department department)
+        [HttpPost, ActionName("DeleteDepartment")]
+        public async Task<IActionResult> DeleteDepartmentConfirmend(int id)
+
         {
-            if (ModelState.IsValid)
+            var department = await _service.GetById(id);
+            if (department != null)
             {
+                _logger.LogInformation("success");
                _service.DeleteDepartment(department);
-                return RedirectToAction(nameof(DeleteDepartment));
+                return RedirectToAction("Index");
             }
             else
             {
+                _logger.LogInformation("failed");
+                var errorList = ModelState.Values.SelectMany(v => v.Errors)
+                                          .Select(e => e.ErrorMessage)
+                                          .ToList();
+                var errorString = string.Join("; ", errorList);
+                _logger.LogInformation(errorString);
                 return View(department);
             }
         }

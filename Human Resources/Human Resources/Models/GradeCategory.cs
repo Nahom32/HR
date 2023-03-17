@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Human_Resources.Models
@@ -10,9 +11,8 @@ namespace Human_Resources.Models
         [Required(ErrorMessage ="Category Name is Required")]
         [Display(Name ="Category Name")]
         public string CategoryName { get; set; }
-        public int BranchId { get; set; }
-        [ForeignKey("BranchId")]
-        public Branch Branch { get; set; }
-
+        public int DepartmentId { get; set; }
+        [ForeignKey("DepartmentId")]
+        public Department Department { get; set; }
     }
 }
