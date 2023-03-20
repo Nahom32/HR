@@ -8,7 +8,7 @@ namespace Human_Resources.Data.Services
         public Task<List<Employee>> GetAll();
         public Task<Employee> GetById(int id);
         public Task AddEmployee(EmployeeViewModel employee);
-        public void UpdateEmployee(EmployeeViewModel employee);
+        public Task UpdateEmployee(EmployeeViewModel employee);
         public void DeleteEmployee(EmployeeViewModel employee);
         public Task<DepartmentdropdownViewModel> GetDepartmentdropdowns();
 

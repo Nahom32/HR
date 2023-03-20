@@ -51,7 +51,7 @@ namespace Human_Resources.Data.Services
 
         public async Task<Employee> GetById(int id)
         {
-            var retval = await _context.Employees.FindAsync(id);
+            var retval = await _context.Employees.Include(e => e.Department).FirstOrDefaultAsync(n => n.Id ==id);
             if (retval != null)
             {
                 return retval;
@@ -62,9 +62,19 @@ namespace Human_Resources.Data.Services
             }
         }
 
-        public void UpdateEmployee(EmployeeViewModel employee)
+        public async Task UpdateEmployee(EmployeeViewModel employee)
         {
-            throw new NotImplementedException();
+            var DbEmployee = await _context.Employees.FirstOrDefaultAsync(n => n.Id == employee.Id);
+            if (DbEmployee != null)
+            {
+                DbEmployee.Name = employee.Name;
+                DbEmployee.Email = employee.Email;
+                DbEmployee.PhotoURL = employee.PhotoURL;
+                DbEmployee.DepartmentId = employee.DepartmentId;
+                DbEmployee.MaritalStatus = employee.MaritalStatus;
+                DbEmployee.Sex = employee.Sex;
+
+            }
         }
         public async Task<DepartmentdropdownViewModel> GetDepartmentdropdowns()
         {

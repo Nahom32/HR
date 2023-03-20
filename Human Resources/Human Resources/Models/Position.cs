@@ -15,9 +15,6 @@ namespace Human_Resources.Models
         public double PositionSalary { get; set; }
 
         //Relations
-        public int EmployeeId { get; set; }
-        [ForeignKey("EmployeeId")]
-        public Employee Employee { get; set; }
 
     }
 }

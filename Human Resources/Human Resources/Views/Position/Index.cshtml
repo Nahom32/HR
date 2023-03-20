@@ -1,0 +1,39 @@
+﻿@model List<Position>
+@{
+    ViewData["title"] = "Available Departments";
+}
+@if (Model.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th>Position Name</th>
+            <th>Salary</th>
+            <th>Actions</th>
+        </tr>
+        @foreach (var position in Model)
+        {
+            <tr>
+                <td class="align-middle">
+                    @position.PositionName
+                </td>
+                <td class="align-middle">
+                    @position.PositionSalary
+                </td>
+                <td class="align-middle">
+                    <a class="btn btn-outline-primary" asp-action="EditPosition" asp-route-Id="@position.Id"><i class="bi bi-pencil-square"></i>Edit</a> |
+                    <a class="btn btn-outline-info"><i class="bi bi-eye"></i>Details</a> |
+                    <a class="btn btn-danger text-white" asp-action="DeletePosition" asp-route-Id="@position.Id"><i class="bi bi-trash"></i>Delete</a>
+                </td>
+
+            </tr>
+
+        }
+        <a class="btn btn-primary" asp-action="AddPosition">Add a Position</a>
+    </table>
+}
+else
+{
+    <h4 class="text-danger align-content-center">No Position Given</h4>
+    <a class="btn btn-primary" asp-action="AddPosition">Add a Position</a>
+
+}

@@ -1,4 +1,5 @@
 ﻿using Human_Resources.Data.Enum;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -23,6 +24,9 @@ namespace Human_Resources.Models
         public int DepartmentId { get; set; }
         [ForeignKey("DepartmentId")]
         public Department Department { get; set; }
+        public int PositionId { get; set; }
+        [ForeignKey("PositionId")]
+        public Position Position { get; set; }
 
     }
 }

@@ -1,0 +1,29 @@
+﻿@model Position
+@{
+    ViewData["Title"] = "Delete a Position";
+}
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1>@ViewData["Title"]</h1>
+            <form method="post" asp-action="DeletePosition">
+                <div class="form-group">
+                    <label asp-for="PositionName" class="form-label"></label>
+                    <input asp-for="PositionName" class="form-control" />
+                    <span asp-validation-for="PositionName" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="PositionSalary" class="form-label"></label>
+                    <input asp-for="PositionSalary" class="form-control form-control-lg" />
+                    <span asp-validation-for="PositionSalary" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <input type="submit" class="btn btn-primary" value="Delete">
+                    <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -26,8 +26,11 @@ namespace Human_Resources.Data.ViewModels
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
 
+        [Required(ErrorMessage = "Position is Required")]
+        [Display(Name = "Department")]
+        public int PositionId { get; set; }
 
-        
+
     }
 
 }
