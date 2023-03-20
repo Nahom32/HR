@@ -1,4 +1,5 @@
-﻿using Human_Resources.Models;
+﻿using Human_Resources.Data.ViewModels;
+using Human_Resources.Models;
 
 namespace Human_Resources.Data.Services
 {
@@ -9,7 +10,7 @@ namespace Human_Resources.Data.Services
         public Task AddDepartment(Department department);
         public void UpdateDepartment(Department department);
         public void DeleteDepartment(Department department);
-
+        
 
     }
 }
