@@ -18,6 +18,7 @@ namespace Human_Resources.Models
         [Required(ErrorMessage = "Marital Status is Required")]
         [Display(Name = "Marital Status")]
         public MaritalStatus MaritalStatus { get; set; }
+        [Display(Name = "Photo")]
         public string  PhotoURL { get; set; }
         [Required(ErrorMessage ="Sex is Required")]
         public Sex Sex { get; set; }
