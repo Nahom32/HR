@@ -1,41 +1,42 @@
-﻿using Human_Resources.Data.Services;
+﻿using Human_Resources.Data;
+using Human_Resources.Data.Services;
 using Human_Resources.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Human_Resources.Controllers
 {
-    public class PositionController : Controller
+    public class EducationalFieldController : Controller
     {
-        private readonly IPositionService _service;
-        private readonly ILogger<PositionController> _logger;
-        public PositionController(IPositionService service, ILogger<PositionController> logger)
+        private readonly IEducationalFieldService _service;
+        private readonly ILogger<EducationalFieldController> _logger;
+        public EducationalFieldController(IEducationalFieldService service, ILogger<EducationalFieldController> logger)
         {
             _service = service;
             _logger = logger;
-
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var allPositions = await _service.GetAll();
+            var allEducationalFields = await _service.GetAll();
 
-            return View(allPositions);
+            return View(allEducationalFields);
         }
         [HttpGet]
-        public IActionResult AddPosition()
+        public IActionResult AddEducationalField()
         {
 
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddPosition(Position position)
+        public async Task<IActionResult> AddEducationalField(EducationalField educationalField)
         {
             _logger.LogInformation(ModelState.IsValid.ToString());
 
             if (ModelState.IsValid)
             {
-                await _service.AddPosition(position);
+                await _service.AddEducationalField(educationalField);
                 _logger.LogInformation("success");
                 return RedirectToAction("index");
             }
@@ -47,38 +48,39 @@ namespace Human_Resources.Controllers
                                           .ToList();
                 var errorString = string.Join("; ", errorList);
                 _logger.LogInformation(errorString);
-                return View(position);
+                
+                return View(educationalField);
             }
 
 
         }
         [HttpGet]
-        public async Task<IActionResult> EditPosition(int id)
+        public async Task<IActionResult> EditEducationalField(int id)
         {
-            var position = await _service.GetById(id);
-            if (position == null)
+            var eduField = await _service.GetById(id);
+            if (eduField == null)
             {
-                return View("Position not found");
+                return View("Educational Field not found");
             }
             else
             {
-                return View(position);
+                return View(eduField);
             }
         }
         [HttpPost]
-        public IActionResult EditPosition(Position position)
+        public IActionResult EditEducationalField(EducationalField educationalField)
         {
             if (ModelState.IsValid)
             {
                 _logger.LogInformation("success");
-                _service.UpdatePosition(position);
+                _service.UpdateEducationalField(educationalField);
                 return RedirectToAction("Index");
             }
             _logger.LogInformation("failure");
-            return View(position);
+            return View(educationalField);
         }
         [HttpGet]
-        public async Task<IActionResult> DeletePosition(int id)
+        public async Task<IActionResult> DeleteEducationalField(int id)
         {
             var deleteValue = await _service.GetById(id);
             if (deleteValue == null)
@@ -90,14 +92,15 @@ namespace Human_Resources.Controllers
                 return View(deleteValue);
             }
         }
-        [HttpPost, ActionName("DeletePosition")]
-        public async Task<IActionResult> DeletePositionConfirmed(int id)
+        [HttpPost, ActionName("DeleteEducationalField")]
+        public async Task<IActionResult> DeleteEducationalFieldConfirmed(int id)
+
         {
-            var position = await _service.GetById(id);
-            if (position != null)
+            var educationalField = await _service.GetById(id);
+            if (educationalField != null)
             {
                 _logger.LogInformation("success");
-                _service.DeletePosition(position);
+                _service.DeleteEducationalField(educationalField);
                 return RedirectToAction("Index");
             }
             else
@@ -108,8 +111,12 @@ namespace Human_Resources.Controllers
                                           .ToList();
                 var errorString = string.Join("; ", errorList);
                 _logger.LogInformation(errorString);
-                return View(position);
+                return View(educationalField);
             }
         }
+
+
+
     }
 }
+

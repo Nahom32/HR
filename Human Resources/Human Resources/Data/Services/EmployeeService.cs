@@ -24,6 +24,9 @@ namespace Human_Resources.Data.Services
                 Sex = employeeViewModel.Sex,
                 MaritalStatus = employeeViewModel.MaritalStatus,
                 DepartmentId = employeeViewModel.DepartmentId,
+                PositionId = employeeViewModel.PositionId,
+                EducationalLevel = employeeViewModel.EducationalLevel,
+                EducationalFieldId = employeeViewModel.EducationalFieldId,
             };
             await _context.Employees.AddAsync(employee);
             await _context.SaveChangesAsync();
@@ -73,7 +76,11 @@ namespace Human_Resources.Data.Services
                 DbEmployee.DepartmentId = employee.DepartmentId;
                 DbEmployee.MaritalStatus = employee.MaritalStatus;
                 DbEmployee.Sex = employee.Sex;
-
+                DbEmployee.EducationalFieldId = employee.EducationalFieldId;
+                DbEmployee.EducationalLevel = employee.EducationalLevel;
+                DbEmployee.PositionId = employee.PositionId;
+                _context.Employees.Update(DbEmployee);
+                _context.SaveChanges();
             }
         }
         public async Task<DepartmentdropdownViewModel> GetDepartmentdropdowns()
@@ -84,7 +91,23 @@ namespace Human_Resources.Data.Services
             };
             return response;
         }
+        public async Task<PositiondropdownViewModel> GetPositiondropdowns()
+        {
+            var response = new PositiondropdownViewModel()
+            {
+                Positions = await _context.Positions.ToListAsync()
+        };
+            return response;
+        }
+        public async Task<EducationalFielddropdownViewModel> GetEducationalFielddropdowns()
+        {
+            var response = new EducationalFielddropdownViewModel()
+            {
+                EducationalFields = await _context.EducationalFields.ToListAsync()
+            };
+            return response;
+        }
 
-       
+
     }
 }

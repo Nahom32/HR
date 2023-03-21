@@ -11,6 +11,7 @@ namespace Human_Resources.Data.Services
         public Task UpdateEmployee(EmployeeViewModel employee);
         public void DeleteEmployee(EmployeeViewModel employee);
         public Task<DepartmentdropdownViewModel> GetDepartmentdropdowns();
-
+        public Task<PositiondropdownViewModel> GetPositiondropdowns();
+        public  Task<EducationalFielddropdownViewModel> GetEducationalFielddropdowns();
     }
 }

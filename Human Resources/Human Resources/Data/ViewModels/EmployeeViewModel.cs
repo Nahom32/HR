@@ -25,10 +25,16 @@ namespace Human_Resources.Data.ViewModels
         [Required(ErrorMessage = "Department is Required")]
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
+        [Required(ErrorMessage = "Educational Field is Required")]
+        [Display(Name = "Educational Field")]
+        public EducationalLevel EducationalLevel { get; set; }
 
         [Required(ErrorMessage = "Position is Required")]
-        [Display(Name = "Department")]
+        [Display(Name = "Position")]
         public int PositionId { get; set; }
+        [Required(ErrorMessage = "Educational Field is Required")]
+        [Display(Name = "Educational Field")]
+        public int EducationalFieldId { get; set; }
 
 
     }

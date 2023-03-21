@@ -21,12 +21,19 @@ namespace Human_Resources.Models
         public string  PhotoURL { get; set; }
         [Required(ErrorMessage ="Sex is Required")]
         public Sex Sex { get; set; }
+        public EducationalLevel EducationalLevel { get; set; }
         public int DepartmentId { get; set; }
         [ForeignKey("DepartmentId")]
+
         public Department Department { get; set; }
         public int PositionId { get; set; }
         [ForeignKey("PositionId")]
         public Position Position { get; set; }
+
+        public int EducationalFieldId { get; set; }
+        [ForeignKey("EducationalFieldId")]
+        public EducationalField EducationalField{ get; set; }
+        
 
     }
 }

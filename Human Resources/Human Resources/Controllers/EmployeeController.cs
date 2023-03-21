@@ -23,9 +23,13 @@ namespace Human_Resources.Controllers
         public async Task<IActionResult> AddEmployee()
         {
             var lists = await _service.GetDepartmentdropdowns();
+            var Positions = await _service.GetPositiondropdowns();
+            var EducationalFields = await _service.GetEducationalFielddropdowns();
             
             var employeeViewModel = new EmployeeViewModel();
             ViewBag.Departments = new SelectList(lists.Departments, "Id", "DepartmentName");
+            ViewBag.Positions = new SelectList(Positions.Positions, "Id", "PositionName");
+            ViewBag.EducationalFields = new SelectList(EducationalFields.EducationalFields, "Id", "Name");
             return View(employeeViewModel);
         }
         [HttpPost]
@@ -34,8 +38,10 @@ namespace Human_Resources.Controllers
             if(!ModelState.IsValid)
             {
                 var Departments = await _service.GetDepartmentdropdowns();
+                var Positions = await _service.GetPositiondropdowns();
 
                 ViewBag.Departments = new SelectList(Departments.Departments, "Id", "DepartmentName");
+                ViewBag.Positions = new SelectList(Positions.Positions, "Id", "PositionName");
                 return View(employeeViewModel);
             }
             await _service.AddEmployee(employeeViewModel);
