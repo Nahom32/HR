@@ -83,13 +83,13 @@
                 </ul>
             </div>
         </nav>
-    </header>
+    
 
     <button class="btn btn-default d-md-none" type="button" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="sidebar">
         <i class="fas fa-bars"></i>
     </button>
 
-    <aside class="left-sidebar collapse" id="sidebar" data-sidebarbg="skin4">
+    <aside class="left-sidebar " id="sidebar" data-sidebarbg="skin6">
         <!-- Sidebar scroll-->
         <div class="scroll-sidebar">
             <!-- Sidebar navigation-->
@@ -129,6 +129,7 @@
         </div>
         <!-- End Sidebar scroll-->
     </aside>
+    </header>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -141,25 +142,25 @@
         </div>
     </footer>
     
-    <script src="~/lib/jquery/dist/jquery.min.js" defer></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
-    <script src="~/js/site.js" asp-append-version="true" defer></script>
-    <script src="~/plugins/bower_components/jquery/dist/jquery.min.js" defer></script>
+    <script src="~/lib/jquery/dist/jquery.min.js" ></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
+    <script src="~/js/site.js" asp-append-version="true" ></script>
+    <script src="~/plugins/bower_components/jquery/dist/jquery.min.js" ></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="~/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
-    <script src="~/js/app-style-switcher.js" defer></script>
-    <script src="~/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js" defer></script>
+    <script src="~/bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
+    <script src="~/js/app-style-switcher.js" ></script>
+    <script src="~/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js" ></script>
     <!--Wave Effects -->
-    <script src="~/js/waves.js" defer></script>
+    <script src="~/js/waves.js" ></script>
     <!--Menu sidebar -->
-    <script src="~/js/sidebarmenu.js" defer></script>
+    <script src="~/js/sidebarmenu.js" ></script>
     <!--Custom JavaScript -->
-    <script src="~/js/custom.js" defer></script>
+    <script src="~/js/custom.js" ></script>
     <!--This page JavaScript -->
     <!--chartis chart-->
-    <script src="~/plugins/bower_components/chartist/dist/chartist.min.js" defer></script>
-    <script src="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js" defer></script>
-    <script src="~/js/pages/dashboards/dashboard1.js" defer></script>
+    <script src="~/plugins/bower_components/chartist/dist/chartist.min.js" ></script>
+    <script src="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js" ></script>
+    <script src="~/js/pages/dashboards/dashboard1.js" ></script>
   
     @await RenderSectionAsync("Scripts", required: false)
 </body>
