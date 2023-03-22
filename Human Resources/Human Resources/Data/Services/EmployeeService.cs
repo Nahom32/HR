@@ -32,18 +32,19 @@ namespace Human_Resources.Data.Services
             await _context.SaveChangesAsync();
         }
 
-        public void DeleteEmployee(EmployeeViewModel employee)
+        public async Task DeleteEmployee(EmployeeViewModel employee)
         {
-            //if (employee != null)
-            //{
-            //    _context.Employees.Remove(employee);
-            //    _context.SaveChanges();
-            //}
-            //else
-            //{
-            //    throw new Exception("The Value was not found ");
-            //}
-            throw new NotImplementedException();
+            var toDelete  = await _context.Employees.FirstOrDefaultAsync(n => n.Id == employee.Id);
+            if (toDelete != null)
+            {
+                _context.Employees.Remove(toDelete);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("The described Employee doesn't Exist");
+            }
+        
         }
 
         public async Task<List<Employee>> GetAll()
@@ -82,7 +83,9 @@ namespace Human_Resources.Data.Services
                 _context.Employees.Update(DbEmployee);
                 _context.SaveChanges();
             }
+
         }
+
         public async Task<DepartmentdropdownViewModel> GetDepartmentdropdowns()
         {
             var response = new DepartmentdropdownViewModel()

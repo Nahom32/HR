@@ -8,34 +8,119 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Human_Resources.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="~/plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
+    <!-- Custom CSS -->
+    <link href="~/css/style.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Department" asp-action="Index">Departments</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">Employees</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Position" asp-action="Index">Positions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="EducationalField" asp-action="Index">Educational Fields</a>
-                        </li>
-                    </ul>
-                </div>
+    <header class="topbar" data-navbarbg="skin5">
+        
+        <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+            <div class="navbar-header" data-logobg="skin6">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <a class="navbar-brand" href="dashboard.html">
+                    <!-- Logo icon -->
+                    <b class="logo-icon">
+                        <!-- Dark Logo icon -->
+                        <img src="plugins/images/logo-icon.png" alt="homepage" />
+                    </b>
+                    <!--End Logo icon -->
+                    <!-- Logo text -->
+                    <span class="logo-text">
+                        <!-- dark Logo text -->
+                        <img src="plugins/images/logo-text.png" alt="homepage" />
+                    </span>
+                </a>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- toggle and nav items -->
+                <!-- ============================================================== -->
+                <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
+                   href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Logo -->
+            <!-- ============================================================== -->
+            <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+
+                <!-- ============================================================== -->
+                <!-- Right side toggle and nav items -->
+                <!-- ============================================================== -->
+                <ul class="navbar-nav ms-auto d-flex align-items-center">
+
+                    <!-- ============================================================== -->
+                    <!-- Search -->
+                    <!-- ============================================================== -->
+                    <li class=" in">
+                        <form role="search" class="app-search d-none d-md-block me-3">
+                            <input type="text" placeholder="Search..." class="form-control mt-0">
+                            <a href="" class="active">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </form>
+                    </li>
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                    <li>
+                        <a class="profile-pic" href="#">
+                            <img src="plugins/images/users/varun.jpg" alt="user-img" width="36"
+                                 class="img-circle"><span class="text-white font-medium">Steave</span>
+                        </a>
+                    </li>
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                </ul>
             </div>
         </nav>
+
     </header>
+    <aside class="left-sidebar" data-sidebarbg="skin4">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                    <!-- User Profile-->
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link text-secondary"
+                           asp-area="" asp-controller="Department" asp-action="Index">
+                           <i class="bi bi-building" aria-hidden="true"></i>Departments</a>
+
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link text-secondary" asp-controller="Employee" asp-action="Index"
+                           aria-expanded="false">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <span class="hide-menu">Employees</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link text-secondary" asp-controller="Position" asp-action="Index"
+                           aria-expanded="false">
+                            <i class="fa fa-table" aria-hidden="true"></i>
+                            <span class="hide-menu">Positions</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link text-secondary" asp-controller="Educational Fields" asp-action="Index"
+                           aria-expanded="false">
+                            <i class="fa fa-font" aria-hidden="true"></i>
+                            <span class="hide-menu">Educational Fields</span>
+                        </a>
+                    </li>             
+                </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -47,9 +132,27 @@
             &copy; 2023 - Human_Resources - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    <script src="~/lib/jquery/dist/jquery.min.js" defer></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="~/js/site.js" asp-append-version="true" defer></script>
+    <script src="~/plugins/bower_components/jquery/dist/jquery.min.js" defer></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="~/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="~/js/app-style-switcher.js" defer></script>
+    <script src="~/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js" defer></script>
+    <!--Wave Effects -->
+    <script src="~/js/waves.js" defer></script>
+    <!--Menu sidebar -->
+    <script src="~/js/sidebarmenu.js" defer></script>
+    <!--Custom JavaScript -->
+    <script src="~/js/custom.js" defer></script>
+    <!--This page JavaScript -->
+    <!--chartis chart-->
+    <script src="~/plugins/bower_components/chartist/dist/chartist.min.js" defer></script>
+    <script src="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js" defer></script>
+    <script src="~/js/pages/dashboards/dashboard1.js" defer></script>
+  
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

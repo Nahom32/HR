@@ -9,7 +9,7 @@ namespace Human_Resources.Data.Services
         public Task<Employee> GetById(int id);
         public Task AddEmployee(EmployeeViewModel employee);
         public Task UpdateEmployee(EmployeeViewModel employee);
-        public void DeleteEmployee(EmployeeViewModel employee);
+        public Task DeleteEmployee(EmployeeViewModel employee);
         public Task<DepartmentdropdownViewModel> GetDepartmentdropdowns();
         public Task<PositiondropdownViewModel> GetPositiondropdowns();
         public  Task<EducationalFielddropdownViewModel> GetEducationalFielddropdowns();

@@ -5,16 +5,220 @@
       "PackagePath": "staticwebassets\\Human Resources.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\.DS_Store",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\.DS_Store"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
       "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\css\\style.min.css",
+      "PackagePath": "staticwebassets\\css\\style.min.css"
     },
     {
       "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\js\\app-style-switcher.js",
+      "PackagePath": "staticwebassets\\js\\app-style-switcher.js"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\js\\custom.js",
+      "PackagePath": "staticwebassets\\js\\custom.js"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\js\\pages\\dashboards\\dashboard1.js",
+      "PackagePath": "staticwebassets\\js\\pages\\dashboards\\dashboard1.js"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\js\\sidebarmenu.js",
+      "PackagePath": "staticwebassets\\js\\sidebarmenu.js"
+    },
+    {
       "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\js\\waves.js",
+      "PackagePath": "staticwebassets\\js\\waves.js"
     },
     {
       "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\lib\\bootstrap\\LICENSE",
@@ -243,6 +447,166 @@
     {
       "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\.DS_Store",
+      "PackagePath": "staticwebassets\\plugins\\.DS_Store"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\bower_components\\chartist-plugin-tooltips\\dist\\chartist-plugin-tooltip.css",
+      "PackagePath": "staticwebassets\\plugins\\bower_components\\chartist-plugin-tooltips\\dist\\chartist-plugin-tooltip.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\bower_components\\chartist\\dist\\chartist.min.css",
+      "PackagePath": "staticwebassets\\plugins\\bower_components\\chartist\\dist\\chartist.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\bower_components\\perfect-scrollbar\\dist\\css\\perfect-scrollbar.min.css",
+      "PackagePath": "staticwebassets\\plugins\\bower_components\\perfect-scrollbar\\dist\\css\\perfect-scrollbar.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\.DS_Store",
+      "PackagePath": "staticwebassets\\plugins\\images\\.DS_Store"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\custom-select.png",
+      "PackagePath": "staticwebassets\\plugins\\images\\custom-select.png"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\favicon.png",
+      "PackagePath": "staticwebassets\\plugins\\images\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\large\\img1.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\large\\img1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\logo-icon.png",
+      "PackagePath": "staticwebassets\\plugins\\images\\logo-icon.png"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\logo-light-icon.png",
+      "PackagePath": "staticwebassets\\plugins\\images\\logo-light-icon.png"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\logo-light-text.png",
+      "PackagePath": "staticwebassets\\plugins\\images\\logo-light-text.png"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\logo-text.png",
+      "PackagePath": "staticwebassets\\plugins\\images\\logo-text.png"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\1-old.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\1-old.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\1.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\1.png",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\1.png"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\2.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\2.png",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\2.png"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\3.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\3.png",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\3.png"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\4.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\5.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\6.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\7.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\8.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\agent.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\agent.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\agent2.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\agent2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\arijit.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\arijit.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\d1.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\d1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\d2.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\d2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\d3.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\d3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\d4.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\d4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\d5.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\d5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\genu.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\genu.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\govinda.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\govinda.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\hritik.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\hritik.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\pawandeep.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\pawandeep.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\profile.png",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\profile.png"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\ritesh.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\ritesh.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\sonu.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\sonu.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\plugins\\images\\users\\varun.jpg",
+      "PackagePath": "staticwebassets\\plugins\\images\\users\\varun.jpg"
     },
     {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.Human Resources.Microsoft.AspNetCore.StaticWebAssets.props",
