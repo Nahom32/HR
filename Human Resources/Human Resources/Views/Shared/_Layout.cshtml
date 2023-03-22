@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
     <!-- Custom CSS -->
     <link href="~/css/style.min.css" rel="stylesheet">
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>*@
+
 </head>
 <body>
     <header class="topbar" data-navbarbg="skin5">
@@ -79,9 +83,13 @@
                 </ul>
             </div>
         </nav>
-
     </header>
-    <aside class="left-sidebar" data-sidebarbg="skin4">
+
+    <button class="btn btn-default d-md-none" type="button" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="sidebar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <aside class="left-sidebar collapse" id="sidebar" data-sidebarbg="skin4">
         <!-- Sidebar scroll-->
         <div class="scroll-sidebar">
             <!-- Sidebar navigation-->
@@ -96,7 +104,7 @@
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link waves-effect waves-dark sidebar-link text-secondary" asp-controller="Employee" asp-action="Index"
-                           aria-expanded="false">
+                           aria-expanded ="false">
                             <i class="fa fa-user" aria-hidden="true"></i>
                             <span class="hide-menu">Employees</span>
                         </a>
@@ -109,7 +117,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link waves-effect waves-dark sidebar-link text-secondary" asp-controller="Educational Fields" asp-action="Index"
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link text-secondary" asp-controller="EducationalFields" asp-action="Index"
                            aria-expanded="false">
                             <i class="fa fa-font" aria-hidden="true"></i>
                             <span class="hide-menu">Educational Fields</span>
@@ -129,7 +137,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - Human_Resources - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - Human Resources - <a asp-area="" asp-controller="Department" asp-action="Index">Privacy</a>
         </div>
     </footer>
     

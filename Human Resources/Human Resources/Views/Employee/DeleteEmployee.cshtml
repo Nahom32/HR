@@ -81,5 +81,14 @@
             var output = document.getElementById('ProfilePicturePreview');
             output.src = $(this).val();
         })
+        function validateFile(input) {
+            var fileName = input.value;
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+            if (!allowedExtensions.exec(fileName)) {
+                alert('Invalid file type. Only JPG, JPEG, PNG and GIF files are allowed.');
+                input.value = '';
+                return false;
+            }
+        }
     </script>
 }
