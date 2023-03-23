@@ -1,6 +1,7 @@
 ﻿using Human_Resources.Data.Services;
 using Human_Resources.Data.ViewModels;
 using Human_Resources.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -10,10 +11,15 @@ namespace Human_Resources.Controllers
     {
         private readonly IEmployeeService _service;
         private readonly ILogger<EmployeeController> _logger;
-        public EmployeeController(IEmployeeService service, ILogger<EmployeeController> logger)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        public EmployeeController(IEmployeeService service, ILogger<EmployeeController> logger,
+            UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _service = service;
             _logger = logger;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
         public async Task<IActionResult> Index()
         {

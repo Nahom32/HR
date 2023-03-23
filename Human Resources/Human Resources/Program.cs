@@ -1,5 +1,7 @@
 using Human_Resources.Data;
 using Human_Resources.Data.Services;
+using Human_Resources.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +16,12 @@ builder.Services.AddScoped<IDepartmentService,DepartmentService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IPositionService, PositionService>();
 builder.Services.AddScoped<IEducationalFieldService, EducationalFieldService>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
