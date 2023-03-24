@@ -2,6 +2,7 @@
 using Human_Resources.Data.Services;
 using Human_Resources.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.Extensions.Logging;
 
 namespace Human_Resources.Controllers
@@ -10,11 +11,12 @@ namespace Human_Resources.Controllers
     {
         private readonly IDepartmentService _service;
         private readonly ILogger<DepartmentController> _logger;
-        public DepartmentController(IDepartmentService service, ILogger<DepartmentController> logger)
+        private readonly IEmployeeService _employeeService;
+        public DepartmentController(IDepartmentService service, ILogger<DepartmentController> logger, IEmployeeService employeeService)
         {
             _service = service;
             _logger = logger;
-            
+            _employeeService = employeeService;
         }
         [HttpGet]
         public async  Task<IActionResult> Index()
@@ -92,6 +94,20 @@ namespace Human_Resources.Controllers
             {
                 return View(deleteValue);
             }
+        }
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var all = await _employeeService.GetAll();
+            var result = new List<Employee>();
+            foreach (var employee in all)
+            {
+                if (id == employee.DepartmentId)
+                {
+                    result.Add(employee);
+                }
+            }
+            return View(result);
         }
         [HttpPost, ActionName("DeleteDepartment")]
         public async Task<IActionResult> DeleteDepartmentConfirmend(int id)
