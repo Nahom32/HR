@@ -18,7 +18,7 @@ namespace Human_Resources.Data.ViewModels
         [Display(Name = "Marital Status")]
         public MaritalStatus MaritalStatus { get; set; }
 
-        public string PhotoURL { get; set; }
+        public IFormFile PhotoURL { get; set; }
 
         [Required(ErrorMessage = "Sex is Required")]
         public Sex Sex { get; set; }

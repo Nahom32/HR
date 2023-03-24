@@ -20,7 +20,7 @@ namespace Human_Resources.Data.Services
                 Id = employeeViewModel.Id,
                 Email = employeeViewModel.Email,
                 Name = employeeViewModel.Name,
-                PhotoURL = employeeViewModel.PhotoURL,
+                PhotoURL = employeeViewModel.PhotoURL.FileName,
                 Sex = employeeViewModel.Sex,
                 MaritalStatus = employeeViewModel.MaritalStatus,
                 DepartmentId = employeeViewModel.DepartmentId,
@@ -80,7 +80,7 @@ namespace Human_Resources.Data.Services
             {
                 DbEmployee.Name = employee.Name;
                 DbEmployee.Email = employee.Email;
-                DbEmployee.PhotoURL = employee.PhotoURL;
+                DbEmployee.PhotoURL =employee.PhotoURL.FileName;
                 DbEmployee.DepartmentId = employee.DepartmentId;
                 DbEmployee.MaritalStatus = employee.MaritalStatus;
                 DbEmployee.Sex = employee.Sex;

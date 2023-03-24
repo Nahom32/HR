@@ -1,12 +1,16 @@
 ﻿@model Employee
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 <div class="card">
-    <img src="@Model.PhotoURL" width="100%" alt="@Model.Name">
+    <img decoding="async" src="@("~/images/"+Model.PhotoURL.Trim())"  alt="@Model.Name">
     <div class="box-title">
         <h3>@Model.Name</h3>
     </div>
     <div>
         @Model.Department.DepartmentName
     </div>
+    @("~/images/" + Model.PhotoURL.Trim())
     <div>
         @Model.EducationalField.Name
     </div>

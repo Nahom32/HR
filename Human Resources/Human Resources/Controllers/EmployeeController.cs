@@ -39,18 +39,34 @@ namespace Human_Resources.Controllers
             return View(employeeViewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> AddEmployee(EmployeeViewModel employeeViewModel, [FromForm] IFormFile file)
+        public async Task<IActionResult> AddEmployee(EmployeeViewModel employeeViewModel,[FromForm] IFormFile PhotoURL)
         {
+            
             if (!ModelState.IsValid)
             {
                 var Departments = await _service.GetDepartmentdropdowns();
                 var Positions = await _service.GetPositiondropdowns();
                 var EducationalFields = await _service.GetEducationalFielddropdowns();
-
                 ViewBag.Departments = new SelectList(Departments.Departments, "Id", "DepartmentName");
                 ViewBag.Positions = new SelectList(Positions.Positions, "Id", "PositionName");
                 ViewBag.EducationalFields = new SelectList(EducationalFields.EducationalFields, "Id", "Name");
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    _logger.LogError(error.ErrorMessage);
+                }
+
                 return View(employeeViewModel);
+            }
+            if (PhotoURL != null && PhotoURL.Length > 0)
+            {
+                var fileName = Path.GetFileName(PhotoURL.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    _logger.LogInformation("Hi");
+                    PhotoURL.CopyTo(stream);
+                }
             }
             await _service.AddEmployee(employeeViewModel);
             return RedirectToAction("Index", "Employee");
@@ -61,32 +77,40 @@ namespace Human_Resources.Controllers
             var employee = await _service.GetById(id);
             if (employee != null)
             {
-                var EmployeeVm = new EmployeeViewModel()
+                using (var stream = new FileStream(employee.PhotoURL, FileMode.Open))
                 {
-                    Id = employee.Id,
-                    DepartmentId = employee.DepartmentId,
-                    PositionId = employee.PositionId,
-                    Sex = employee.Sex,
-                    Name = employee.Name,
-                    PhotoURL = employee.PhotoURL,
-                    EducationalFieldId = employee.EducationalFieldId,
-                    Email = employee.Email,
-                    EducationalLevel = employee.EducationalLevel
+                    // Create a new IFormFile object using the stream
+                    var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(employee.PhotoURL));
 
-                };
-                var Departments = await _service.GetDepartmentdropdowns();
-                var Positions = await _service.GetPositiondropdowns();
-                var EducationalFields = await _service.GetEducationalFielddropdowns();
+                    // Use the file object as needed
+                    // ...
+                    var EmployeeVm = new EmployeeViewModel()
+                    {
+                        Id = employee.Id,
+                        DepartmentId = employee.DepartmentId,
+                        PositionId = employee.PositionId,
+                        Sex = employee.Sex,
+                        Name = employee.Name,
+                        PhotoURL = file,
+                        EducationalFieldId = employee.EducationalFieldId,
+                        Email = employee.Email,
+                        EducationalLevel = employee.EducationalLevel
 
-                ViewBag.Departments = new SelectList(Departments.Departments, "Id", "DepartmentName");
-                ViewBag.Positions = new SelectList(Positions.Positions, "Id", "PositionName");
-                ViewBag.EducationalFields = new SelectList(EducationalFields.EducationalFields, "Id", "Name");
-                return View(EmployeeVm);
+                    };
+                    var Departments = await _service.GetDepartmentdropdowns();
+                    var Positions = await _service.GetPositiondropdowns();
+                    var EducationalFields = await _service.GetEducationalFielddropdowns();
+
+                    ViewBag.Departments = new SelectList(Departments.Departments, "Id", "DepartmentName");
+                    ViewBag.Positions = new SelectList(Positions.Positions, "Id", "PositionName");
+                    ViewBag.EducationalFields = new SelectList(EducationalFields.EducationalFields, "Id", "Name");
+                    return View(EmployeeVm);
+                }
             }
             return View("Not Found");
         }
         [HttpPost]
-        public async Task<IActionResult> EditEmployee(EmployeeViewModel employeeViewModel)
+        public async Task<IActionResult> EditEmployee(EmployeeViewModel employeeViewModel, [FromForm] IFormFile PhotoURL)
         {
             if (!ModelState.IsValid)
             {
@@ -98,10 +122,20 @@ namespace Human_Resources.Controllers
                 ViewBag.Positions = new SelectList(Positions.Positions, "Id", "PositionName");
                 ViewBag.EducationalFields = new SelectList(EducationalFields.EducationalFields, "Id", "Name");
                 return View(employeeViewModel);
-
             }
             else
             {
+                if (PhotoURL != null && PhotoURL.Length > 0)
+                {
+                    var fileName = Path.GetFileName(PhotoURL.FileName);
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        PhotoURL.CopyTo(stream);
+                        _logger.LogInformation("Hi");
+                    }
+                }
                 await _service.UpdateEmployee(employeeViewModel);
                 return RedirectToAction("Index");
             }
@@ -112,27 +146,43 @@ namespace Human_Resources.Controllers
             var employee = await _service.GetById(id);
             if (employee != null)
             {
-                var EmployeeVm = new EmployeeViewModel()
+                using (var stream = new FileStream(employee.PhotoURL, FileMode.Open))
                 {
-                    Id = employee.Id,
-                    DepartmentId = employee.DepartmentId,
-                    PositionId = employee.PositionId,
-                    Sex = employee.Sex,
-                    Name = employee.Name,
-                    PhotoURL = employee.PhotoURL,
-                    EducationalFieldId = employee.EducationalFieldId,
-                    Email = employee.Email,
-                    EducationalLevel = employee.EducationalLevel
+                    // Create a new IFormFile object using the stream
+                    var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(employee.PhotoURL));
 
-                };
-                var Departments = await _service.GetDepartmentdropdowns();
-                var Positions = await _service.GetPositiondropdowns();
-                var EducationalFields = await _service.GetEducationalFielddropdowns();
+                    // Use the file object as needed
+                    // ...
+                    var EmployeeVm = new EmployeeViewModel()
+                    {
+                        Id = employee.Id,
+                        DepartmentId = employee.DepartmentId,
+                        PositionId = employee.PositionId,
+                        Sex = employee.Sex,
+                        Name = employee.Name,
+                        PhotoURL = file,
+                        EducationalFieldId = employee.EducationalFieldId,
+                        Email = employee.Email,
+                        EducationalLevel = employee.EducationalLevel
 
-                ViewBag.Departments = new SelectList(Departments.Departments, "Id", "DepartmentName");
-                ViewBag.Positions = new SelectList(Positions.Positions, "Id", "PositionName");
-                ViewBag.EducationalFields = new SelectList(EducationalFields.EducationalFields, "Id", "Name");
-                return View(EmployeeVm);
+                    };
+                    var Departments = await _service.GetDepartmentdropdowns();
+                    var Positions = await _service.GetPositiondropdowns();
+                    var EducationalFields = await _service.GetEducationalFielddropdowns();
+
+                    ViewBag.Departments = new SelectList(Departments.Departments, "Id", "DepartmentName");
+                    ViewBag.Positions = new SelectList(Positions.Positions, "Id", "PositionName");
+                    ViewBag.EducationalFields = new SelectList(EducationalFields.EducationalFields, "Id", "Name");
+                    return View(EmployeeVm);
+                }
+                //var Departments = await _service.GetDepartmentdropdowns();
+                //var Positions = await _service.GetPositiondropdowns();
+                //var EducationalFields = await _service.GetEducationalFielddropdowns();
+
+                //ViewBag.Departments = new SelectList(Departments.Departments, "Id", "DepartmentName");
+                //ViewBag.Positions = new SelectList(Positions.Positions, "Id", "PositionName");
+                //ViewBag.EducationalFields = new SelectList(EducationalFields.EducationalFields, "Id", "Name");
+                //return View(EmployeeVm);
             }
             else
             {
@@ -144,20 +194,28 @@ namespace Human_Resources.Controllers
         public async Task<IActionResult> DeleteEmployeeConfirmed(int id)
         {
             var employee = await _service.GetById(id);
-            var EmployeeVm = new EmployeeViewModel()
+            using (var stream = new FileStream(employee.PhotoURL, FileMode.Open))
             {
-                Id = employee.Id,
-                DepartmentId = employee.DepartmentId,
-                PositionId = employee.PositionId,
-                Sex = employee.Sex,
-                Name = employee.Name,
-                PhotoURL = employee.PhotoURL,
-                EducationalFieldId = employee.EducationalFieldId,
-                Email = employee.Email,
-                EducationalLevel = employee.EducationalLevel
-            };
-            await _service.DeleteEmployee(EmployeeVm);
-            return RedirectToAction("Index");
+                // Create a new IFormFile object using the stream
+                var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(employee.PhotoURL));
+
+                // Use the file object as needed
+                // ...
+                var EmployeeVm = new EmployeeViewModel()
+                {
+                    Id = employee.Id,
+                    DepartmentId = employee.DepartmentId,
+                    PositionId = employee.PositionId,
+                    Sex = employee.Sex,
+                    Name = employee.Name,
+                    PhotoURL = file,
+                    EducationalFieldId = employee.EducationalFieldId,
+                    Email = employee.Email,
+                    EducationalLevel = employee.EducationalLevel
+                };
+                await _service.DeleteEmployee(EmployeeVm);
+                return RedirectToAction("Index");
+            }
         }
         [HttpGet]
         public async Task<IActionResult> Details(int id)

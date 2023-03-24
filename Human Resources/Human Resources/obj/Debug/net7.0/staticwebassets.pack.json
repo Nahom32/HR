@@ -197,6 +197,22 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\k-means.jpg",
+      "PackagePath": "staticwebassets\\images\\k-means.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\my photo.jpg",
+      "PackagePath": "staticwebassets\\images\\my photo.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\my_photo2 (1).jpg",
+      "PackagePath": "staticwebassets\\images\\my_photo2 (1).jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\photo_2023-02-24_18-22-18.jpg",
+      "PackagePath": "staticwebassets\\images\\photo_2023-02-24_18-22-18.jpg"
+    },
+    {
       "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\js\\app-style-switcher.js",
       "PackagePath": "staticwebassets\\js\\app-style-switcher.js"
     },
