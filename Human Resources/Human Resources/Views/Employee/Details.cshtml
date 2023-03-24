@@ -1,0 +1,23 @@
+﻿@model Employee
+<div class="card">
+    <img src="@Model.PhotoURL" width="100%" alt="@Model.Name">
+    <div class="box-title">
+        <h3>@Model.Name</h3>
+    </div>
+    <div>
+        @Model.Department.DepartmentName
+    </div>
+    <div>
+        @Model.EducationalField.Name
+    </div>
+    <div>
+        @Model.EducationalLevel
+    </div>
+    <div>
+        @Model.Position.PositionSalary
+    </div>
+    <div>
+        @Model.MaritalStatus
+    </div>
+
+</div>

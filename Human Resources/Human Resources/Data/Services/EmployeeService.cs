@@ -49,13 +49,20 @@ namespace Human_Resources.Data.Services
 
         public async Task<List<Employee>> GetAll()
         {
-            var retLis = await _context.Employees.ToListAsync();
+            var retLis = await _context.Employees.Include(n => n.Department)
+                .Include(n => n.Position)
+                .Include(n => n.EducationalField)
+                .ToListAsync();
             return retLis;
         }
 
         public async Task<Employee> GetById(int id)
         {
-            var retval = await _context.Employees.Include(e => e.Department).FirstOrDefaultAsync(n => n.Id ==id);
+            var retval = await _context.Employees
+                .Include(e => e.Department)
+                .Include(e => e.Position)
+                .Include(e => e.EducationalField)
+                .FirstOrDefaultAsync(n => n.Id ==id);
             if (retval != null)
             {
                 return retval;

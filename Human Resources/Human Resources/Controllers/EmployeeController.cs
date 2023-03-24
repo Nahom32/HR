@@ -39,7 +39,7 @@ namespace Human_Resources.Controllers
             return View(employeeViewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> AddEmployee(EmployeeViewModel employeeViewModel)
+        public async Task<IActionResult> AddEmployee(EmployeeViewModel employeeViewModel, [FromForm] IFormFile file)
         {
             if (!ModelState.IsValid)
             {
@@ -158,6 +158,12 @@ namespace Human_Resources.Controllers
             };
             await _service.DeleteEmployee(EmployeeVm);
             return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var employee = await _service.GetById(id);
+            return View(employee);
         }
     }
 }

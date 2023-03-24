@@ -13,7 +13,7 @@
             <div class="form-group text-center">
                 <img id="ProfilePicturePreview" class="border-info rounded-circle" style="max-width: 150px" />
             </div>
-            <form method="post" asp-action="AddEmployee">
+            <form method="post" asp-action="AddEmployee" enctype="multipart/form-data">
                 <div class="form-group">
                     <label asp-for="Name" class="form-label"></label>
                     <input asp-for="Name" class="form-control" />
