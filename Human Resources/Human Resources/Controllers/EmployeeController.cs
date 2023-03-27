@@ -77,7 +77,7 @@ namespace Human_Resources.Controllers
             var employee = await _service.GetById(id);
             if (employee != null)
             {
-                using (var stream = new FileStream(employee.PhotoURL, FileMode.Open))
+                using (var stream = new FileStream("wwwroot/images/"+employee.PhotoURL, FileMode.Open))
                 {
                     // Create a new IFormFile object using the stream
                     var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(employee.PhotoURL));
@@ -146,7 +146,7 @@ namespace Human_Resources.Controllers
             var employee = await _service.GetById(id);
             if (employee != null)
             {
-                using (var stream = new FileStream(employee.PhotoURL, FileMode.Open))
+                using (var stream = new FileStream("wwwroot/images/"+employee.PhotoURL, FileMode.Open))
                 {
                     // Create a new IFormFile object using the stream
                     var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(employee.PhotoURL));
@@ -194,7 +194,7 @@ namespace Human_Resources.Controllers
         public async Task<IActionResult> DeleteEmployeeConfirmed(int id)
         {
             var employee = await _service.GetById(id);
-            using (var stream = new FileStream(employee.PhotoURL, FileMode.Open))
+            using (var stream = new FileStream("wwwroot/images/" + employee.PhotoURL, FileMode.Open))
             {
                 // Create a new IFormFile object using the stream
                 var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(employee.PhotoURL));
