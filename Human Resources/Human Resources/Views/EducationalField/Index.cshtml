@@ -6,16 +6,16 @@
 {
     <table class="table bg-white">
         <tr>
-            <th>Educational Field Name</th>
-            <th>Actions</th>
+            <th style="padding-left: 30px;">Educational Field Name</th>
+            <th style="padding-left: 30px;">Actions</th>
         </tr>
         @foreach (var educationalField in Model)
         {
             <tr>
-                <td class="align-middle">
+                <td class="align-middle" style="padding-left: 30px;">
                     @educationalField.Name
                 </td>
-                <td class="align-middle">
+                <td class="align-middle" style="padding-left: 30px;">
                     <a class="btn btn-outline-primary" asp-action="EditEducationalField" asp-route-Id="@educationalField.Id"><i class="bi bi-pencil-square"></i>Edit</a> |
                     <a class="btn btn-outline-info"><i class="bi bi-eye"></i>Details</a> |
                     <a class="btn btn-danger text-white" asp-action="DeleteEducationalField" asp-route-Id="@educationalField.Id"><i class="bi bi-trash"></i>Delete</a>

@@ -2,26 +2,28 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="card">
-    <img decoding="async" src="@("/../../images/"+Model.PhotoURL.Trim())"  alt="@Model.Name">
-    <div class="box-title">
+<div class="card my-3">
+    <div style="width: 300px;" class="px-3  mt-3">
+        <img decoding="async" src="@("/../../images/"+Model.PhotoURL.Trim())" alt="@Model.Name" class="img-fluid img-circle">
+    </div>
+    <div class="box-title bg-primary text-light px-3">
         <h3>@Model.Name</h3>
     </div>
-    <div>
-        @Model.Department.DepartmentName
+    <div class="box-title px-3">
+        <h5 class="font-weight-bold">@Model.Department.DepartmentName</h5>
     </div>
     
-    <div>
-        @Model.EducationalField.Name
+    <div class="px-3">
+        <p class="font-weight-bold">@Model.EducationalField.Name</p>
     </div>
-    <div>
-        @Model.EducationalLevel
+    <div class="px-3">
+        <p class="font-weight-bold">@Model.EducationalLevel</p>
     </div>
-    <div>
-        @Model.Position.PositionSalary
+    <div class="px-3">
+        <p class="font-weight-bold">@Model.Position.PositionSalary</p>
     </div>
-    <div>
-        @Model.MaritalStatus
+    <div class="px-3">
+        <p class="font-weight-bold">@Model.MaritalStatus</p>
     </div>
 
 </div>

@@ -6,20 +6,20 @@
 {
     <table class="table bg-white">
         <tr>
-            <th>Position Name</th>
-            <th>Salary</th>
-            <th>Actions</th>
+            <th style="padding-left: 30px;">Position Name</th>
+            <th style="padding-left: 30px;">Salary</th>
+            <th style="padding-left: 30px;">Actions</th>
         </tr>
         @foreach (var position in Model)
         {
             <tr>
-                <td class="align-middle">
+                <td class="align-middle" style="padding-left: 30px;">
                     @position.PositionName
                 </td>
-                <td class="align-middle">
+                <td class="align-middle" style="padding-left: 30px;">
                     @position.PositionSalary
                 </td>
-                <td class="align-middle">
+                <td class="align-middle" style="padding-left: 30px;">
                     <a class="btn btn-outline-primary" asp-action="EditPosition" asp-route-Id="@position.Id"><i class="bi bi-pencil-square"></i>Edit</a> |
                     <a class="btn btn-outline-info"><i class="bi bi-eye"></i>Details</a> |
                     <a class="btn btn-danger text-white" asp-action="DeletePosition" asp-route-Id="@position.Id"><i class="bi bi-trash"></i>Delete</a>
