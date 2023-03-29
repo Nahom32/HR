@@ -1,0 +1,39 @@
+﻿@model Department
+@{
+    ViewData["Title"] = "Add Department";
+}
+
+<div class="modal fade" id="DeleteDept-@Model.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" asp-action="DeleteDepartment">
+            <div class="modal-body">
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="form-group">
+                        <label asp-for="DepartmentName" class="form-label"></label>
+                        <input asp-for="DepartmentName" class="form-control" disabled/>
+                        <span asp-validation-for="DepartmentName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="DepartmentDescription" class="form-label"></label>
+                        <textarea asp-for="DepartmentDescription" class="form-control form-control-lg" disabled></textarea>
+                        <span asp-validation-for="DepartmentDescription" class="text-danger"></span>
+                    </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>

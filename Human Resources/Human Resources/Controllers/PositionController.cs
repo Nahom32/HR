@@ -25,7 +25,7 @@ namespace Human_Resources.Controllers
         public IActionResult AddPosition()
         {
 
-            return View();
+            return PartialView("~/Views/Shared/_AddPosition.cshtml",new Position());
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -62,7 +62,7 @@ namespace Human_Resources.Controllers
             }
             else
             {
-                return View(position);
+                return PartialView("~/Views/Shared/_EditPosition.cshtml",position);
             }
         }
         [HttpPost]
@@ -87,7 +87,7 @@ namespace Human_Resources.Controllers
             }
             else
             {
-                return View(deleteValue);
+                return PartialView("~/Views/Shared/_EditPosition.cshtml", deleteValue);
             }
         }
         [HttpPost, ActionName("DeletePosition")]

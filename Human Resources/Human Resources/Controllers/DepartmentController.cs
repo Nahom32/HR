@@ -1,5 +1,6 @@
 ﻿using Human_Resources.Data;
 using Human_Resources.Data.Services;
+using Human_Resources.Data.ViewModels;
 using Human_Resources.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
@@ -21,19 +22,18 @@ namespace Human_Resources.Controllers
         [HttpGet]
         public async  Task<IActionResult> Index()
         {
-            var allBranches = await _service.GetAll();
-
-            return View(allBranches);
+            var departments = await _service.GetAll();
+            return View(departments);
         }
         [HttpGet]
         public IActionResult AddDepartment()
         {
-            
-            return View();
+            //DepartmentViewModel departmentViewModel = new DepartmentViewModel();
+            return PartialView("_AddDepartment",new Department());
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddDepartment([Bind("DepartmentName,DepartmentDescription")]Department department)
+        public async Task<IActionResult> AddDepartment(Department department)
         {
             _logger.LogInformation(ModelState.IsValid.ToString());
             
@@ -67,7 +67,7 @@ namespace Human_Resources.Controllers
             }
             else
             {
-                return View(dept);
+                return PartialView("_EditDepartment",dept);
             }
         }
         [HttpPost]
@@ -92,7 +92,7 @@ namespace Human_Resources.Controllers
             }
             else
             {
-                return View(deleteValue);
+                return PartialView("_DeleteDepartment",deleteValue);
             }
         }
         [HttpGet]
@@ -110,7 +110,7 @@ namespace Human_Resources.Controllers
             return View(result);
         }
         [HttpPost, ActionName("DeleteDepartment")]
-        public async Task<IActionResult> DeleteDepartmentConfirmend(int id)
+        public async Task<IActionResult> DeleteDepartmentConfirmed(int id)
 
         {
             var department = await _service.GetById(id);

@@ -1,11 +1,13 @@
-﻿@model List<Department> 
+﻿@using Human_Resources.Data.ViewModels
+@model IEnumerable<Department>
+
 @{
     ViewData["title"] = "Available Departments";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@if(Model.Count > 0)
+@if(Model.ToList().Count > 0)
 {
-    <table class="table bg-white">
+    <table class="table bg-white" id="deptTable">
         <tr>
             <th style="padding-left: 30px;">Department Name</th>
             <th style="padding-left: 30px;">Department Description</th>
@@ -22,21 +24,60 @@
                 @dept.DepartmentDescription
             </td>
             <td class="col-sm-6" style="padding-left: 30px;">
-                <a class="btn btn-outline-primary" asp-action="EditDepartment" asp-route-Id ="@dept.Id"><i class="bi bi-pencil-square"></i>Edit</a> |
-                <a class="btn btn-outline-info" asp-route-Id="@dept.Id" asp-action="Details"><i class="bi bi-eye"></i>Details</a> |
-                <a class="btn btn-danger text-white" asp-action="DeleteDepartment" asp-route-Id="@dept.Id"><i class="bi bi-trash"></i>Delete</a>
+                <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="@("#EditDept-" + dept.Id)" data-bs-url="@Url.Action("/EditDepartment/"+ dept.Id)"><i class="bi bi-pencil-square"></i>Edit</a> |
+                <a href="#" class="btn btn-outline-info" @*asp-route-Id="@dept.Id"*@ asp-action="Details"><i class="bi bi-eye"></i>Details</a> |
+               <a href="#" class="btn btn-danger text-white" data-bs-toggle="modal" data-bs-target="@("#DeleteDept-" + dept.Id)" data-bs-url="@Url.Action("/DeleteDepartment/"+ dept.Id)"><i class="bi bi-trash"></i>Delete</a>
+                        @await Html.PartialAsync("~/Views/Shared/_EditDepartment.cshtml", dept)
+                        @await Html.PartialAsync("~/Views/Shared/_DeleteDepartment.cshtml", dept)
             </td>
 
         </tr>
-
     }
     </tbody>
-        <a class="btn btn-primary" asp-action="AddDepartment">Add a department</a>
+        
     </table>
+    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreateDept">Add a department</a>
     
 }else
 {
     <h4 class="text-danger align-content-center">No Departments Given</h4>
     <a class="btn btn-primary" asp-action="AddDepartment">Add a department</a>
+}
+@await Html.PartialAsync("~/Views/Shared/_AddDepartment.cshtml",new Department())
+@*@await Html.PartialAsync("~/Views/Shared/_EditDepartment.cshtml")
+@await Html.PartialAsync("~/Views/Shared/_DeleteDepartment.cshtml")*@
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            //alert("hi");
+                $('#CreateDept').on('show.bs.modal', function () {
+                    // Code to execute when the CreateDept modal is shown
+                    $('#CreateDept').modal('show');
+                });
+                $('#EditDept').on('show.bs.modal', function () {
+                    // Code to execute when the EditDept modal is shown
+                    $('#EditDept').modal('show');
+                });
+                $('#DeleteDept').on('show.bs.modal', function () {
+                    // Code to execute when the DeleteDept modal is shown
+                    $('#DeleteDept').modal('show');
+                });    
+        });
+        function addDepartment() 
+        {
+            $.ajax({
+                type: "Get",
+                url: "/Department/AddDepartment",
+                success: function (result) {
+                    $("#deptTable").html(result);
+                    $("#CreateDept").modal("show");
+                }
+            })
+        }
+
+    </script>
 
 }
+
+
