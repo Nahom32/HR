@@ -25,8 +25,7 @@ namespace Human_Resources.Controllers
         [HttpGet]
         public IActionResult AddEducationalField()
         {
-
-            return View();
+            return PartialView("~/Views/Shared/_AddEducationalField.cshtml",new EducationalField());
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -64,7 +63,7 @@ namespace Human_Resources.Controllers
             }
             else
             {
-                return View(eduField);
+                return PartialView("~/Views/Shared/_EditEducationalField",eduField);
             }
         }
         [HttpPost]
@@ -89,7 +88,7 @@ namespace Human_Resources.Controllers
             }
             else
             {
-                return View(deleteValue);
+                return PartialView("~/Views/Shared/_DeleteEducationalField",deleteValue);
             }
         }
         [HttpPost, ActionName("DeleteEducationalField")]
