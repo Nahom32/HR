@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "offH1dQ95xacHqVwxLEXaaL2jhqLrc/n76Mop0oVWgM=",
+  "Hash": "N5S4mj9S8nBKUZxCd1B+EZpYdSfgTyjQDyl9TgBgmIY=",
   "Source": "Human Resources",
   "BasePath": "_content/Human Resources",
   "Mode": "Default",
@@ -916,6 +916,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\my_photo2 (1).jpg"
+    },
+    {
+      "Identity": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\my_photo2.jpg",
+      "SourceId": "Human Resources",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\",
+      "BasePath": "_content/Human Resources",
+      "RelativePath": "images/my_photo2.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\my_photo2.jpg"
     },
     {
       "Identity": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\photo_2023-02-24_18-22-18.jpg",

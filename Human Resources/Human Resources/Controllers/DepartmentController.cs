@@ -29,7 +29,7 @@ namespace Human_Resources.Controllers
         public IActionResult AddDepartment()
         {
             //DepartmentViewModel departmentViewModel = new DepartmentViewModel();
-            return PartialView("_AddDepartment",new Department());
+            return PartialView("~/Views/Shared/_AddDepartment.cshtml",new Department());
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -52,7 +52,7 @@ namespace Human_Resources.Controllers
                 var errorString = string.Join("; ", errorList);
                 _logger.LogInformation(errorString);
                 _logger.LogInformation($"{department.Id},{department.DepartmentName},{department.DepartmentDescription}");
-                return View(department);
+                return PartialView("_AddDepartment",department);
             }
            
 
@@ -80,7 +80,7 @@ namespace Human_Resources.Controllers
                 return RedirectToAction("Index");
             }
             _logger.LogInformation("failure");
-            return View(department);
+            return PartialView("_EditDepartment",department);
     }
         [HttpGet]
         public async Task<IActionResult> DeleteDepartment(int id)

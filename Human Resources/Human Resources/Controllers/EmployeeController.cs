@@ -4,6 +4,7 @@ using Human_Resources.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace Human_Resources.Controllers
 {
@@ -222,6 +223,20 @@ namespace Human_Resources.Controllers
         {
             var employee = await _service.GetById(id);
             return View(employee);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetDropdownData()
+        {
+            var departments = await _service.GetDepartmentdropdowns();
+            var positions = await _service.GetPositiondropdowns();
+            var educationalFields = await _service.GetEducationalFielddropdowns();
+
+            return Json(new
+            {
+                departments,
+                positions,
+                educationalFields
+            });
         }
     }
 }

@@ -209,6 +209,10 @@
       "PackagePath": "staticwebassets\\images\\my_photo2 (1).jpg"
     },
     {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\my_photo2.jpg",
+      "PackagePath": "staticwebassets\\images\\my_photo2.jpg"
+    },
+    {
       "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\photo_2023-02-24_18-22-18.jpg",
       "PackagePath": "staticwebassets\\images\\photo_2023-02-24_18-22-18.jpg"
     },

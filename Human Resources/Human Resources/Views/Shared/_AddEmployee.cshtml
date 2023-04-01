@@ -1,0 +1,142 @@
+﻿@using Human_Resources.Data.ViewModels
+@using Human_Resources.Data.Enum
+@model EmployeeViewModel
+@{
+    ViewData["Title"] = "Add Department";
+}
+
+<div class="modal fade" id="CreateEmployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="max-height:100vh">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Employee Creation Form</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" asp-action="AddEmployee">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email " class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="PhotoURL" class="form-label"></label>
+                        <input asp-for="PhotoURL" class="form-label" type="file" accept="image/*" onchange="validateFile(this)" />
+                        <span asp-validation-for="PhotoURL" class="text-danger"></span>
+                    </div>
+                   <div class="form-group mb-3">
+                        <label asp-for="Sex" class="control-label"></label>
+                        <select asp-for="Sex" class="form-control" asp-items="Html.GetEnumSelectList<Sex>()">
+                        </select>
+                        <span asp-validation-for="Sex" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="MaritalStatus" class="control-label"></label>
+                        <select asp-for="MaritalStatus" class="form-control" asp-items="Html.GetEnumSelectList<MaritalStatus>()">
+                        </select>
+                        <span asp-validation-for="MaritalStatus" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="EducationalLevel" class="control-label"></label>
+                        <select asp-for="EducationalLevel" class="form-control" asp-items="Html.GetEnumSelectList<EducationalLevel>()">
+                        </select>
+                        <span asp-validation-for="EducationalLevel" class="text-danger"></span>
+                    </div>
+
+                   <div class="form-group mb-3">
+                        <label asp-for="DepartmentId" class="control-label"></label>
+                        <select asp-for="DepartmentId" id="department-dropdown" class="form-control "></select>
+                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="PositionId" class="control-label"></label>
+                        <select id= "position-dropdown" asp-for="PositionId" class="form-control"></select>
+                        <span asp-validation-for="PositionId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="EducationalFieldId" class="control-label"></label>
+                        <select id="educational-field-dropdown" asp-for="EducationalFieldId" class="form-control"></select>
+                        <span asp-validation-for="EducationalFieldId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a asp-action="Index" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                    <input type="submit" id="addEmployeeForm" class="btn btn-primary" value="Create">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+    @*<script>
+        alert("hi")
+        $(document).ready(function () {
+            alert("hi")
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetDropdownData","Employee")',
+                success: function (data) {
+                    var departments = data.departments;
+                    var positions = data.positions;
+                    var educationalFields = data.educationalFields;
+
+                    $.each(departments, function (i, item) {
+                        $('#department-dropdown').append($('<option>', {
+                            value: item.id,
+                            text: item.departmentName
+                        }));
+                    });
+
+                    $.each(positions, function (i, item) {
+                        $('#position-dropdown').append($('<option>', {
+                            value: item.id,
+                            text: item.positionName
+                        }));
+                    });
+
+                    $.each(educationalFields, function (i, item) {
+                        $('#educational-field-dropdown').append($('<option>', {
+                            value: item.id,
+                            text: item.name
+                        }));
+                    });
+                },
+                error: function () {
+                    alert("Error occurred while retrieving dropdown data.");
+                }
+            });
+
+            $("#addEmployeeForm").submit(function (event) {
+                event.preventDefault();
+
+                var departmentId = $('#department-dropdown').val();
+                var positionId = $('#position-dropdown').val();
+                var educationalFieldId = $('#educational-field-dropdown').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/YourControllerName/FilterEmployees",
+                    data: {
+                        departmentId: departmentId,
+                        positionId: positionId,
+                        educationalFieldId: educationalFieldId
+                    },
+                    success: function (data) {
+                        $('#employee-table').html(data);
+                    },
+                    error: function () {
+                        alert("Error occurred while filtering employees.");
+                    }
+                });
+            });   
+</script>*@

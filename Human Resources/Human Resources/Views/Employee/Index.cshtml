@@ -1,6 +1,8 @@
 ﻿@model List<Employee>
+@using Human_Resources.Data.ViewModels
 @{
     ViewData["title"] = "Available Employees";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @if (Model.Count > 0)
 {
@@ -21,12 +23,14 @@
                 </td>
             </tr>
         }
-        <a class="btn btn-primary " asp-action="AddEmployee">Add an Employee</a>
+        <a class="btn btn-primary" asp-action="AddEmployee">Add an Employee</a>
     </table>
 }
 else
 {
     <h4 class="text-danger align-content-center">No Employees available</h4>
-    <a class="btn btn-primary" asp-action="AddEmployee">Add an Employee</a>
-
+    <a asp-action="AddEmployee" class="btn btn-primary" >Add an Employee</a>
 }
+@*@await Html.PartialAsync("~/Views/Shared/_AddEmployee.cshtml", new EmployeeViewModel())*@
+
+
