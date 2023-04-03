@@ -3,26 +3,43 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
+using System.Reflection.Metadata;
 
 namespace Human_Resources.Data
 {
     public class AppDbContext:IdentityDbContext
     {
+
         public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
         {
             
         }
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<IdentityUserLogin<string>>().HasNoKey();
-        //    modelBuilder.Entity<Branch>()
-        //    .HasOne(b => b.Department)
-        //    .WithMany(d => d.Branches)
-        //    .HasForeignKey(b => b.DepartmentId)
-        //    .IsRequired(false)
-        //    .OnDelete(DeleteBehavior.Restrict);
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
-        //}
+            // Configure the foreign key relationship between Promotion and Position
+            modelBuilder.Entity<Promotion>()
+                .HasOne(p => p.PositionFrom)
+                .WithMany()
+                .HasForeignKey(p => p.fromPositionId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Promotion>()
+                .HasOne(p => p.PositionTo)
+                .WithMany()
+                .HasForeignKey(p => p.toPositionId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Configure the foreign key relationship between Employee and Position
+            modelBuilder.Entity<Employee>()
+                .HasOne(e => e.Position)
+                .WithMany()
+                .HasForeignKey(e => e.PositionId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+
+
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EducationalField> EducationalFields { get; set; }
         public DbSet<Grade> Grades { get; set; }
@@ -31,7 +48,8 @@ namespace Human_Resources.Data
         public DbSet<GradeCategory> GradeCategories { get; set; }
         public DbSet<Allowance> Allowances { get; set; }
         public DbSet<Department> Departments { get; set; }
-
-
+        public DbSet<Promotion> Promotions { get; set; }
+        public DbSet<Reward> Rewards { get; set; }
+        public DbSet<Leave> Leaves { get; set; }
     }
 }

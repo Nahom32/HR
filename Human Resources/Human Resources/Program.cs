@@ -16,6 +16,7 @@ builder.Services.AddScoped<IDepartmentService,DepartmentService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IPositionService, PositionService>();
 builder.Services.AddScoped<IEducationalFieldService, EducationalFieldService>();
+builder.Services.AddScoped<IPromotionService, PromotionService>();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 builder.Services.AddAuthentication(options =>
 {
