@@ -96,6 +96,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zaXRpb25cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Promotion/AddPromotion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvbW90aW9uXEFkZFByb21vdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Promotion/DeletePromotion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvbW90aW9uXERlbGV0ZVByb21vdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Promotion/EditPromotion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvbW90aW9uXEVkaXRQcm9tb3Rpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Promotion/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvbW90aW9uXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
