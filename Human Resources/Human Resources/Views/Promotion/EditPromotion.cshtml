@@ -12,6 +12,11 @@
                 <img id="ProfilePicturePreview" class="border-info rounded-circle" style="max-width: 150px" />
             </div>
             <form method="post" asp-action="AddPromotion">
+                <div class="form-group mb-3">
+                    <label asp-for="EmployeeId" class="control-label"></label>
+                    <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.PositionFrom"></select>
+                    <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                </div>
                 <div class="form-group">
                     <label asp-for="Reason" class="form-label"></label>
                     <input asp-for="Reason" class="form-control" />
@@ -26,7 +31,7 @@
 
                 <div class="form-group mb-3">
                     <label asp-for="fromPositionId" class="control-label"></label>
-                    <select asp-for="Id" class="fromPositionId" asp-items="ViewBag.PositionFrom"></select>
+                    <select asp-for="fromPositionId" class="form-control" asp-items="ViewBag.PositionFrom"></select>
                     <span asp-validation-for="fromPositionId" class="text-danger"></span>
                 </div>
                 <div class="form-group mb-3">

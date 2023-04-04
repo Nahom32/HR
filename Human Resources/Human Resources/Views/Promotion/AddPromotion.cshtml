@@ -8,11 +8,13 @@
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <h1>@ViewData["Title"]</h1>
-            <div class="form-group text-center">
-                <img id="ProfilePicturePreview" class="border-info rounded-circle" style="max-width: 150px" />
-            </div>
             <form method="post" asp-action="AddPromotion">
-                <div class="form-group">
+                <div class="form-group mb-3">
+                    <label asp-for="EmployeeId" class="control-label"></label>
+                    <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.Employeedropdowns"></select>
+                    <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
                     <label asp-for="Reason" class="form-label"></label>
                     <input asp-for="Reason" class="form-control" />
                     <span asp-validation-for="Reason" class="text-danger"></span>
@@ -26,7 +28,7 @@
                 
                 <div class="form-group mb-3">
                     <label asp-for="fromPositionId" class="control-label"></label>
-                    <select asp-for="Id" class="fromPositionId" asp-items="ViewBag.PositionFrom"></select>
+                    <select asp-for="fromPositionId" class="form-control" asp-items="ViewBag.PositionFrom"></select>
                     <span asp-validation-for="fromPositionId" class="text-danger"></span>
                 </div>
                 <div class="form-group mb-3">

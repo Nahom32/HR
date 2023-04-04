@@ -10,10 +10,12 @@ namespace Human_Resources.Controllers
     {
         private readonly IPromotionService _service;
         private readonly IEmployeeService _empService;
-        public PromotionController(IPromotionService service, IEmployeeService empService) 
+        private readonly ILogger<PromotionController> _logger;
+        public PromotionController(IPromotionService service, IEmployeeService empService, ILogger<PromotionController> logger) 
         {
             _service = service;
             _empService = empService;
+            _logger = logger;
         }
         public async Task<IActionResult> Index()
         {
@@ -21,7 +23,7 @@ namespace Human_Resources.Controllers
             return View(lists);
         }
         [HttpGet]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> AddPromotion()
         {
             PromotionViewModel promotionVM = new PromotionViewModel();
@@ -29,7 +31,7 @@ namespace Human_Resources.Controllers
             var Employeedropdowns = await _service.GetEmployeedropdowns();
             ViewBag.PositionFrom = new SelectList(Positiondropdowns.Positions, "Id", "PositionName");
             ViewBag.PositionTo = new SelectList(Positiondropdowns.Positions, "Id", "PositionName");
-            ViewBag.Employeedropdowns = new SelectList(Employeedropdowns.Employees, "Id", "EmployeeName");
+            ViewBag.Employeedropdowns = new SelectList(Employeedropdowns.Employees, "Id", "Name");
             return View(promotionVM);
         }
         [HttpPost]
@@ -42,7 +44,12 @@ namespace Human_Resources.Controllers
                 var Employeedropdowns = await _service.GetEmployeedropdowns();
                 ViewBag.PositionFrom = new SelectList(Positiondropdowns.Positions, "Id", "PositionName");
                 ViewBag.PositionTo = new SelectList(Positiondropdowns.Positions, "Id", "PositionName");
-                ViewBag.Employeedropdowns = new SelectList(Employeedropdowns.Employees, "Id", "EmployeeName");
+                ViewBag.Employeedropdowns = new SelectList(Employeedropdowns.Employees, "Id", "Name");
+                _logger.LogInformation("Failed");
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    _logger.LogError(error.ErrorMessage);
+                }
 
                 return View(promotionVM);
             }
@@ -131,9 +138,50 @@ namespace Human_Resources.Controllers
             }
 
         }
+        public async Task<IActionResult> DeletePromotion(int id)
+        {
+            var promotion = await _service.GetById(id);
+            if (promotion != null)
+            {
+                var Positiondropdowns = await _service.GetPositiondropdowns();
+                var Employeedropdowns = await _service.GetEmployeedropdowns();
+                ViewBag.Positions = new SelectList(Positiondropdowns.Positions, "Id", "PositionName");
+                ViewBag.Employeedropdowns = new SelectList(Employeedropdowns.Employees, "Id", "EmployeeName");
+                return View(promotion);
+            }
+            else
+            {
+                return View("Such a view doesn't exist");
+
+            }
+        }
+        [HttpPost, ActionName("DeletePromotion")]
+        public async Task<IActionResult> DeletePromotionConfirmed(int id)
+        {
+            var promotion = await _service.GetById(id);
+            if (promotion != null)
+            {
+                var PromotionVm = new PromotionViewModel()
+                {
+                    Id = promotion.Id,
+                    PositionChange = promotion.PositionChange,
+                    EmployeeId = promotion.EmployeeId,
+                    Reason = promotion.Reason,
+                    fromPositionId = promotion.fromPositionId,
+                    toPositionId = promotion.toPositionId
 
 
+                };
+                await _service.DeletePromotion(PromotionVm);
+                return RedirectToAction("Index", "Promotion");
+
+            }
+            else
+            {
+                return View("The object doesn't exist");
+            }
 
 
+        }
     }
 }
