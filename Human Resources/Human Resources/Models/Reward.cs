@@ -10,12 +10,12 @@ namespace Human_Resources.Models
         [Required(ErrorMessage = "The Reason for reward is required")]
         public string Reason { get; set; }
         [Required(ErrorMessage = "The amount paid for reward is required")]
-        public int Amount { get; set; }
+        public double Amount { get; set; }
         public DateTime DateTime { get; set; } = DateTime.Now;
-        [ForeignKey("EmployeeId")]
+        [Display(Name ="Employee Name")]
         public int EmployeeId { get; set; }
+        [ForeignKey("EmployeeId")]
         public Employee Employee { get; set; }
-
 
     }
 }

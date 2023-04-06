@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Reflection.Emit;
 using System.Reflection.Metadata;
 
@@ -51,5 +52,7 @@ namespace Human_Resources.Data
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Reward> Rewards { get; set; }
         public DbSet<Leave> Leaves { get; set; }
+        public DbSet<Appraisal> Appraisals { get; set;}
+
     }
 }

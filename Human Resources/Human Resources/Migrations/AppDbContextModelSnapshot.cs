@@ -47,6 +47,49 @@ namespace Human_Resources.Migrations
                     b.ToTable("Allowances");
                 });
 
+            modelBuilder.Entity("Human_Resources.Models.Appraisal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CollaborativeSkillsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GroupWorkId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PunctualityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TechnicalSkillsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TimelinessId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CollaborativeSkillsId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("GroupWorkId");
+
+                    b.HasIndex("PunctualityId");
+
+                    b.HasIndex("TechnicalSkillsId");
+
+                    b.HasIndex("TimelinessId");
+
+                    b.ToTable("Appraisals");
+                });
+
             modelBuilder.Entity("Human_Resources.Models.Department", b =>
                 {
                     b.Property<int>("Id")
@@ -292,8 +335,8 @@ namespace Human_Resources.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
@@ -519,6 +562,57 @@ namespace Human_Resources.Migrations
                         .IsRequired();
 
                     b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("Human_Resources.Models.Appraisal", b =>
+                {
+                    b.HasOne("Human_Resources.Models.Grade", "CollaborativeSkills")
+                        .WithMany()
+                        .HasForeignKey("CollaborativeSkillsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Human_Resources.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Human_Resources.Models.Grade", "GroupWork")
+                        .WithMany()
+                        .HasForeignKey("GroupWorkId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Human_Resources.Models.Grade", "Punctuality")
+                        .WithMany()
+                        .HasForeignKey("PunctualityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Human_Resources.Models.Grade", "TechnicalSkills")
+                        .WithMany()
+                        .HasForeignKey("TechnicalSkillsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Human_Resources.Models.Grade", "Timeliness")
+                        .WithMany()
+                        .HasForeignKey("TimelinessId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CollaborativeSkills");
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("GroupWork");
+
+                    b.Navigation("Punctuality");
+
+                    b.Navigation("TechnicalSkills");
+
+                    b.Navigation("Timeliness");
                 });
 
             modelBuilder.Entity("Human_Resources.Models.Employee", b =>

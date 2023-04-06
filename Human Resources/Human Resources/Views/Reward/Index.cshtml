@@ -1,0 +1,39 @@
+﻿@model List<Reward>
+@using Human_Resources.Data.ViewModels
+@{
+    ViewData["title"] = "Available Employees";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model.Count > 0)
+{
+    <table class="table bg-white">
+        <tr>
+            <th style="padding-left: 30px;">Employee Name</th>
+            <th style="padding-left: 30px;">Reward Amount</th>
+            <th style="padding-left: 30px;">Actions</th>
+        </tr>
+        @foreach (var reward in Model)
+        {
+            <tr>
+                <td class="align-middle" style="padding-left: 30px;">
+                    @reward.Employee.Name
+                </td>
+                <td class="align-middle" style="padding-left: 30px;">
+                    @reward.Amount
+                </td>
+             
+                <td class="align-middle" style="padding-left: 30px;">
+                    <a class="btn btn-outline-primary" asp-action="EditReward" asp-route-Id="@reward.Id"><i class="bi bi-pencil-square"></i>Edit</a> |
+                    <a class="btn btn-outline-info" asp-route-Id="@reward.Id" asp-action="Details"><i class="bi bi-eye"></i>Details</a> |
+                    <a class="btn btn-danger text-white" asp-action="DeleteReward" asp-route-Id="@reward.Id"><i class="bi bi-trash"></i>Delete</a>
+                </td>
+            </tr>
+        }
+        <a class="btn btn-primary" asp-action="AddReward">Reward an Employee</a>
+    </table>
+}
+else
+{
+    <h4 class="text-danger align-content-center">No Promotions are Made till now</h4>
+    <a asp-action="AddReward" class="btn btn-primary">Reward an Employee</a>
+}

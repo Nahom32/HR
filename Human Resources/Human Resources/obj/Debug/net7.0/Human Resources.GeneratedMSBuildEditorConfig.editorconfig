@@ -112,6 +112,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvbW90aW9uXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Reward/AddReward.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV3YXJkXEFkZFJld2FyZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Reward/DeleteReward.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV3YXJkXERlbGV0ZVJld2FyZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Reward/EditReward.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV3YXJkXEVkaXRSZXdhcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Reward/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV3YXJkXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
