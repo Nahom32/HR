@@ -55,37 +55,27 @@ namespace Human_Resources.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CollaborativeSkillsId")
+                    b.Property<int>("CollaborativeSkills")
                         .HasColumnType("int");
 
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("GroupWorkId")
+                    b.Property<int>("GroupWork")
                         .HasColumnType("int");
 
-                    b.Property<int>("PunctualityId")
+                    b.Property<int>("Punctuality")
                         .HasColumnType("int");
 
-                    b.Property<int>("TechnicalSkillsId")
+                    b.Property<int>("TechnicalSkills")
                         .HasColumnType("int");
 
-                    b.Property<int>("TimelinessId")
+                    b.Property<int>("Timeliness")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CollaborativeSkillsId");
-
                     b.HasIndex("EmployeeId");
-
-                    b.HasIndex("GroupWorkId");
-
-                    b.HasIndex("PunctualityId");
-
-                    b.HasIndex("TechnicalSkillsId");
-
-                    b.HasIndex("TimelinessId");
 
                     b.ToTable("Appraisals");
                 });
@@ -566,53 +556,13 @@ namespace Human_Resources.Migrations
 
             modelBuilder.Entity("Human_Resources.Models.Appraisal", b =>
                 {
-                    b.HasOne("Human_Resources.Models.Grade", "CollaborativeSkills")
-                        .WithMany()
-                        .HasForeignKey("CollaborativeSkillsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Human_Resources.Models.Employee", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Human_Resources.Models.Grade", "GroupWork")
-                        .WithMany()
-                        .HasForeignKey("GroupWorkId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Human_Resources.Models.Grade", "Punctuality")
-                        .WithMany()
-                        .HasForeignKey("PunctualityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Human_Resources.Models.Grade", "TechnicalSkills")
-                        .WithMany()
-                        .HasForeignKey("TechnicalSkillsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Human_Resources.Models.Grade", "Timeliness")
-                        .WithMany()
-                        .HasForeignKey("TimelinessId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CollaborativeSkills");
-
                     b.Navigation("Employee");
-
-                    b.Navigation("GroupWork");
-
-                    b.Navigation("Punctuality");
-
-                    b.Navigation("TechnicalSkills");
-
-                    b.Navigation("Timeliness");
                 });
 
             modelBuilder.Entity("Human_Resources.Models.Employee", b =>

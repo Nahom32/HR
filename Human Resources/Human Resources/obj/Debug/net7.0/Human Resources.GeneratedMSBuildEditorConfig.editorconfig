@@ -16,6 +16,26 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\hp\Desktop\HR\Human Resources\Human Resources
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Appraisal/AddAppraisal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwcmFpc2FsXEFkZEFwcHJhaXNhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Appraisal/DeleteAppraisal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwcmFpc2FsXERlbGV0ZUFwcHJhaXNhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Appraisal/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwcmFpc2FsXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Appraisal/EditAppraisal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwcmFpc2FsXEVkaXRBcHByYWlzYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Appraisal/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwcmFpc2FsXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Department/AddDepartment.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0bWVudFxBZGREZXBhcnRtZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

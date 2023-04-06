@@ -1,0 +1,46 @@
+﻿@using Human_Resources.Data.Enum
+@using Human_Resources.Data.ViewModels
+@model AppraisalViewModel
+@{
+    ViewData["Title"] = "Employee Grading Form";
+}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1>@ViewData["Title"]</h1>
+            <form method="post" asp-action="DeleteAppraisal">
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group mb-3">
+                    <label asp-for="EmployeeId" class="control-label"></label>
+                    <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.Employees"></select>
+                    <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Timeliness" class="control-label"></label>
+                    <select asp-for="Timeliness" class="form-control" asp-items="Html.GetEnumSelectList<GradeValue>()"></select>
+                    <span asp-validation-for="Timeliness" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="GroupWork" class="control-label"></label>
+                    <select asp-for="GroupWork" class="form-control" asp-items="Html.GetEnumSelectList<GradeValue>()"></select>
+                    <span asp-validation-for="GroupWork" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="TechnicalSkills" class="control-label"></label>
+                    <select asp-for="TechnicalSkills" class="form-control" asp-items="Html.GetEnumSelectList<GradeValue>()"></select>
+                    <span asp-validation-for="TechnicalSkills" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="CollaborativeSkills" class="control-label"></label>
+                    <select asp-for="CollaborativeSkills" class="form-control" asp-items="Html.GetEnumSelectList<GradeValue>()"></select>
+                    <span asp-validation-for="CollaborativeSkills" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <input type="submit" class="btn btn-primary" value="Delete Grade">
+                    <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
