@@ -116,5 +116,18 @@ namespace Human_Resources.Controllers
                 return View("The Appraisal doesn't exist");
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var Result = await _service.GetById(id);
+            if (Result != null)
+            {
+                return View(Result);
+            }
+            else
+            {
+                throw new Exception("The appraisal record wasn't found");
+            }
+        }
     }
 }
