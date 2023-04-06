@@ -31,16 +31,17 @@ namespace Human_Resources.Data.Services
 
         public async Task DeleteReward(RewardViewModel reward)
         {
-            Reward persist = new Reward()
+            var persist =await _context.Rewards.FirstOrDefaultAsync(n => n.Id == reward.Id);
+            if( persist != null)
             {
-                Id = reward.Id,
-                Reason = reward.Reason,
-                Amount = reward.Amount,
-                DateTime = reward.DateTime,
-                EmployeeId = reward.EmployeeId,
-            };
-            _context.Rewards.Remove(persist);
-            await _context.SaveChangesAsync();
+                _context.Rewards.Remove(persist);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("The following Reward doesn't exist");
+            }
+            
         }
 
         public async Task<List<Reward>> GetAll()
