@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\hp\Desktop\HR\Human Resources\Human Resources
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Appraisal/AddAppraisal.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwcmFpc2FsXEFkZEFwcHJhaXNhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

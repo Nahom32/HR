@@ -39,10 +39,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Department}/{action=Index}/{id?}");
+//AppDbInitializer.SeedRole(app).Wait();
 app.Run();

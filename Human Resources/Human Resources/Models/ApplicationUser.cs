@@ -7,5 +7,8 @@ namespace Human_Resources.Models
     {
         [Display(Name = "User name")]
         public string UserName { get; set; }
+        public string Name { get; set; }
+        public string pictureURL { get; set; }
+
     }
 }
