@@ -49,6 +49,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Department}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 AppDbInitializer.SeedRole(app).Wait();
 app.Run();

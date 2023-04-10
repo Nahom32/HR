@@ -197,8 +197,16 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\happy guy.jpg",
+      "PackagePath": "staticwebassets\\images\\happy guy.jpg"
+    },
+    {
       "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\k-means.jpg",
       "PackagePath": "staticwebassets\\images\\k-means.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\laughing.jpeg",
+      "PackagePath": "staticwebassets\\images\\laughing.jpeg"
     },
     {
       "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\my photo.jpg",

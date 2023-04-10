@@ -1,10 +1,12 @@
 ﻿using Human_Resources.Data.Services;
 using Human_Resources.Data.ViewModels;
+using Human_Resources.Data.Helpers;
 using Human_Resources.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Human_Resources.Data.Static;
 
 namespace Human_Resources.Controllers
 {
@@ -69,6 +71,23 @@ namespace Human_Resources.Controllers
                     PhotoURL.CopyTo(stream);
                 }
             }
+            var password = StringGenerator.GenerateRandomString(8);
+            var username = StringGenerator.GenerateRandomString(4);
+            ApplicationUser user = new ApplicationUser()
+            {
+                Name = employeeViewModel.Name,
+                Email = employeeViewModel.Email,
+                EmailConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                UserName = username,
+                pictureURL = employeeViewModel.PhotoURL.FileName
+            };
+            var result = await _userManager.CreateAsync(user, password);
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, UserRoles.User);
+            }
+            _logger.LogInformation($"username: {username}, password: {password}");
             await _service.AddEmployee(employeeViewModel);
             return RedirectToAction("Index", "Employee");
         }
@@ -176,14 +195,7 @@ namespace Human_Resources.Controllers
                     ViewBag.EducationalFields = new SelectList(EducationalFields.EducationalFields, "Id", "Name");
                     return View(EmployeeVm);
                 }
-                //var Departments = await _service.GetDepartmentdropdowns();
-                //var Positions = await _service.GetPositiondropdowns();
-                //var EducationalFields = await _service.GetEducationalFielddropdowns();
-
-                //ViewBag.Departments = new SelectList(Departments.Departments, "Id", "DepartmentName");
-                //ViewBag.Positions = new SelectList(Positions.Positions, "Id", "PositionName");
-                //ViewBag.EducationalFields = new SelectList(EducationalFields.EducationalFields, "Id", "Name");
-                //return View(EmployeeVm);
+                
             }
             else
             {

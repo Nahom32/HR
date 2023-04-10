@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "N5S4mj9S8nBKUZxCd1B+EZpYdSfgTyjQDyl9TgBgmIY=",
+  "Hash": "5S+Lp1M7Vgnfd8OsDzPXYD8hE0HPBXV0bR2imJKS1NI=",
   "Source": "Human Resources",
   "BasePath": "_content/Human Resources",
   "Mode": "Default",
@@ -867,6 +867,23 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\happy guy.jpg",
+      "SourceId": "Human Resources",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\",
+      "BasePath": "_content/Human Resources",
+      "RelativePath": "images/happy guy.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\happy guy.jpg"
+    },
+    {
       "Identity": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\k-means.jpg",
       "SourceId": "Human Resources",
       "SourceType": "Discovered",
@@ -882,6 +899,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\k-means.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\laughing.jpeg",
+      "SourceId": "Human Resources",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\",
+      "BasePath": "_content/Human Resources",
+      "RelativePath": "images/laughing.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\laughing.jpeg"
     },
     {
       "Identity": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\my photo.jpg",
