@@ -1,5 +1,6 @@
 ﻿using Human_Resources.Data.Services;
 using Human_Resources.Data.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -12,12 +13,14 @@ namespace Human_Resources.Controllers
         {
             _service = service;
         }
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var Appraisals = await _service.GetAll();
             return View(Appraisals);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddAppraisal()
         {
             AppraisalViewModel appraisal = new AppraisalViewModel();
@@ -27,6 +30,7 @@ namespace Human_Resources.Controllers
 
         }
         [HttpPost]
+        
         public async Task<IActionResult> AddAppraisal(AppraisalViewModel appraisal)
         {
             if(!ModelState.IsValid)
@@ -42,6 +46,7 @@ namespace Human_Resources.Controllers
             }
         }
         [HttpGet]
+        [Authorize(Roles ="User")]
         public async Task<IActionResult> EditAppraisal(int id)
         {
             var appraisal = await _service.GetById(id);
@@ -117,6 +122,7 @@ namespace Human_Resources.Controllers
             }
         }
         [HttpGet]
+        [Authorize(Roles="Admin,User")]
         public async Task<IActionResult> Details(int id)
         {
             var Result = await _service.GetById(id);

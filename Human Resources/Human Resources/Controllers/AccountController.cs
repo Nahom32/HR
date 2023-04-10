@@ -36,7 +36,7 @@ namespace Human_Resources.Controllers
                     var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, true);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index", "Departments");
+                        return RedirectToAction("Index", "Department");
                     }
                 }
                 TempData["Error"] = "Wrong credentials. Please, try again!";
@@ -51,39 +51,8 @@ namespace Human_Resources.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Login");
         }
-        //[HttpPost]
-        //public async Task<IActionResult> Reg()
-        //{
-           
-        //    string adminUserEmail = "admin@africom.com";
-
-        //    var adminUser = await _userManager.FindByNameAsync("Administrator");
-        //    if (adminUser == null)
-        //    {
-        //        var newAdminUser = new ApplicationUser()
-        //        {
-        //            Name = "HR Admin",
-        //            UserName = "administrator",
-        //            pictureURL = "",
-        //            Email = adminUserEmail,
-        //            EmailConfirmed = true,
-        //            SecurityStamp = Guid.NewGuid().ToString(),
-        //        };
-        //        var result = await _userManager.CreateAsync(newAdminUser, "Afri@1298!");
-        //        if (result.Succeeded)
-        //        {
-        //            await _userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
-        //        }
-        //        return Ok(result);
-        //    }
-        //    else
-        //    {
-        //        return View("Already exists");
-        //    }
-            
-        //}
-
+       
     }
 }

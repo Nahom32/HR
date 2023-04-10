@@ -82,10 +82,15 @@ namespace Human_Resources.Controllers
                 UserName = username,
                 pictureURL = employeeViewModel.PhotoURL.FileName
             };
+
             var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, UserRoles.User);
+            }
+            else
+            {
+                _logger.LogInformation("failed to register");
             }
             _logger.LogInformation($"username: {username}, password: {password}");
             await _service.AddEmployee(employeeViewModel);

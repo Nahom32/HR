@@ -97,8 +97,10 @@
             </div>
         </nav>
     </header>
-    <aside class="left-sidebar " id="sidebar" data-sidebarbg="skin6">
-        <!-- Sidebar scroll-->
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            <aside class="left-sidebar " id="sidebar" data-sidebarbg="skin6">
+                <!-- Sidebar scroll-->
         <div class="scroll-sidebar">
             <!-- Sidebar navigation-->
             <nav class="sidebar-nav">
@@ -157,6 +159,7 @@
         </div>
         <!-- End Sidebar scroll-->
     </aside>
+    }
    
     <div class="container page-wrapper">
         <main role="main" class="pb-3">
@@ -165,7 +168,15 @@
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
-                                <li><a href="#" class="fw-normal">Dashboard</a></li>
+                                @*<li><a href="#" class="fw-normal">Dashboard</a></li>*@
+                                    @if(User.Identity.IsAuthenticated)
+                                    {
+                                        <form asp-action="Logout" asp-controller="Account">
+                                            <li>
+                                                <input type="submit" class="btn btn-danger" asp-controller="Account" asp-action="Logout"><i class="fa fa-lock"></i>
+                                            </li>
+                                        </form>
+                                    }
                             </ol>
                         </div>
                     </div>
