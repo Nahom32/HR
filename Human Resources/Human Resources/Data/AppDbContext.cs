@@ -53,6 +53,7 @@ namespace Human_Resources.Data
         public DbSet<Reward> Rewards { get; set; }
         public DbSet<Leave> Leaves { get; set; }
         public DbSet<Appraisal> Appraisals { get; set;}
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
     }
 }

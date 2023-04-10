@@ -1,12 +1,14 @@
 ﻿using Human_Resources.Data.Static;
 using Human_Resources.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Human_Resources.Data
 {
     public class AppDbInitializer
     {
+        //private static readonly ILogger<AppDbInitializer>? logger;
         public static async Task SeedRole(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
@@ -19,21 +21,29 @@ namespace Human_Resources.Data
 
 
                 var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-                string adminUserEmail = "admin@africom.com";
+                string adminUserEmail = "admin@gmail.com";
 
-                var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
+                var adminUser = await userManager.FindByNameAsync("administrator");
                 if (adminUser == null)
                 {
                     var newAdminUser = new ApplicationUser()
                     {
-                        Name = "HR Admin",
+                        Name = "HRAdmin",
                         UserName = "administrator",
                         pictureURL = "",
                         Email = adminUserEmail,
-                        EmailConfirmed = true
+                        EmailConfirmed = true,
+                        SecurityStamp = Guid.NewGuid().ToString(),
+                       
                     };
-                    await userManager.CreateAsync(newAdminUser, "Afri@1298!");
-                    await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
+                    var result = await userManager.CreateAsync(newAdminUser,"Afri@1298!");
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
+
+                    }
+                   
+                   
                 }
             }
         }

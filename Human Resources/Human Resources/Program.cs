@@ -19,7 +19,11 @@ builder.Services.AddScoped<IEducationalFieldService, EducationalFieldService>();
 builder.Services.AddScoped<IPromotionService, PromotionService>();
 builder.Services.AddScoped<IAppraisalService, AppraisalService>();
 builder.Services.AddScoped<IRewardService, RewardService>();
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -46,5 +50,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Department}/{action=Index}/{id?}");
-//AppDbInitializer.SeedRole(app).Wait();
+AppDbInitializer.SeedRole(app).Wait();
 app.Run();

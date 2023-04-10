@@ -1,8 +1,10 @@
 ﻿using Azure.Identity;
+using Human_Resources.Data.Static;
 using Human_Resources.Data.ViewModels;
 using Human_Resources.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Human_Resources.Controllers
 {
@@ -51,6 +53,37 @@ namespace Human_Resources.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login", "Account");
         }
+        //[HttpPost]
+        //public async Task<IActionResult> Reg()
+        //{
+           
+        //    string adminUserEmail = "admin@africom.com";
+
+        //    var adminUser = await _userManager.FindByNameAsync("Administrator");
+        //    if (adminUser == null)
+        //    {
+        //        var newAdminUser = new ApplicationUser()
+        //        {
+        //            Name = "HR Admin",
+        //            UserName = "administrator",
+        //            pictureURL = "",
+        //            Email = adminUserEmail,
+        //            EmailConfirmed = true,
+        //            SecurityStamp = Guid.NewGuid().ToString(),
+        //        };
+        //        var result = await _userManager.CreateAsync(newAdminUser, "Afri@1298!");
+        //        if (result.Succeeded)
+        //        {
+        //            await _userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
+        //        }
+        //        return Ok(result);
+        //    }
+        //    else
+        //    {
+        //        return View("Already exists");
+        //    }
+            
+        //}
 
     }
 }
