@@ -2,12 +2,14 @@
 using Human_Resources.Data.Services;
 using Human_Resources.Data.ViewModels;
 using Human_Resources.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.Extensions.Logging;
 
 namespace Human_Resources.Controllers
 {
+    [Authorize(Roles ="Admin,User")]
     public class DepartmentController : Controller
     {
         private readonly IDepartmentService _service;
@@ -26,6 +28,7 @@ namespace Human_Resources.Controllers
             return View(departments);
         }
         [HttpGet]
+        
         public IActionResult AddDepartment()
         {
             //DepartmentViewModel departmentViewModel = new DepartmentViewModel();

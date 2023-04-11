@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Human_Resources.Data.Static;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Human_Resources.Controllers
 {
+    [Authorize(Roles="Admin")]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _service;
@@ -24,6 +26,7 @@ namespace Human_Resources.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var Employees = await _service.GetAll();
@@ -217,8 +220,7 @@ namespace Human_Resources.Controllers
                 // Create a new IFormFile object using the stream
                 var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(employee.PhotoURL));
 
-                // Use the file object as needed
-                // ...
+                
                 var EmployeeVm = new EmployeeViewModel()
                 {
                     Id = employee.Id,

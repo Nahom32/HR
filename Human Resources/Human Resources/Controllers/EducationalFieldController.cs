@@ -1,11 +1,13 @@
 ﻿using Human_Resources.Data;
 using Human_Resources.Data.Services;
 using Human_Resources.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace Human_Resources.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class EducationalFieldController : Controller
     {
         private readonly IEducationalFieldService _service;

@@ -4,6 +4,7 @@ using Human_Resources.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,7 @@ builder.Services.AddScoped<IPositionService, PositionService>();
 builder.Services.AddScoped<IEducationalFieldService, EducationalFieldService>();
 builder.Services.AddScoped<IPromotionService, PromotionService>();
 builder.Services.AddScoped<IAppraisalService, AppraisalService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IRewardService, RewardService>();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
@@ -28,8 +30,20 @@ builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 });
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    // Default Password settings.
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 6;
+    options.Password.RequiredUniqueChars = 0;
+    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()1234567890";
+});
 
 var app = builder.Build();
+var User = new ClaimsPrincipal();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -46,9 +60,11 @@ app.UseRouting();
 app.UseAuthentication();
 
 app.UseAuthorization();
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Account}/{action=Login}/{id?}");
+
+
+
 AppDbInitializer.SeedRole(app).Wait();
 app.Run();

@@ -1,9 +1,11 @@
 ﻿using Human_Resources.Data.Services;
 using Human_Resources.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Human_Resources.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class PositionController : Controller
     {
         private readonly IPositionService _service;
