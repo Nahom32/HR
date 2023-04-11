@@ -80,6 +80,34 @@ namespace Human_Resources.Migrations
                     b.ToTable("Appraisals");
                 });
 
+            modelBuilder.Entity("Human_Resources.Models.ConfirmedLeave", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ConfirmedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LeaveId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LeaveType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Remark")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LeaveId");
+
+                    b.ToTable("ConfirmedLeaves");
+                });
+
             modelBuilder.Entity("Human_Resources.Models.Department", b =>
                 {
                     b.Property<int>("Id")
@@ -219,6 +247,9 @@ namespace Human_Resources.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("AskedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
@@ -315,6 +346,34 @@ namespace Human_Resources.Migrations
                     b.HasIndex("toPositionId");
 
                     b.ToTable("Promotions");
+                });
+
+            modelBuilder.Entity("Human_Resources.Models.RejectedLeave", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("LeaveId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LeaveType")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RejectedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Remark")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LeaveId");
+
+                    b.ToTable("RejectedLeaves");
                 });
 
             modelBuilder.Entity("Human_Resources.Models.Reward", b =>
@@ -588,6 +647,17 @@ namespace Human_Resources.Migrations
                     b.Navigation("Employee");
                 });
 
+            modelBuilder.Entity("Human_Resources.Models.ConfirmedLeave", b =>
+                {
+                    b.HasOne("Human_Resources.Models.Leave", "Leave")
+                        .WithMany()
+                        .HasForeignKey("LeaveId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Leave");
+                });
+
             modelBuilder.Entity("Human_Resources.Models.Employee", b =>
                 {
                     b.HasOne("Human_Resources.Models.Department", "Department")
@@ -684,6 +754,17 @@ namespace Human_Resources.Migrations
                     b.Navigation("PositionFrom");
 
                     b.Navigation("PositionTo");
+                });
+
+            modelBuilder.Entity("Human_Resources.Models.RejectedLeave", b =>
+                {
+                    b.HasOne("Human_Resources.Models.Leave", "Leave")
+                        .WithMany()
+                        .HasForeignKey("LeaveId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Leave");
                 });
 
             modelBuilder.Entity("Human_Resources.Models.Reward", b =>

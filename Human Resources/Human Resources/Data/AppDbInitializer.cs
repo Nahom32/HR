@@ -8,7 +8,7 @@ namespace Human_Resources.Data
 {
     public class AppDbInitializer
     {
-        //private static readonly ILogger<AppDbInitializer>? logger;
+        
         public static async Task SeedRole(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
