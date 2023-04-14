@@ -18,8 +18,8 @@ namespace Human_Resources.Data
                     await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
                 if (!await roleManager.RoleExistsAsync(UserRoles.User))
                     await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
-
-
+                if (!await roleManager.RoleExistsAsync(UserRoles.HRManager))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.HRManager));
                 var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
                 string adminUserEmail = "admin@gmail.com";
 

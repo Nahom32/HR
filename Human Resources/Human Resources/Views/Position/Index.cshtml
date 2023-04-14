@@ -1,4 +1,5 @@
-﻿@model List<Position>
+﻿@using Human_Resources.Data.ViewModels;
+@model List<Position>
 @{
     ViewData["title"] = "Available Departments";
 }
@@ -25,6 +26,7 @@
                     <a class="btn btn-danger text-white" data-bs-toggle="modal" data-bs-target="@("#DeletePosition-" + position.Id)" data-bs-url="@Url.Action("/DeletePosition/"+ position.Id)"><i class="bi bi-trash"></i>Delete</a>
                 </td>
             </tr>
+            
             @await Html.PartialAsync("~/Views/Shared/_EditPosition.cshtml", position)
             @await Html.PartialAsync("~/Views/Shared/_DeletePosition.cshtml", position)
 
@@ -41,4 +43,4 @@ else
     <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreatePosition">Add a Position</a>
 
 }
-@await Html.PartialAsync("~/Views/Shared/_AddPosition.cshtml", new Position())
+@await Html.PartialAsync("~/Views/Shared/_AddPosition.cshtml", new PositionViewModel())

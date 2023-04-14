@@ -1,4 +1,5 @@
 ﻿using Human_Resources.Models;
+using Human_Resources.Data.ViewModels;
 
 namespace Human_Resources.Data.Services
 {
@@ -6,8 +7,10 @@ namespace Human_Resources.Data.Services
     {
         public Task<List<Position>> GetAll();
         public Task<Position> GetById(int id);
-        public Task AddPosition(Position position);
-        public void UpdatePosition(Position position);
-        public void DeletePosition(Position position);
+        public Task AddPosition(PositionViewModel position);
+        public Task UpdatePosition(PositionViewModel position);
+        public Task DeletePosition(PositionViewModel position);
+        public Task<PositiondropdownViewModel> GetPositiondropdowns();
+        public Task<DepartmentdropdownViewModel> GetDepartmentdropdowns();
     }
 }

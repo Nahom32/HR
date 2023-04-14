@@ -301,6 +301,13 @@ namespace Human_Resources.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("DepartmentId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PositionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PositionName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -309,6 +316,10 @@ namespace Human_Resources.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("PositionId");
 
                     b.ToTable("Positions");
                 });
@@ -727,6 +738,24 @@ namespace Human_Resources.Migrations
                         .IsRequired();
 
                     b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("Human_Resources.Models.Position", b =>
+                {
+                    b.HasOne("Human_Resources.Models.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Human_Resources.Models.Position", "position")
+                        .WithMany()
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Department");
+
+                    b.Navigation("position");
                 });
 
             modelBuilder.Entity("Human_Resources.Models.Promotion", b =>

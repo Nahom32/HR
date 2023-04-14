@@ -36,6 +36,17 @@ namespace Human_Resources.Data
                 .WithMany()
                 .HasForeignKey(e => e.PositionId)
                 .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Position>()
+                        .HasOne(p => p.Department)
+                        .WithMany()
+                        .HasForeignKey(p => p.DepartmentId)
+                        .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Position>()
+                        .HasOne(p => p.position)
+                        .WithMany()
+                        .HasForeignKey(p=>p.PositionId)
+                        .OnDelete(DeleteBehavior.Restrict);
+
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using Human_Resources.Models;
 using Microsoft.EntityFrameworkCore;
+using Human_Resources.Data.ViewModels;
 
 namespace Human_Resources.Data.Services
 {
@@ -12,19 +13,30 @@ namespace Human_Resources.Data.Services
             _context = context;
             _logger = logger;
         }
-        public async Task AddPosition(Position position)
+        public async Task AddPosition(PositionViewModel position)
         {
-            await _context.Positions.AddAsync(position);
+            Position pos = new Position()
+            {
+                Id = position.Id,
+                DepartmentId = position.DepartmentId,
+                PositionId = position.PositionId,
+                PositionName = position.PositionName,
+                PositionSalary =position.PositionSalary,
+
+            };
+            await _context.Positions.AddAsync(pos);
             await _context.SaveChangesAsync();
         }
 
 
-        public void DeletePosition(Position position)
+        public async Task DeletePosition(PositionViewModel position)
         {
 
-            if (position != null)
+            var pos = await _context.Positions.FirstOrDefaultAsync(n=>n.Id==position.Id);
+
+            if (pos != null)
             {
-                _context.Positions.Remove(position);
+                _context.Positions.Remove(pos);
                 _context.SaveChanges();
             }
             else
@@ -53,11 +65,41 @@ namespace Human_Resources.Data.Services
             }
         }
 
-        public void UpdatePosition(Position position)
+        public async Task UpdatePosition(PositionViewModel position)
         {
-            _context.Positions.Update(position);
-            _context.SaveChanges();
+            var pos = await _context.Positions.FirstOrDefaultAsync(n => n.Id == position.Id);
+            if(pos != null)
+            {
+                _context.Positions.Update(pos);
+                _context.SaveChanges();
 
+            }
+            
+
+        }
+        public async Task<PositiondropdownViewModel> GetPositiondropdowns()
+        {
+            PositiondropdownViewModel positions = new PositiondropdownViewModel()
+            {
+                Positions = await _context.Positions.ToListAsync()
+            };
+            if(positions.Positions == null)
+            {
+                positions.Positions = new List<Position>();
+            }
+            return positions;
+        }
+        public async Task<DepartmentdropdownViewModel> GetDepartmentdropdowns()
+        {
+            DepartmentdropdownViewModel departments = new DepartmentdropdownViewModel()
+            {
+                Departments = await _context.Departments.ToListAsync()
+            };
+            if(departments.Departments == null)
+            {
+                departments.Departments = new List<Department>();
+            }
+            return departments;
         }
     }
 }

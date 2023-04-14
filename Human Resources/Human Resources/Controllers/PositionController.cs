@@ -2,6 +2,8 @@
 using Human_Resources.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Human_Resources.Data.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Human_Resources.Controllers
 {
@@ -20,18 +22,26 @@ namespace Human_Resources.Controllers
         public async Task<IActionResult> Index()
         {
             var allPositions = await _service.GetAll();
+            var Positions = await _service.GetPositiondropdowns();
+            var Departments = await _service.GetDepartmentdropdowns();
+            ViewBag.Positions = new SelectList(Positions.Positions, "Id", "PositionName");
+            ViewBag.Departments = new SelectList(Departments.Departments, "Id", "DepartmentName");
 
             return View(allPositions);
         }
         [HttpGet]
-        public IActionResult AddPosition()
+        public async Task<IActionResult> AddPosition()
         {
+            var Positions = await _service.GetPositiondropdowns();
+            var Departments = await _service.GetDepartmentdropdowns();
+            ViewBag.Positions = new SelectList(Positions.Positions,"Id","PositionName");
+            ViewBag.Departments = new SelectList(Departments.Departments, "Id", "DepartmentName");
 
-            return PartialView("~/Views/Shared/_AddPosition.cshtml",new Position());
+            return PartialView("~/Views/Shared/_AddPosition.cshtml",new PositionViewModel());
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddPosition(Position position)
+        public async Task<IActionResult> AddPosition(PositionViewModel position)
         {
             _logger.LogInformation(ModelState.IsValid.ToString());
 
@@ -43,13 +53,17 @@ namespace Human_Resources.Controllers
             }
             else
             {
+                var Positions = await _service.GetPositiondropdowns();
+                var Departments = await _service.GetDepartmentdropdowns();
+                ViewBag.Positions = new SelectList(Positions.Positions, "Id", "PositionName");
+                ViewBag.Departments = new SelectList(Departments.Departments, "Id", "DepartmentName");
                 _logger.LogInformation("failure");
                 var errorList = ModelState.Values.SelectMany(v => v.Errors)
                                           .Select(e => e.ErrorMessage)
                                           .ToList();
                 var errorString = string.Join("; ", errorList);
                 _logger.LogInformation(errorString);
-                return View(position);
+                return PartialView("~/Views/Shared/_AddPosition.cshtml",position);
             }
 
 
@@ -64,20 +78,36 @@ namespace Human_Resources.Controllers
             }
             else
             {
-                return PartialView("~/Views/Shared/_EditPosition.cshtml",position);
+                var Positions = await _service.GetPositiondropdowns();
+                var Departments = await _service.GetDepartmentdropdowns();
+                ViewBag.Positions = new SelectList(Positions.Positions, "Id", "PositionName");
+                ViewBag.Departments = new SelectList(Departments.Departments, "Id", "DepartmentName");
+                PositionViewModel positionVm = new PositionViewModel()
+                {
+                    Id = position.Id,
+                    DepartmentId = position.DepartmentId,
+                    PositionName = position.PositionName,
+                    PositionSalary = position.PositionSalary,
+                    PositionId = position.PositionId
+                };
+                return PartialView("~/Views/Shared/_EditPosition.cshtml",positionVm);
             }
         }
         [HttpPost]
-        public IActionResult EditPosition(Position position)
+        public async Task<IActionResult> EditPosition(PositionViewModel position)
         {
             if (ModelState.IsValid)
             {
                 _logger.LogInformation("success");
-                _service.UpdatePosition(position);
+                await _service.UpdatePosition(position);
                 return RedirectToAction("Index");
             }
             _logger.LogInformation("failure");
-            return View(position);
+            var Positions = await _service.GetPositiondropdowns();
+            var Departments = await _service.GetDepartmentdropdowns();
+            ViewBag.Positions = new SelectList(Positions.Positions, "Id", "PositionName");
+            ViewBag.Departments = new SelectList(Departments.Departments, "Id", "DepartmentName");
+            return PartialView("~/Views/Shared/_EditPosition.cshtml", position);
         }
         [HttpGet]
         public async Task<IActionResult> DeletePosition(int id)
@@ -89,7 +119,20 @@ namespace Human_Resources.Controllers
             }
             else
             {
-                return PartialView("~/Views/Shared/_EditPosition.cshtml", deleteValue);
+                var Positions = await _service.GetPositiondropdowns();
+                var Departments = await _service.GetDepartmentdropdowns();
+                ViewBag.Positions = new SelectList(Positions.Positions, "Id", "PositionName");
+                ViewBag.Departments = new SelectList(Departments.Departments, "Id", "DepartmentName");
+                PositionViewModel positionVm = new PositionViewModel()
+                {
+                    Id = deleteValue.Id,
+                    DepartmentId = deleteValue.DepartmentId,
+                    PositionName = deleteValue.PositionName,
+                    PositionSalary = deleteValue.PositionSalary,
+                    PositionId = deleteValue.PositionId
+                };
+
+                return PartialView("~/Views/Shared/_EditPosition.cshtml", positionVm);
             }
         }
         [HttpPost, ActionName("DeletePosition")]
@@ -98,12 +141,23 @@ namespace Human_Resources.Controllers
             var position = await _service.GetById(id);
             if (position != null)
             {
-                _logger.LogInformation("success");
-                _service.DeletePosition(position);
+                PositionViewModel positionVm = new PositionViewModel()
+                {
+                    Id = position.Id,
+                    DepartmentId = position.DepartmentId,
+                    PositionName = position.PositionName,
+                    PositionSalary = position.PositionSalary,
+                    PositionId = position.PositionId
+                };
+                await _service.DeletePosition(positionVm);
                 return RedirectToAction("Index");
             }
             else
             {
+                var Positions = await _service.GetPositiondropdowns();
+                var Departments = await _service.GetDepartmentdropdowns();
+                ViewBag.Positions = new SelectList(Positions.Positions, "Id", "PositionName");
+                ViewBag.Departments = new SelectList(Departments.Departments, "Id", "DepartmentName");
                 _logger.LogInformation("failed");
                 var errorList = ModelState.Values.SelectMany(v => v.Errors)
                                           .Select(e => e.ErrorMessage)
