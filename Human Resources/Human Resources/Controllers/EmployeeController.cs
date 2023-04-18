@@ -15,16 +15,18 @@ namespace Human_Resources.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _service;
+        private readonly IPositionService _posService;
         private readonly ILogger<EmployeeController> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         public EmployeeController(IEmployeeService service, ILogger<EmployeeController> logger,
-            UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+            UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IPositionService posService)
         {
             _service = service;
             _logger = logger;
             _userManager = userManager;
             _signInManager = signInManager;
+            _posService = posService;
         }
         [AllowAnonymous]
         public async Task<IActionResult> Index()
@@ -73,6 +75,7 @@ namespace Human_Resources.Controllers
                     PhotoURL.CopyTo(stream);
                 }
             }
+            var pos = await _posService.GetById(employeeViewModel.PositionId);
             var password = StringGenerator.GenerateRandomString(8);
             var username = StringGenerator.GenerateRandomString(4);
             ApplicationUser user = new ApplicationUser()
@@ -82,7 +85,8 @@ namespace Human_Resources.Controllers
                 EmailConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = username,
-                pictureURL = employeeViewModel.PhotoURL.FileName
+                pictureURL = employeeViewModel.PhotoURL.FileName,
+                PositionName = pos.PositionName 
             };
 
             var result = await _userManager.CreateAsync(user, password);

@@ -34,6 +34,7 @@ namespace Human_Resources.Data
                         Email = adminUserEmail,
                         EmailConfirmed = true,
                         SecurityStamp = Guid.NewGuid().ToString(),
+                        PositionName = "Admin"
                        
                     };
                     var result = await userManager.CreateAsync(newAdminUser,"Afri@1298!");

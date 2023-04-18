@@ -10,7 +10,7 @@ namespace Human_Resources.Data.ViewModels
         public string PositionName { get; set; }
         [Display(Name = "Position Salary")]
         public double PositionSalary { get; set; }
-        [Display(Name = "Position")]
+        [Display(Name = "Higher Position")]
         public int? PositionId { get; set; }
         [Display(Name = "Department")]
         public int? DepartmentId { get; set; }

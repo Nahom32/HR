@@ -632,6 +632,10 @@ namespace Human_Resources.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PositionName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("pictureURL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

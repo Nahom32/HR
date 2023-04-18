@@ -15,6 +15,7 @@ namespace Human_Resources.Models
         public double PositionSalary { get; set; }
         public int? PositionId { get; set; }
         [ForeignKey("PositionId")]
+        [Display(Name ="Higher Position")]
         public Position? position { get; set; }
         public int? DepartmentId { get; set; }
         [ForeignKey("DepartmentId")]

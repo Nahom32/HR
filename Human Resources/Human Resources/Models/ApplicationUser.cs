@@ -8,6 +8,7 @@ namespace Human_Resources.Models
         
         public string Name { get; set; }
         public string pictureURL { get; set; }
+        public string PositionName { get; set; }
 
     }
 }
