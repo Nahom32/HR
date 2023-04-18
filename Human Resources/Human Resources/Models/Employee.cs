@@ -34,6 +34,9 @@ namespace Human_Resources.Models
         public int EducationalFieldId { get; set; }
         [ForeignKey("EducationalFieldId")]
         public EducationalField EducationalField{ get; set; }
+        [Display(Name = "Role")]
+        public Roles Roles { get; set; }
+
         
 
     }

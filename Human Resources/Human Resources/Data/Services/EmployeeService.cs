@@ -27,6 +27,7 @@ namespace Human_Resources.Data.Services
                 PositionId = employeeViewModel.PositionId,
                 EducationalLevel = employeeViewModel.EducationalLevel,
                 EducationalFieldId = employeeViewModel.EducationalFieldId,
+                Roles = employeeViewModel.Roles
             };
             await _context.Employees.AddAsync(employee);
             await _context.SaveChangesAsync();
@@ -87,6 +88,7 @@ namespace Human_Resources.Data.Services
                 DbEmployee.EducationalFieldId = employee.EducationalFieldId;
                 DbEmployee.EducationalLevel = employee.EducationalLevel;
                 DbEmployee.PositionId = employee.PositionId;
+                DbEmployee.Roles = employee.Roles;
                 _context.Employees.Update(DbEmployee);
                 _context.SaveChanges();
             }

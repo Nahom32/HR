@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Human_Resources.Controllers
 {
-    [Authorize(Roles="Admin")]
+    [Authorize(Roles="Admin, HRManager")]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _service;
@@ -70,7 +70,6 @@ namespace Human_Resources.Controllers
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                    _logger.LogInformation("Hi");
                     PhotoURL.CopyTo(stream);
                 }
             }
@@ -89,7 +88,16 @@ namespace Human_Resources.Controllers
             var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, UserRoles.User);
+                if(employeeViewModel.Roles == Data.Enum.Roles.User)
+                {
+                    await _userManager.AddToRoleAsync(user, UserRoles.User);
+                }
+                else
+                {
+                    await _userManager.AddToRoleAsync(user, UserRoles.HRManager);
+                }
+
+                
             }
             else
             {
@@ -122,7 +130,8 @@ namespace Human_Resources.Controllers
                         PhotoURL = file,
                         EducationalFieldId = employee.EducationalFieldId,
                         Email = employee.Email,
-                        EducationalLevel = employee.EducationalLevel
+                        EducationalLevel = employee.EducationalLevel,
+                        Roles = employee.Roles
 
                     };
                     var Departments = await _service.GetDepartmentdropdowns();

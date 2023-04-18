@@ -35,6 +35,8 @@ namespace Human_Resources.Data.ViewModels
         [Required(ErrorMessage = "Educational Field is Required")]
         [Display(Name = "Educational Field")]
         public int EducationalFieldId { get; set; }
+        [Display(Name = "Role")]
+        public Roles Roles { get; set; }
 
 
     }

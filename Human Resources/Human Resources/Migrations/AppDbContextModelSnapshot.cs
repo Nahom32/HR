@@ -181,6 +181,9 @@ namespace Human_Resources.Migrations
                     b.Property<int>("PositionId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Roles")
+                        .HasColumnType("int");
+
                     b.Property<int>("Sex")
                         .HasColumnType("int");
 
