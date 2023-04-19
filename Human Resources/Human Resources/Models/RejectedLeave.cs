@@ -8,11 +8,9 @@ namespace Human_Resources.Models
         public int Id { get; set; }
         public string Remark { get; set; }
         public LeaveType LeaveType { get; set; }
-        
-
-        public int LeaveId { get; set; }
-        [ForeignKey("LeaveId")]
-        public Leave Leave { get; set; }
+        public int EmployeeId { get; set; }
+        [ForeignKey("EmployeeId")]
+        public Employee Employee { get; set; }
         public DateTime RejectedAt { get; set; } = DateTime.Now;
     }
 }

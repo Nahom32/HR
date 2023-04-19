@@ -91,7 +91,7 @@ namespace Human_Resources.Migrations
                     b.Property<DateTime>("ConfirmedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("LeaveId")
+                    b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<int>("LeaveType")
@@ -103,7 +103,7 @@ namespace Human_Resources.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LeaveId");
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("ConfirmedLeaves");
                 });
@@ -370,7 +370,7 @@ namespace Human_Resources.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("LeaveId")
+                    b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<int>("LeaveType")
@@ -385,7 +385,7 @@ namespace Human_Resources.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LeaveId");
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("RejectedLeaves");
                 });
@@ -667,13 +667,13 @@ namespace Human_Resources.Migrations
 
             modelBuilder.Entity("Human_Resources.Models.ConfirmedLeave", b =>
                 {
-                    b.HasOne("Human_Resources.Models.Leave", "Leave")
+                    b.HasOne("Human_Resources.Models.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("LeaveId")
+                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Leave");
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("Human_Resources.Models.Employee", b =>
@@ -794,13 +794,13 @@ namespace Human_Resources.Migrations
 
             modelBuilder.Entity("Human_Resources.Models.RejectedLeave", b =>
                 {
-                    b.HasOne("Human_Resources.Models.Leave", "Leave")
+                    b.HasOne("Human_Resources.Models.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("LeaveId")
+                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Leave");
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("Human_Resources.Models.Reward", b =>

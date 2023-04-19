@@ -1,4 +1,5 @@
 ﻿using Human_Resources.Data.Enum;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Human_Resources.Models
@@ -11,6 +12,8 @@ namespace Human_Resources.Models
         public int EmployeeId { get; set; }
         [ForeignKey("EmployeeId")]
         public Employee Employee { get; set; }
+        [Display(Name ="Number of Days")]
+        [Required(ErrorMessage ="The number of days is Required")]
         public DateTime AskedAt { get; set; } = DateTime.Now;
 
 
