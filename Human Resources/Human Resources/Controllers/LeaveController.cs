@@ -52,13 +52,21 @@ namespace Human_Resources.Controllers
 
         }
         [HttpGet]
-        public async Task<IActionResult> RequestLeave(int id)
+        public async Task<IActionResult> RequestLeave()
         {
-
-            var employee = await _employeeService.GetById(id);
-            LeaveViewModel leave = new LeaveViewModel();
-            leave.EmployeeId = employee.Id;
-            return View(leave);
+            var User = _accessor.HttpContext.User;
+            var user = await _userManager.GetUserAsync(User);
+            if(user != null)
+            {
+                var employee = await _employeeService.GetById(user.EmployeeId);
+                LeaveViewModel leave = new LeaveViewModel();
+                leave.EmployeeId = employee.Id;
+                return View(leave);
+            }
+            else
+            {
+                throw new Exception("the user doesn't exist");
+            }   
         }
         [HttpPost]
         public async Task<IActionResult> RequestLeave(LeaveViewModel leave)
@@ -81,7 +89,7 @@ namespace Human_Resources.Controllers
             if (accept != null)
             {
                 ConfirmedLeave confirmedLeave = new ConfirmedLeave();
-                confirmedLeave.EmployeeId = accept.Id;
+                confirmedLeave.EmployeeId = accept.EmployeeId;
                 confirmedLeave.Remark = accept.Remark;
                 confirmedLeave.LeaveType = accept.LeaveType;
                 return View(confirmedLeave);

@@ -86,7 +86,8 @@ namespace Human_Resources.Controllers
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = username,
                 pictureURL = employeeViewModel.PhotoURL.FileName,
-                PositionName = pos.PositionName 
+                PositionName = pos.PositionName,
+                EmployeeId = employeeViewModel.Id
             };
 
             var result = await _userManager.CreateAsync(user, password);
