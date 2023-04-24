@@ -98,7 +98,7 @@ namespace Human_Resources.Controllers
         {
             if (ModelState.IsValid)
             {
-                _logger.LogInformation("success");
+                _logger.LogInformation("success1");
                 await _service.UpdatePosition(position);
                 return RedirectToAction("Index");
             }

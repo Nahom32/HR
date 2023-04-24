@@ -1,13 +1,12 @@
-﻿using Human_Resources.Data.Services;
+﻿using Human_Resources.Data.Helpers;
+using Human_Resources.Data.Services;
+using Human_Resources.Data.Static;
 using Human_Resources.Data.ViewModels;
-using Human_Resources.Data.Helpers;
 using Human_Resources.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Human_Resources.Data.Static;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Human_Resources.Controllers
 {
@@ -76,8 +75,10 @@ namespace Human_Resources.Controllers
                 }
             }
             var pos = await _posService.GetById(employeeViewModel.PositionId);
+            await _service.AddEmployee(employeeViewModel);
             var password = StringGenerator.GenerateRandomString(8);
             var username = StringGenerator.GenerateRandomString(4);
+            var employeeFromEmail = await _service.GetEmployeeByEmail(employeeViewModel.Email);
             ApplicationUser user = new ApplicationUser()
             {
                 Name = employeeViewModel.Name,
@@ -87,9 +88,9 @@ namespace Human_Resources.Controllers
                 UserName = username,
                 pictureURL = employeeViewModel.PhotoURL.FileName,
                 PositionName = pos.PositionName,
-                EmployeeId = employeeViewModel.Id
+                EmployeeId = employeeFromEmail.Id
             };
-
+            
             var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
             {
@@ -97,9 +98,10 @@ namespace Human_Resources.Controllers
                 {
                     await _userManager.AddToRoleAsync(user, UserRoles.User);
                 }
-                else
+                else if(employeeViewModel.Roles == Data.Enum.Roles.HRManager)
                 {
                     await _userManager.AddToRoleAsync(user, UserRoles.HRManager);
+                    _logger.LogInformation("HRManager");
                 }
 
                 
@@ -109,7 +111,6 @@ namespace Human_Resources.Controllers
                 _logger.LogInformation("failed to register");
             }
             _logger.LogInformation($"username: {username}, password: {password}");
-            await _service.AddEmployee(employeeViewModel);
             return RedirectToAction("Index", "Employee");
         }
         [HttpGet]
@@ -248,7 +249,24 @@ namespace Human_Resources.Controllers
                     EducationalLevel = employee.EducationalLevel
                 };
                 await _service.DeleteEmployee(EmployeeVm);
-                return RedirectToAction("Index");
+                var user = await _userManager.FindByEmailAsync(EmployeeVm.Email);
+                if (user != null)
+                {
+                    var result = await _userManager.DeleteAsync(user);
+                    if(result.Succeeded)
+                    {
+                        _logger.LogInformation("user delete has succeeded");
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        throw new Exception("The result didn't succeed");
+                    }
+                }
+                else
+                {
+                    throw new Exception("The user isn't found");
+                }
             }
         }
         [HttpGet]

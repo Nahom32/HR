@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Human_Resources.Controllers
 {
-    [Authorize(Roles ="Admin,User")]
+    [Authorize(Roles ="Admin,User,HRAdmin")]
     public class DepartmentController : Controller
     {
         private readonly IDepartmentService _service;
@@ -28,7 +28,7 @@ namespace Human_Resources.Controllers
             return View(departments);
         }
         [HttpGet]
-        
+        [Authorize(Roles ="Admin")]
         public IActionResult AddDepartment()
         {
             //DepartmentViewModel departmentViewModel = new DepartmentViewModel();

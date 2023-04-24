@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,7 +25,8 @@
     <link href="~/css/style.min.css" rel="stylesheet">
 </head>
 <body>
-   
+  
+    
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
@@ -32,8 +34,6 @@
         </div>
     </div>
     
-        
-   
         <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
        
@@ -48,13 +48,13 @@
                             <!-- Logo icon -->
                             <b class="logo-icon">
                                 <!-- Dark Logo icon -->
-                                <img src="plugins/images/logo-icon.png" alt="homepage" />
+                                <img src="/../../images/logo-icon.png" alt="homepage" />
                             </b>
                             <!--End Logo icon -->
                             <!-- Logo text -->
                             <span class="logo-text">
                                 <!-- dark Logo text -->
-                                <img src="plugins/images/logo-text.png" alt="homepage" />
+                            <img src="/../../images/logo-text.png" alt="homepage" />
                             </span>
                         </a>
                         <!-- ============================================================== -->
@@ -78,6 +78,13 @@
                             <!-- ============================================================== -->
                             <!-- Search -->
                             <!-- ============================================================== -->
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <a class="profile-pic">
+                                <img @*src="plugins/images/users/varun.jpg"*@ src="" alt="user-img" width="36"
+                                     class="img-circle"><span class="text-white font-medium">@User.Identity.Name</span>
+                            </a>
                             <li class=" in">
                                 <form role="search" class="app-search d-none d-md-block me-3">
                                     <input type="text" placeholder="Search..." class="form-control mt-0">
@@ -90,11 +97,10 @@
                             <!-- User profile and search -->
                             <!-- ============================================================== -->
                             <li>
-                                <a class="profile-pic" href="#">
-                                    <img src="plugins/images/users/varun.jpg" alt="user-img" width="36"
-                                    class="img-circle"><span class="text-white font-medium">Steave</span>
-                                </a>
+                                
+                                
                             </li>
+                                }
                             <!-- ============================================================== -->
                             <!-- User profile and search -->
                             <!-- ============================================================== -->
@@ -163,7 +169,9 @@
                 </div>
                 <!-- End Sidebar scroll-->
             </aside>
-        
+            
+            
+        @*}*@
     <div class="container page-wrapper">
         <main role="main" class="pb-3">
             <div class="page-breadcrumb  bg-white">

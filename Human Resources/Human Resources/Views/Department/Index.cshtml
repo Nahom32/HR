@@ -11,7 +11,11 @@
         <tr>
             <th style="padding-left: 30px;">Department Name</th>
             <th style="padding-left: 30px;">Department Description</th>
-            <th style="padding-left: 30px;">Actions</th>
+            @if (User.IsInRole("Admin"))
+            {
+
+                <th style="padding-left: 30px;">Actions</th>
+            }
         </tr>
     <tbody class=".table-striped">
     @foreach(var dept in Model)
@@ -23,25 +27,34 @@
             <td class="col-sm-5" style="padding-left: 30px;">
                 @dept.DepartmentDescription
             </td>
-            <td class="col-sm-6" style="padding-left: 30px;">
-                <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="@("#EditDept-" + dept.Id)" data-bs-url="@Url.Action("/EditDepartment/"+ dept.Id)"><i class="bi bi-pencil-square"></i>Edit</a> |
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td class="col-sm-6" style="padding-left: 30px;">
+                            <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="@("#EditDept-" + dept.Id)" data-bs-url="@Url.Action("/EditDepartment/"+ dept.Id)"><i class="bi bi-pencil-square"></i>Edit</a> |
                 <a  class="btn btn-outline-info" asp-route-Id="@dept.Id" asp-action="Details"><i class="bi bi-eye"></i>Details</a> |
                <a href="#" class="btn btn-danger text-white" data-bs-toggle="modal" data-bs-target="@("#DeleteDept-" + dept.Id)" data-bs-url="@Url.Action("/DeleteDepartment/"+ dept.Id)"><i class="bi bi-trash"></i>Delete</a>
                         @await Html.PartialAsync("~/Views/Shared/_EditDepartment.cshtml", dept)
                         @await Html.PartialAsync("~/Views/Shared/_DeleteDepartment.cshtml", dept)
-            </td>
+                        </td>
+            }
 
         </tr>
     }
     </tbody>
         
     </table>
-    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreateDept">Add a department</a>
-    
+    @if (User.IsInRole("Admin"))
+    {
+        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreateDept">Add a department</a>
+    }
+
 }else
 {
     <h4 class="text-danger align-content-center">No Departments Given</h4>
-    <a class="btn btn-primary" asp-action="AddDepartment">Add a department</a>
+    @if (User.IsInRole("Admin"))
+    {
+        <a class="btn btn-primary" asp-action="AddDepartment">Add a department</a>
+    }
 }
 @await Html.PartialAsync("~/Views/Shared/_AddDepartment.cshtml",new Department())
 @*@await Html.PartialAsync("~/Views/Shared/_EditDepartment.cshtml")

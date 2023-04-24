@@ -1,10 +1,8 @@
 ﻿using Human_Resources.Data;
 using Human_Resources.Data.Services;
 using Human_Resources.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Human_Resources.Data.ViewModels;
 
 namespace Human_Resources.Controllers
@@ -16,15 +14,17 @@ namespace Human_Resources.Controllers
         private readonly IHttpContextAccessor _accessor;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmployeeService _employeeService;
+        private readonly IPositionService _positionService;
         public LeaveController(ILeaveService service, AppDbContext context,
-            IHttpContextAccessor accessor, UserManager<ApplicationUser> userManager, IEmployeeService employeeService)
+            IHttpContextAccessor accessor, UserManager<ApplicationUser> userManager,
+            IEmployeeService employeeService, IPositionService positionService)
         {
             leaveService = service;
             _context = context;
             _accessor = accessor;
             _userManager = userManager;
             _employeeService = employeeService;
-
+            _positionService = positionService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -41,7 +41,11 @@ namespace Human_Resources.Controllers
             {
                 foreach (var leave in leaves)
                 {
-                    if (leave.Employee.Position.position.PositionName == user.PositionName)
+                    var pos = await _positionService.GetById(leave.Employee.PositionId);
+                    if(pos.position == null)
+                    {
+                        continue;
+                    }else if(pos.position.PositionName == user.PositionName) // Check for parent node
                     {
                         bucket.Add(leave);
                     }

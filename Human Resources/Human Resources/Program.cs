@@ -2,6 +2,7 @@ using Human_Resources.Data;
 using Human_Resources.Data.Services;
 using Human_Resources.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
+//using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -61,9 +62,10 @@ app.UseRouting();
 app.UseAuthentication();
 
 app.UseAuthorization();
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Account}/{action=Login}/{id?}");
+
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Account}/{action=Login}/{id?}");
 
 
 

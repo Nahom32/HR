@@ -165,7 +165,7 @@ namespace Human_Resources.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("MaritalStatus")
                         .HasColumnType("int");
@@ -192,6 +192,9 @@ namespace Human_Resources.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.HasIndex("EducationalFieldId");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.HasIndex("PositionId");
 

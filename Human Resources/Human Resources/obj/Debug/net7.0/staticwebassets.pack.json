@@ -209,6 +209,22 @@
       "PackagePath": "staticwebassets\\images\\laughing.jpeg"
     },
     {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\logo-icon.png",
+      "PackagePath": "staticwebassets\\images\\logo-icon.png"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\logo-light-icon.png",
+      "PackagePath": "staticwebassets\\images\\logo-light-icon.png"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\logo-light-text.png",
+      "PackagePath": "staticwebassets\\images\\logo-light-text.png"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\logo-text.png",
+      "PackagePath": "staticwebassets\\images\\logo-text.png"
+    },
+    {
       "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\my photo.jpg",
       "PackagePath": "staticwebassets\\images\\my photo.jpg"
     },
@@ -223,6 +239,10 @@
     {
       "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\photo_2023-02-24_18-22-18.jpg",
       "PackagePath": "staticwebassets\\images\\photo_2023-02-24_18-22-18.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\profile-img.webp",
+      "PackagePath": "staticwebassets\\images\\profile-img.webp"
     },
     {
       "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\js\\app-style-switcher.js",

@@ -119,6 +119,18 @@ namespace Human_Resources.Data.Services
             };
             return response;
         }
+        public async Task<Employee> GetEmployeeByEmail(string email)
+        {
+            var employee = await _context.Employees.FirstOrDefaultAsync(n => n.Email == email);
+            if(employee != null)
+            {
+                return employee;
+            }
+            else
+            {
+                throw new Exception($"A user with {email} doesn't exist");
+            }
+        }
 
 
     }

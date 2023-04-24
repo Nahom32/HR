@@ -1,10 +1,12 @@
 ﻿using Human_Resources.Data.Enum;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Human_Resources.Models
 {
+    [Index(nameof(Email), IsUnique =true)]
     public class Employee
     {
         

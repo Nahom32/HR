@@ -47,14 +47,14 @@ namespace Human_Resources.Data.Services
 
         public async Task<List<Position>> GetAll()
         {
-            var retLis = await _context.Positions.ToListAsync();
+            var retLis = await _context.Positions.Include(n => n.position).ToListAsync();
             return retLis;
 
         }
 
         public async Task<Position> GetById(int id)
         {
-            var retval = await _context.Positions.FindAsync(id);
+            var retval = await _context.Positions.Include(n => n.position).FirstOrDefaultAsync(n => n.Id == id);
             if (retval != null)
             {
                 return retval;
@@ -67,15 +67,18 @@ namespace Human_Resources.Data.Services
 
         public async Task UpdatePosition(PositionViewModel position)
         {
-            var pos = await _context.Positions.FirstOrDefaultAsync(n => n.Id == position.Id);
-            if(pos != null)
+            var pos = new Position()
             {
-                _context.Positions.Update(pos);
-                _context.SaveChanges();
+                Id = position.Id,
+                PositionName = position.PositionName,
+                PositionSalary = position.PositionSalary,
+                PositionId = position.PositionId,
+                DepartmentId = position.DepartmentId
 
-            }
+            };
+            _context.Positions.Update(pos);
+            await _context.SaveChangesAsync();
             
-
         }
         public async Task<PositiondropdownViewModel> GetPositiondropdowns()
         {
