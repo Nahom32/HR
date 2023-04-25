@@ -10,21 +10,28 @@ namespace Human_Resources.Controllers
     public class LeaveController : Controller
     {
         private readonly ILeaveService leaveService;
-        private readonly AppDbContext _context;
         private readonly IHttpContextAccessor _accessor;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmployeeService _employeeService;
         private readonly IPositionService _positionService;
-        public LeaveController(ILeaveService service, AppDbContext context,
+        private readonly ILogger<LeaveController> _logger;
+        private readonly IRejectedLeaveService _rejectedLeaveService;
+        private readonly IConfirmedLeaveService _confirmedLeaveService;
+        public LeaveController(ILeaveService service,
             IHttpContextAccessor accessor, UserManager<ApplicationUser> userManager,
-            IEmployeeService employeeService, IPositionService positionService)
+            IEmployeeService employeeService, IPositionService positionService,
+            ILogger<LeaveController> logger,
+            IRejectedLeaveService rejLeave, IConfirmedLeaveService confirmedLeaveService)
         {
             leaveService = service;
-            _context = context;
             _accessor = accessor;
             _userManager = userManager;
             _employeeService = employeeService;
             _positionService = positionService;
+            _logger = logger;
+            _rejectedLeaveService = rejLeave;
+            _confirmedLeaveService = confirmedLeaveService;
+
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -33,8 +40,14 @@ namespace Human_Resources.Controllers
             var User = _accessor.HttpContext.User;
             var user = await _userManager.GetUserAsync(User);
             var bucket = new List<Leave>();
+            if(leaves == null)
+            {
+                leaves = new List<Leave>();
+            }
+
             if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
             {
+
                 return View(leaves);
             }
             else
@@ -96,6 +109,7 @@ namespace Human_Resources.Controllers
                 confirmedLeave.EmployeeId = accept.EmployeeId;
                 confirmedLeave.Remark = accept.Remark;
                 confirmedLeave.LeaveType = accept.LeaveType;
+
                 return View(confirmedLeave);
             }
             else
@@ -107,14 +121,16 @@ namespace Human_Resources.Controllers
         [HttpPost]
         public async Task<IActionResult> AcceptLeave(ConfirmedLeave confirmedLeave)
         {
+            confirmedLeave.Id = 0;
             if (!ModelState.IsValid)
             {
+                _logger.LogInformation("leave unsuccessful");
                 return View(confirmedLeave);
             }
             else
             {
-                await _context.ConfirmedLeaves.AddAsync(confirmedLeave);
-                var value = await leaveService.GetById(confirmedLeave.Id);
+                await _confirmedLeaveService.AddConfirmedLeave(confirmedLeave);
+                var value = await leaveService.SearchByEmployeeId(confirmedLeave.EmployeeId);
                 LeaveViewModel leaveView = new LeaveViewModel()
                 {
                     Id = value.Id,
@@ -124,6 +140,7 @@ namespace Human_Resources.Controllers
                 };
 
                 await leaveService.DeleteLeave(leaveView);
+               
                 return View("index");
 
             }
@@ -158,7 +175,7 @@ namespace Human_Resources.Controllers
             }
             else
             {
-                await _context.RejectedLeaves.AddAsync(leave);
+                await _rejectedLeaveService.AddRejectedLeave(leave);
                 var toDelete = await leaveService.GetById(leave.Id);
                 LeaveViewModel reg = new LeaveViewModel()
                 {

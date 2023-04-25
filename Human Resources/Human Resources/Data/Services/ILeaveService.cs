@@ -11,7 +11,7 @@ namespace Human_Resources.Data.Services
         public Task UpdateLeave(LeaveViewModel leave);
         public Task DeleteLeave(LeaveViewModel leave);
         public Task<EmployeedropdownViewModel> GetEmployeedropdowns();
-        
+        public Task<Leave> SearchByEmployeeId(int id);
 
     }
 }

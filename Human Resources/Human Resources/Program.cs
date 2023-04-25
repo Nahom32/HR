@@ -23,6 +23,8 @@ builder.Services.AddScoped<IAppraisalService, AppraisalService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IRewardService, RewardService>();
 builder.Services.AddScoped<ILeaveService, LeaveService>();
+builder.Services.AddScoped<IRejectedLeaveService, RejectedLeaveService>();
+builder.Services.AddScoped<IConfirmedLeaveService, ConfirmedLeaveService>();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();

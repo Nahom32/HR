@@ -89,5 +89,18 @@ namespace Human_Resources.Data.Services
 
             }
         }
+        public async Task<Leave> SearchByEmployeeId(int id)
+        {
+            var leave = await _context.Leaves.FirstOrDefaultAsync(n => n.EmployeeId == id);
+            if (leave != null)
+            {
+                return leave;
+            }
+            else
+            {
+                throw new Exception("The Leave doesn't exist");
+            }
+        }
+
     }
 }

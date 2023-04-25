@@ -104,8 +104,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Leave/AcceptLeave.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhdmVcQWNjZXB0TGVhdmUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Leave/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhdmVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Leave/RejectLeave.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhdmVcUmVqZWN0TGVhdmUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Leave/RequestLeave.cshtml]
