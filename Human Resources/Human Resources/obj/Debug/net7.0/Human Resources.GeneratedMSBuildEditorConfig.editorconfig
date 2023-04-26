@@ -80,6 +80,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVcQWRkRW1wbG95ZWUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Employee/Deactivate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVcRGVhY3RpdmF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Employee/DeleteEmployee.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVcRGVsZXRlRW1wbG95ZWUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -112,8 +116,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhdmVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Leave/RejectLeave.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhdmVcUmVqZWN0TGVhdmUuY3NodG1s
+[C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Leave/RejectedLeave.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhdmVcUmVqZWN0ZWRMZWF2ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/hp/Desktop/HR/Human Resources/Human Resources/Views/Leave/RequestLeave.cshtml]

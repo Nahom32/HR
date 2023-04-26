@@ -37,8 +37,7 @@ namespace Human_Resources.Data.ViewModels
         public int EducationalFieldId { get; set; }
         [Display(Name = "Role")]
         public Roles Roles { get; set; }
-
+        public State State { get; set; } = State.Active;
 
     }
-
 }

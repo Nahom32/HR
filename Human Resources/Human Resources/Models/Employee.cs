@@ -38,8 +38,7 @@ namespace Human_Resources.Models
         public EducationalField EducationalField{ get; set; }
         [Display(Name = "Role")]
         public Roles Roles { get; set; }
-
-        
+        public State State { get; set; } = State.Active;
 
     }
 }

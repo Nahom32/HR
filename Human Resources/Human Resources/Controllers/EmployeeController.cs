@@ -289,5 +289,97 @@ namespace Human_Resources.Controllers
                 educationalFields
             });
         }
+        [HttpGet]
+        public async Task<IActionResult> Deactivate(int id)
+        {
+            var employee = await _service.GetById(id);
+            if (employee != null)
+            {
+                using (var stream = new FileStream("wwwroot/images/" + employee.PhotoURL, FileMode.Open))
+                {
+                    // Create a new IFormFile object using the stream
+                    var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(employee.PhotoURL));
+
+                    // Use the file object as needed
+                    // ...
+                    var EmployeeVm = new EmployeeViewModel()
+                    {
+                        Id = employee.Id,
+                        DepartmentId = employee.DepartmentId,
+                        PositionId = employee.PositionId,
+                        Sex = employee.Sex,
+                        Name = employee.Name,
+                        PhotoURL = file,
+                        EducationalFieldId = employee.EducationalFieldId,
+                        Email = employee.Email,
+                        EducationalLevel = employee.EducationalLevel
+
+                    };
+                    var Departments = await _service.GetDepartmentdropdowns();
+                    var Positions = await _service.GetPositiondropdowns();
+                    var EducationalFields = await _service.GetEducationalFielddropdowns();
+
+                    ViewBag.Departments = new SelectList(Departments.Departments, "Id", "DepartmentName");
+                    ViewBag.Positions = new SelectList(Positions.Positions, "Id", "PositionName");
+                    ViewBag.EducationalFields = new SelectList(EducationalFields.EducationalFields, "Id", "Name");
+                    return View(EmployeeVm);
+                }
+
+            }
+            else
+            {
+                return View("Not Found");
+            }
+        }
+        [HttpPost, ActionName("Deactivate")]
+        public async Task<IActionResult> DeactivateConfirmed(int id)
+        {
+            var employee = await _service.GetById(id);
+            if (employee == null)
+            {
+                throw new Exception("The employee doesn't exist");
+
+            }
+            else
+            {
+                using (var stream = new FileStream("wwwroot/images/" + employee.PhotoURL, FileMode.Open))
+                {
+                    var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(employee.PhotoURL));
+                    var empvm = new EmployeeViewModel()
+                    {
+                        Id = employee.Id,
+                        DepartmentId = employee.DepartmentId,
+                        PositionId = employee.PositionId,
+                        Sex = employee.Sex,
+                        Name = employee.Name,
+                        PhotoURL = file,
+                        EducationalFieldId = employee.EducationalFieldId,
+                        Email = employee.Email,
+                        EducationalLevel = employee.EducationalLevel,
+                        State = Data.Enum.State.Inactive
+                    };
+                    await _service.UpdateEmployee(empvm);
+                    var user = await _userManager.FindByEmailAsync(empvm.Email);
+                    if (user != null)
+                    {
+                        var result = await _userManager.DeleteAsync(user);
+                        if (result.Succeeded)
+                        {
+                            _logger.LogInformation("user delete has succeeded");
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            throw new Exception("The result didn't succeed");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("The user isn't found");
+                    }
+                }
+            }
+        }
+
     }
 }

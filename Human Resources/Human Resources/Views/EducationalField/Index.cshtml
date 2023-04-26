@@ -17,7 +17,6 @@
                 </td>
                 <td class="align-middle" style="padding-left: 30px;">
                     <a class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="@("#EditEducationalField-" + educationalField.Id)" data-bs-url="@Url.Action("/EditEducationalField/"+ educationalField.Id)"><i class="bi bi-pencil-square"></i>Edit</a> |
-                    <a class="btn btn-outline-info"><i class="bi bi-eye"></i>Details</a> |
                     <a class="btn btn-danger text-white" data-bs-toggle="modal" data-bs-target="@("#DeleteEducationalField-" + educationalField.Id)" data-bs-url="@Url.Action("/DeleteEducationalField/"+ educationalField.Id)"><i class="bi bi-trash"></i>Delete</a>
 
                 </td>
@@ -37,3 +36,9 @@ else
 
 }
 @await Html.PartialAsync("~/Views/Shared/_AddEducationalField.cshtml", new EducationalField())
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}

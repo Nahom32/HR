@@ -1,0 +1,33 @@
+﻿@model RejectedLeave
+@using Human_Resources.Data.ViewModels
+@using Human_Resources.Data.Enum
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1>@ViewData["Title"]</h1>
+            <form method="post" asp-action="RejectedLeave">
+                <input asp-for="EmployeeId" class="form-control" type="hidden">
+                <div class="form-group mb-3">
+                    <label asp-for="LeaveType" class="control-label"></label>
+                    <select asp-for="LeaveType" class="form-control" asp-items="Html.GetEnumSelectList<LeaveType>()">
+                    </select>
+                    <span asp-validation-for="LeaveType" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Remark" class="control-label"></label>
+                    <input type="text" asp-for="Remark" class="form-control">
+                    <span asp-validation-for="Remark" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="RefusalReason" class="control-label"></label>
+                    <textarea type="text" asp-for="RefusalReason" class="form-control"></textarea>
+                    <span asp-validation-for="RefusalReason" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

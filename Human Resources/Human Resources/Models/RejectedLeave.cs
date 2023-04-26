@@ -9,6 +9,7 @@ namespace Human_Resources.Models
         [Key]
         public int Id { get; set; }
         public string Remark { get; set; }
+        public string RefusalReason { get; set; }
         public LeaveType LeaveType { get; set; }
         public int EmployeeId { get; set; }
         [ForeignKey("EmployeeId")]

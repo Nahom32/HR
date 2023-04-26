@@ -187,6 +187,9 @@ namespace Human_Resources.Migrations
                     b.Property<int>("Sex")
                         .HasColumnType("int");
 
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");
@@ -378,6 +381,10 @@ namespace Human_Resources.Migrations
 
                     b.Property<int>("LeaveType")
                         .HasColumnType("int");
+
+                    b.Property<string>("RefusalReason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("RejectedAt")
                         .HasColumnType("datetime2");

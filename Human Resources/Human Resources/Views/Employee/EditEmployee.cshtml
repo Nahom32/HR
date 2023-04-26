@@ -82,10 +82,12 @@
         $(document).ready(function () {
             var output = document.getElementById('ProfilePicturePreview');
             output.src = $("#PhotoURL").val();
+            
         })
         $("#PhotoURL").on("change", function () {
             var output = document.getElementById('ProfilePicturePreview');
             output.src = $(this).val();
+            
         })
         function validateFile(input) {
             var fileName = input.value;

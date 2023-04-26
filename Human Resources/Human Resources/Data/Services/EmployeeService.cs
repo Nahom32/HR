@@ -89,6 +89,7 @@ namespace Human_Resources.Data.Services
                 DbEmployee.EducationalLevel = employee.EducationalLevel;
                 DbEmployee.PositionId = employee.PositionId;
                 DbEmployee.Roles = employee.Roles;
+                DbEmployee.State = employee.State;
                 _context.Employees.Update(DbEmployee);
                 _context.SaveChanges();
             }
