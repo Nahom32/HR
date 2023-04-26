@@ -108,7 +108,8 @@
                     </div>
                 </nav>
             </header>
-
+            @if(User.Identity.IsAuthenticated)
+            {
             <aside class="left-sidebar " id="sidebar" data-sidebarbg="skin6">
                 <!-- Sidebar scroll-->
                 <div class="scroll-sidebar">
@@ -169,9 +170,7 @@
                 </div>
                 <!-- End Sidebar scroll-->
             </aside>
-            
-            
-        @*}*@
+           }
     <div class="container page-wrapper">
         <main role="main" class="pb-3">
             <div class="page-breadcrumb  bg-white">
@@ -197,9 +196,10 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        
-    </footer>
+    @*<footer class="border-top footer text-muted">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet porro tenetur corporis expedita sequi, laboriosam aspernatur nisi quisquam veniam, odio fuga in delectus quod debitis amet error. Mollitia optio esse impedit corrupti dolorum accusantium dignissimos laudantium fugit culpa cumque itaque sunt quasi iusto, rem, ducimus obcaecati nisi assumenda laborum at?
+
+    </footer>*@
     </div>
     
     <script src="~/lib/jquery/dist/jquery.min.js" ></script>

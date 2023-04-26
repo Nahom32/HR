@@ -13,7 +13,7 @@ namespace Human_Resources.Models
         public LeaveType LeaveType { get; set; }
         public int EmployeeId { get; set; }
         [ForeignKey("EmployeeId")]
-        public Employee Employee { get; set; }
+        public Employee? Employee { get; set; }
         public DateTime RejectedAt { get; set; } = DateTime.Now;
     }
 }

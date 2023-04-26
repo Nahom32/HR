@@ -168,6 +168,7 @@ namespace Human_Resources.Controllers
         [HttpPost]
         public async Task<IActionResult> RejectedLeave(RejectedLeave leave)
         {
+            leave.Id = 0;
             if(!ModelState.IsValid)
             {
 
@@ -176,7 +177,7 @@ namespace Human_Resources.Controllers
             else
             {
                 await _rejectedLeaveService.AddRejectedLeave(leave);
-                var toDelete = await leaveService.GetById(leave.Id);
+                var toDelete = await leaveService.SearchByEmployeeId(leave.EmployeeId);
                 LeaveViewModel reg = new LeaveViewModel()
                 {
                     Id = toDelete.Id,

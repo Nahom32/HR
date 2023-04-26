@@ -11,7 +11,7 @@ namespace Human_Resources.Models
         public LeaveType LeaveType { get; set; }
         public int EmployeeId { get; set; }
         [ForeignKey("EmployeeId")]
-        public Employee Employee { get; set; }
+        public Employee? Employee { get; set; }
         [Display(Name ="Number of Days")]
         [Required(ErrorMessage ="The number of days is Required")]
         public DateTime AskedAt { get; set; } = DateTime.Now;
