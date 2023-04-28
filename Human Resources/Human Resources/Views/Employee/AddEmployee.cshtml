@@ -70,13 +70,16 @@
                     <span asp-validation-for="Roles" class="text-danger"></span>
                 </div>
                 <div class="form-group mb-3">
-                    <input type="submit" class="btn btn-primary" value="Add Employee">
+                    <input  type="submit" class="btn btn-primary" value="Add Employee" data-bs-toggle="modal" data-bs-target="#LoginData" >
                     <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+                    
                 </div>
             </form>
         </div>
     </div>
 </div>
+@await Html.PartialAsync("~/Views/Shared/_LoginData.cshtml")
+
 @section Scripts{
     <script>
         $(document).ready(function () {

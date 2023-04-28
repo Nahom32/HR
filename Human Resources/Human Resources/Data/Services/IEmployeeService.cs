@@ -1,5 +1,6 @@
 ﻿using Human_Resources.Data.ViewModels;
 using Human_Resources.Models;
+using X.PagedList;
 
 namespace Human_Resources.Data.Services
 {
@@ -14,5 +15,6 @@ namespace Human_Resources.Data.Services
         public Task<PositiondropdownViewModel> GetPositiondropdowns();
         public  Task<EducationalFielddropdownViewModel> GetEducationalFielddropdowns();
         public Task<Employee> GetEmployeeByEmail(string email);
+        public Task<IPagedList<Employee>> getEmployees(int? page = 1);
     }
 }

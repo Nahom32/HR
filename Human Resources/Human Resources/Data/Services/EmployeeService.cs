@@ -2,6 +2,7 @@
 using Human_Resources.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata.Ecma335;
+using X.PagedList;
 
 namespace Human_Resources.Data.Services
 {
@@ -132,6 +133,17 @@ namespace Human_Resources.Data.Services
                 throw new Exception($"A user with {email} doesn't exist");
             }
         }
+        public async Task<IPagedList<Employee>> getEmployees(int? page =1)
+        {
+            if (page != null && page < 1)
+            {
+                page = 1;
+            }
+            int PageSize = 10;
+            var res = await _context.Employees.ToPagedListAsync(page ?? 1, PageSize);
+            return res;
+        }
+
 
 
     }

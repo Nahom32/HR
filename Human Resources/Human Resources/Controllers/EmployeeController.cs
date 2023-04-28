@@ -28,9 +28,9 @@ namespace Human_Resources.Controllers
             _posService = posService;
         }
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page = 1)
         {
-            var Employees = await _service.GetAll();
+            var Employees = await _service.getEmployees(page);
             return View(Employees);
         }
         public async Task<IActionResult> AddEmployee()
@@ -110,8 +110,10 @@ namespace Human_Resources.Controllers
             {
                 _logger.LogInformation("failed to register");
             }
+            TempData["username"] = username;
+            TempData["password"] = password;
             _logger.LogInformation($"username: {username}, password: {password}");
-            return RedirectToAction("Index", "Employee");
+            return PartialView("~/Views/Shared/_LoginData.cshtml");
         }
         [HttpGet]
         public async Task<IActionResult> EditEmployee(int id)

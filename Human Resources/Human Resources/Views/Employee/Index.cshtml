@@ -1,5 +1,9 @@
-﻿@model List<Employee>
+﻿@model IPagedList<Employee>
+@using Human_Resources.Data.Enum
 @using Human_Resources.Data.ViewModels
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
+@using X.PagedList;
 @{
     ViewData["title"] = "Available Employees";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,17 +23,41 @@
                 <td class="align-middle" style="padding-left: 30px;">
                     <a class="btn btn-outline-primary" asp-action="EditEmployee" asp-route-Id="@emp.Id"><i class="bi bi-pencil-square"></i>Edit</a> |
                     <a class="btn btn-outline-info" asp-route-Id="@emp.Id" asp-action="Details"><i class="bi bi-eye"></i>Details</a> |
-                    <a class="btn btn-danger text-white" asp-action="Deactivate" asp-route-Id="@emp.Id"><i class="bi bi-trash"></i>Deactivate</a>
+                    @if(emp.State != State.Inactive)
+                    {
+                        <a class="btn btn-danger text-white" asp-action="Deactivate" asp-route-Id="@emp.Id"><i class="bi bi-trash"></i>Deactivate</a>
+                    }
                 </td>
             </tr>
         }
         <a class="btn btn-primary" asp-action="AddEmployee">Add an Employee</a>
     </table>
+    @*@await Html.PartialAsync("~/Views/Shared/_LoginData.cshtml")*@
+    <nav>
+    @Html.PagedListPager(Model, page => Url.Action("index", new { page = page }), new PagedListRenderOptions()
+    {
+    ActiveLiElementClass = "active",
+    PageClasses = new[]{ "page-link"},
+    LiElementClasses=new[] { "page-item" },
+    UlElementClasses = new[] { "pagination","justify-content-center", "mt-3" },
+    LinkToNextPageFormat = "Next",
+    LinkToPreviousPageFormat = "Previous",
+    MaximumPageNumbersToDisplay = 5,
+    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+    DisplayLinkToNextPage = PagedListDisplayMode.Always
+    })
+    </nav>
 }
 else
 {
     <h4 class="text-danger align-content-center">No Employees available</h4>
     <a asp-action="AddEmployee" class="btn btn-primary" >Add an Employee</a>
+}
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
 }
 
 

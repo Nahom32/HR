@@ -79,3 +79,7 @@ C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\refint\H
 C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\Human Resources.pdb
 C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\Human Resources.genruntimeconfig.cache
 C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\ref\Human Resources.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\JetBrains.Annotations.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\X.PagedList.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\X.PagedList.Mvc.Core.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\obj\Debug\net7.0\Human Resources.MvcApplicationPartsAssemblyInfo.cs

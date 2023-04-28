@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "buJ6xkXye6CgAvBsbSHtG/ayGy71wGGidAjUFiavZ0E=",
+  "Hash": "6dzOv6Ey0zeLvp1/xsoGYRZtQCes8yBRjMVJ8GeaWcE=",
   "Source": "Human Resources",
   "BasePath": "_content/Human Resources",
   "Mode": "Default",
@@ -865,6 +865,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\course-report.png",
+      "SourceId": "Human Resources",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\",
+      "BasePath": "_content/Human Resources",
+      "RelativePath": "images/course-report.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\course-report.png"
     },
     {
       "Identity": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\images\\happy guy.jpg",
