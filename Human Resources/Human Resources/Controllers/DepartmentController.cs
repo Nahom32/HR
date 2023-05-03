@@ -134,8 +134,12 @@ namespace Human_Resources.Controllers
                 return View(department);
             }
         }
+        public IActionResult SendMessage()
+        {
+            return View();
+        }
 
-        
+
 
     }
 }

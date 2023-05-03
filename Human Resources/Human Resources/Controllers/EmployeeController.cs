@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Diagnostics.Eventing.Reader;
+using X.PagedList;
 
 namespace Human_Resources.Controllers
 {
@@ -27,11 +29,43 @@ namespace Human_Resources.Controllers
             _signInManager = signInManager;
             _posService = posService;
         }
-        [AllowAnonymous]
+        [HttpGet]
         public async Task<IActionResult> Index(int? page = 1)
         {
-            var Employees = await _service.getEmployees(page);
-            return View(Employees);
+            var PageSize = 10;
+            var Employees = await _service.GetAll();
+            var Filter = new List<Employee>();
+            foreach(var i in Employees)
+            {
+                if(i.State == Data.Enum.State.Active)
+                {
+                    Filter.Add(i);
+                }
+            }
+            var File = await Filter.ToPagedListAsync(page ?? 1,PageSize);
+            var filterVm = new FilterVM();
+            filterVm.Employees = File;
+            return View(filterVm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Index(FilterVM filterVm)
+        {
+            
+                
+                var PageSize = 10;
+                var Employees = await _service.GetAll();
+                var Filter = new List<Employee>();
+                foreach(var i in Employees)
+                {
+                    if(i.State == filterVm.State)
+                    {
+                        Filter.Add(i);
+                    }
+                }
+                var Paged = await Filter.ToPagedListAsync(filterVm?.Page??1,PageSize);
+                filterVm.Employees = Paged;
+                return View(filterVm);
+            
         }
         public async Task<IActionResult> AddEmployee()
         {
@@ -46,9 +80,9 @@ namespace Human_Resources.Controllers
             return View(employeeViewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> AddEmployee(EmployeeViewModel employeeViewModel,[FromForm] IFormFile PhotoURL)
+        public async Task<IActionResult> AddEmployee(EmployeeViewModel employeeViewModel, [FromForm] IFormFile PhotoURL)
         {
-            
+
             if (!ModelState.IsValid)
             {
                 var Departments = await _service.GetDepartmentdropdowns();
@@ -90,30 +124,38 @@ namespace Human_Resources.Controllers
                 PositionName = pos.PositionName,
                 EmployeeId = employeeFromEmail.Id
             };
-            
-            var result = await _userManager.CreateAsync(user, password);
-            if (result.Succeeded)
+            var fuser = await _userManager.FindByNameAsync(user.UserName);
+            if (fuser == null)
             {
-                if(employeeViewModel.Roles == Data.Enum.Roles.User)
-                {
-                    await _userManager.AddToRoleAsync(user, UserRoles.User);
-                }
-                else if(employeeViewModel.Roles == Data.Enum.Roles.HRManager)
-                {
-                    await _userManager.AddToRoleAsync(user, UserRoles.HRManager);
-                    _logger.LogInformation("HRManager");
-                }
 
-                
+                var result = await _userManager.CreateAsync(user, password);
+                if (result.Succeeded)
+                {
+                    if (employeeViewModel.Roles == Data.Enum.Roles.User)
+                    {
+                        await _userManager.AddToRoleAsync(user, UserRoles.User);
+                    }
+                    else if (employeeViewModel.Roles == Data.Enum.Roles.HRManager)
+                    {
+                        await _userManager.AddToRoleAsync(user, UserRoles.HRManager);
+                        _logger.LogInformation("HRManager");
+                    }
+
+                }
+                else
+                {
+                    throw new Exception("Failed to Register");
+                }
+                TempData["username"] = username;
+                TempData["password"] = password;
+                _logger.LogInformation($"username: {username}, password: {password}");
+                return PartialView("~/Views/Shared/_LoginData.cshtml");
             }
             else
             {
-                _logger.LogInformation("failed to register");
+                throw new Exception("the user exists");
             }
-            TempData["username"] = username;
-            TempData["password"] = password;
-            _logger.LogInformation($"username: {username}, password: {password}");
-            return PartialView("~/Views/Shared/_LoginData.cshtml");
+        
         }
         [HttpGet]
         public async Task<IActionResult> EditEmployee(int id)
@@ -271,6 +313,7 @@ namespace Human_Resources.Controllers
                 }
             }
         }
+        [Authorize(Roles ="User")]
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
@@ -381,6 +424,20 @@ namespace Human_Resources.Controllers
                     }
                 }
             }
+        }
+        [HttpPost]
+        public async Task<IActionResult> ListInactive()
+        {
+            var Employees = await _service.getEmployees();
+            var InactiveEmployees = new List<Employee>();
+            foreach(var i in Employees)
+            {
+                if(i.State == Data.Enum.State.Inactive)
+                {
+                    InactiveEmployees.Add(i);
+                }
+            }
+            return View(InactiveEmployees);
         }
 
     }

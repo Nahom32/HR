@@ -1,4 +1,4 @@
-﻿@model IPagedList<Employee>
+﻿@model FilterVM
 @using Human_Resources.Data.Enum
 @using Human_Resources.Data.ViewModels
 @using X.PagedList.Mvc.Core;
@@ -8,13 +8,25 @@
     ViewData["title"] = "Available Employees";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@if (Model.Count > 0)
+@if (Model.Employees.Count > 0)
 {
+    <form asp-action="Index">
+        <div class="form-group mb-3">
+            <label asp-for="State" class="control-label"></label>
+            <select asp-for="State" class="form-control" asp-items="Html.GetEnumSelectList<State>()">
+            </select>
+            <span asp-validation-for="State" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <input type="submit" class="btn btn-success">
+        </div>
+        
+    </form>
     <table class="table bg-white">
         <tr>
             <th style="padding-left: 30px;">Employee Name</th>
         </tr>
-        @foreach (var emp in Model)
+        @foreach (var emp in Model.Employees)
         {
             <tr>
                 <td class="align-middle" style="padding-left: 30px;">
@@ -34,7 +46,7 @@
     </table>
     @*@await Html.PartialAsync("~/Views/Shared/_LoginData.cshtml")*@
     <nav>
-    @Html.PagedListPager(Model, page => Url.Action("index", new { page = page }), new PagedListRenderOptions()
+    @Html.PagedListPager(Model.Employees, page => Url.Action("index", new { page = page }), new PagedListRenderOptions()
     {
     ActiveLiElementClass = "active",
     PageClasses = new[]{ "page-link"},

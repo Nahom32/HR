@@ -1,5 +1,6 @@
 using Human_Resources.Data;
 using Human_Resources.Data.Services;
+using Human_Resources.Hubs;
 using Human_Resources.Middlewares;
 using Human_Resources.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -46,9 +47,11 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredUniqueChars = 0;
     options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()1234567890";
 });
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 var User = new ClaimsPrincipal();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -73,4 +76,8 @@ app.MapControllerRoute(
 
 
 AppDbInitializer.SeedRole(app).Wait();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<MessageHub>("/messagehub");
+});
 app.Run();
