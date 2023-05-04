@@ -2,14 +2,24 @@
 
 namespace Human_Resources.Hubs
 {
-    public class MessageHub:Hub
+    public class MessageHub:Hub<IMessageHub>
     {
-        public async Task SendMessage(string user, string message)
+        
+        public override async Task OnConnectedAsync()
         {
-            if (string.IsNullOrEmpty(user))
-                await Clients.All.SendAsync("ReceiveMessageHandler", message);
-            else
-                await Clients.User(user).SendAsync("ReceiveMessageHandler", message);
+            await base.OnConnectedAsync();
+        }
+        public override async Task OnDisconnectedAsync(Exception? exception)
+        {
+            await base.OnDisconnectedAsync(exception);
+        }
+        public async Task BroadCastMessage(string message)
+        {
+            await Clients.All.ReceiveMessage(message);
+        }
+        public async Task SendToIndividual(string connectionId, string message)
+        {
+            await Clients.Client(connectionId).ReceiveMessage(message);
         }
 
     }

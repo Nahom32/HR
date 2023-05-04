@@ -81,13 +81,13 @@
                             <!-- ============================================================== -->
                         @if (User.Identity.IsAuthenticated)
                         {
-                            @if (SignInManager.IsSignedIn(User))
+                           @* @if (SignInManager.IsSignedIn(User))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Department" asp-action="SendMessage">Send Message</a>
                                 </li>
 
-                            }
+                            }*@
                             <a class="profile-pic">
                                 <img @*src="plugins/images/users/varun.jpg"*@ src="" alt="user-img" width="36"
                                      class="img-circle"><span class="text-white font-medium">@User.Identity.Name</span>
@@ -199,6 +199,7 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+               
             @RenderBody()
         </main>
     </div>
