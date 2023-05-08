@@ -25,10 +25,12 @@ namespace Human_Resources.Controllers
             return View(lists);
         }
         [HttpGet]
-        //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddPromotion()
+        public async Task<IActionResult> AddPromotion(int EmployeeId)
         {
             PromotionViewModel promotionVM = new PromotionViewModel();
+            promotionVM.EmployeeId = EmployeeId;
+            var Employee = await _empService.GetById(EmployeeId);
+            promotionVM.fromPositionId = Employee.PositionId;
             var Positiondropdowns = await _service.GetPositiondropdowns();
             var Employeedropdowns = await _service.GetEmployeedropdowns();
             ViewBag.PositionFrom = new SelectList(Positiondropdowns.Positions, "Id", "PositionName");

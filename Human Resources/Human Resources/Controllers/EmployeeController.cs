@@ -12,7 +12,7 @@ using X.PagedList;
 
 namespace Human_Resources.Controllers
 {
-    [Authorize(Roles="Admin, HRManager")]
+    [Authorize(Roles = "Admin, HRManager")]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _service;
@@ -35,14 +35,14 @@ namespace Human_Resources.Controllers
             var PageSize = 10;
             var Employees = await _service.GetAll();
             var Filter = new List<Employee>();
-            foreach(var i in Employees)
+            foreach (var i in Employees)
             {
-                if(i.State == Data.Enum.State.Active)
+                if (i.State == Data.Enum.State.Active)
                 {
                     Filter.Add(i);
                 }
             }
-            var File = await Filter.ToPagedListAsync(page ?? 1,PageSize);
+            var File = await Filter.ToPagedListAsync(page ?? 1, PageSize);
             var filterVm = new FilterVM();
             filterVm.Employees = File;
             return View(filterVm);
@@ -50,22 +50,22 @@ namespace Human_Resources.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(FilterVM filterVm)
         {
-            
-                
-                var PageSize = 10;
-                var Employees = await _service.GetAll();
-                var Filter = new List<Employee>();
-                foreach(var i in Employees)
+
+
+            var PageSize = 10;
+            var Employees = await _service.GetAll();
+            var Filter = new List<Employee>();
+            foreach (var i in Employees)
+            {
+                if (i.State == filterVm.State)
                 {
-                    if(i.State == filterVm.State)
-                    {
-                        Filter.Add(i);
-                    }
+                    Filter.Add(i);
                 }
-                var Paged = await Filter.ToPagedListAsync(filterVm?.Page??1,PageSize);
-                filterVm.Employees = Paged;
-                return View(filterVm);
-            
+            }
+            var Paged = await Filter.ToPagedListAsync(filterVm?.Page ?? 1, PageSize);
+            filterVm.Employees = Paged;
+            return View(filterVm);
+
         }
         public async Task<IActionResult> AddEmployee()
         {
@@ -155,7 +155,7 @@ namespace Human_Resources.Controllers
             {
                 throw new Exception("the user exists");
             }
-        
+
         }
         [HttpGet]
         public async Task<IActionResult> EditEmployee(int id)
@@ -163,7 +163,7 @@ namespace Human_Resources.Controllers
             var employee = await _service.GetById(id);
             if (employee != null)
             {
-                using (var stream = new FileStream("wwwroot/images/"+employee.PhotoURL, FileMode.Open))
+                using (var stream = new FileStream("wwwroot/images/" + employee.PhotoURL, FileMode.Open))
                 {
                     // Create a new IFormFile object using the stream
                     var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(employee.PhotoURL));
@@ -233,7 +233,7 @@ namespace Human_Resources.Controllers
             var employee = await _service.GetById(id);
             if (employee != null)
             {
-                using (var stream = new FileStream("wwwroot/images/"+employee.PhotoURL, FileMode.Open))
+                using (var stream = new FileStream("wwwroot/images/" + employee.PhotoURL, FileMode.Open))
                 {
                     // Create a new IFormFile object using the stream
                     var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(employee.PhotoURL));
@@ -262,7 +262,7 @@ namespace Human_Resources.Controllers
                     ViewBag.EducationalFields = new SelectList(EducationalFields.EducationalFields, "Id", "Name");
                     return View(EmployeeVm);
                 }
-                
+
             }
             else
             {
@@ -279,7 +279,7 @@ namespace Human_Resources.Controllers
                 // Create a new IFormFile object using the stream
                 var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(employee.PhotoURL));
 
-                
+
                 var EmployeeVm = new EmployeeViewModel()
                 {
                     Id = employee.Id,
@@ -297,7 +297,7 @@ namespace Human_Resources.Controllers
                 if (user != null)
                 {
                     var result = await _userManager.DeleteAsync(user);
-                    if(result.Succeeded)
+                    if (result.Succeeded)
                     {
                         _logger.LogInformation("user delete has succeeded");
                         return RedirectToAction("Index");
@@ -313,8 +313,9 @@ namespace Human_Resources.Controllers
                 }
             }
         }
-        [Authorize(Roles ="User")]
+
         [HttpGet]
+        [Authorize(Roles ="Admin,User,HRManager")]
         public async Task<IActionResult> Details(int id)
         {
             var employee = await _service.GetById(id);

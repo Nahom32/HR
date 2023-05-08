@@ -10,20 +10,26 @@
         <h3>@Model.Name</h3>
     </div>
     <div class="box-title px-3">
-        <h5 class="font-weight-bold">@Model.Department.DepartmentName</h5>
+        <h5 class="font-weight-bold">Department: @Model.Department.DepartmentName</h5>
     </div>
     
     <div class="px-3">
-        <p class="font-weight-bold">@Model.EducationalField.Name</p>
+        <p class="font-weight-bold">Field: @Model.EducationalField.Name</p>
     </div>
     <div class="px-3">
-        <p class="font-weight-bold">@Model.EducationalLevel</p>
+        <p class="font-weight-bold">Education LeveL: @Model.EducationalLevel</p>
     </div>
     <div class="px-3">
-        <p class="font-weight-bold">@Model.Position.PositionSalary</p>
+        <p class="font-weight-bold">Position: @Model.Position.PositionName</p>
     </div>
     <div class="px-3">
-        <p class="font-weight-bold">@Model.MaritalStatus</p>
+        <p class="font-weight-bold">Marital Status: @Model.MaritalStatus</p>
     </div>
-
+    @if(User.IsInRole("Admin"))
+    {
+        <div class="px-3">
+            <a class="btn btn-success" asp-controller="Appraisal" asp-action="AddAppraisal" asp-route-EmployeeId="@Model.Id">Add a Grade</a>
+            <a class="btn btn-success" asp-controller="Promotion" asp-action="AddPromotion" asp-route-EmployeeId="@Model.Id">Add a Promotion</a>
+        </div>
+    }
 </div>

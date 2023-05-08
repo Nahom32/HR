@@ -9,11 +9,12 @@
         <div class="col-md-8 offset-md-2">
             <h1>@ViewData["Title"]</h1>
             <form method="post" asp-action="AddAppraisal">
-                <div class="form-group mb-3">
+                @*<div class="form-group mb-3">
                     <label asp-for="EmployeeId" class="control-label"></label>
                     <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.Employees"></select>
                     <span asp-validation-for="EmployeeId" class="text-danger"></span>
-                </div>
+                </div>*@
+                <input asp-for="EmployeeId" type="hidden" />
                 <div class="form-group mb-3">
                     <label asp-for="Timeliness" class="control-label"></label>
                     <select asp-for="Timeliness" class="form-control" asp-items="Html.GetEnumSelectList<GradeValue>()"></select>

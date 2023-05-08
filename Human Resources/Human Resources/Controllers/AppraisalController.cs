@@ -21,9 +21,10 @@ namespace Human_Resources.Controllers
         }
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> AddAppraisal()
+        public async Task<IActionResult> AddAppraisal(int EmployeeId)
         {
             AppraisalViewModel appraisal = new AppraisalViewModel();
+            appraisal.EmployeeId = EmployeeId;
             var Employeedropdowns = await _service.GetEmployeedropdowns();
             ViewBag.Employees = new SelectList(Employeedropdowns.Employees, "Id", "Name");
             return View(appraisal);
