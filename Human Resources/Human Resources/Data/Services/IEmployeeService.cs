@@ -16,5 +16,9 @@ namespace Human_Resources.Data.Services
         public  Task<EducationalFielddropdownViewModel> GetEducationalFielddropdowns();
         public Task<Employee> GetEmployeeByEmail(string email);
         public Task<IPagedList<Employee>> getEmployees(int? page = 1);
+        public Task<int> Count();
+        public Task<List<Employee>> PaginatedEmployee(int val, int len);
+        public Task<List<Employee>> SearchEmployees(DataTableRequest request);
+
     }
 }

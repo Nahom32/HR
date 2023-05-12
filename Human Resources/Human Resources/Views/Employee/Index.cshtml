@@ -1,4 +1,4 @@
-﻿@model FilterVM
+﻿@*@model EmployeeTableViewModel*@
 @using Human_Resources.Data.Enum
 @using Human_Resources.Data.ViewModels
 @using X.PagedList.Mvc.Core;
@@ -8,7 +8,7 @@
     ViewData["title"] = "Available Employees";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@if (Model.Employees.Count > 0)
+@*@if (Model.Employees.Count > 0)
 {
     <form asp-action="Index">
         <div class="form-group mb-3">
@@ -20,32 +20,44 @@
         <div class="form-group mb-3">
             <input type="submit" class="btn btn-success">
         </div> 
-    </form>
-    <table class="table bg-white">
-        <tr>
-            <th style="padding-left: 30px;">Employee Name</th>
-        </tr>
-        @foreach (var emp in Model.Employees)
-        {
+    </form>*@
+    <table id="EmployeeTable" class="table">
+        <thead>
             <tr>
-                <td class="align-middle" style="padding-left: 30px;">
-                    @emp.Name
-                </td>
-                <td class="align-middle" style="padding-left: 30px;">
-                    <a class="btn btn-outline-primary" asp-action="EditEmployee" asp-route-Id="@emp.Id"><i class="bi bi-pencil-square"></i>Edit</a> |
-                    <a class="btn btn-outline-info" asp-route-Id="@emp.Id" asp-action="Details"><i class="bi bi-eye"></i>Details</a> |
-                    @if(emp.State != State.Inactive)
-                    {
-                        <a class="btn btn-danger text-white" asp-action="Deactivate" asp-route-Id="@emp.Id"><i class="bi bi-trash"></i>Deactivate</a>
-                    }
-                </td>
+                <th style="padding-left: 30px;">Employee Name</th>
+                <th style="padding-left: 30px;">Actions</th>
             </tr>
-        }
-        <a class="btn btn-primary" asp-action="AddEmployee">Add an Employee</a>
+            
+            
+            
+        </thead>
+       <tbody>
+
+       </tbody>
+        @*@if (Model.Employees.Count > 0)
+        {
+            @foreach (var emp in Model.Employees)
+            {
+                <tr>
+                    <td class="align-middle" style="padding-left: 30px;">
+                        @emp.Name
+                    </td>
+                    <td class="align-middle" style="padding-left: 30px;">
+                        <a class="btn btn-outline-primary" asp-action="EditEmployee" asp-route-Id="@emp.Id"><i class="bi bi-pencil-square"></i>Edit</a> |
+                        <a class="btn btn-outline-info" asp-route-Id="@emp.Id" asp-action="Details"><i class="bi bi-eye"></i>Details</a> 
+                        @if (emp.State != State.Inactive)
+                        {
+                           | <a class="btn btn-danger text-white" asp-action="Deactivate" asp-route-Id="@emp.Id"><i class="bi bi-trash"></i>Deactivate</a>
+                        }
+                    </td>
+                </tr>
+            }
+        }*@
+       
     </table>
-    @*@await Html.PartialAsync("~/Views/Shared/_LoginData.cshtml")*@
-    <nav>
-    @Html.PagedListPager(Model.Employees, page => Url.Action("index", new { page = page }), new PagedListRenderOptions()
+        <a class="btn btn-primary" asp-action="AddEmployee">Add an Employee</a>
+  @*  <nav>*@
+    @*@Html.PagedListPager(Model.Employees, page => Url.Action("index", new { page = page }), new PagedListRenderOptions()
     {
     ActiveLiElementClass = "active",
     PageClasses = new[]{ "page-link"},
@@ -56,20 +68,52 @@
     MaximumPageNumbersToDisplay = 5,
     DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
     DisplayLinkToNextPage = PagedListDisplayMode.Always
-    })
-    </nav>
-}
+    })*@
+    @*</nav>*@
+@*}
 else
 {
     <h4 class="text-danger align-content-center">No Employees available</h4>
     <a asp-action="AddEmployee" class="btn btn-primary" >Add an Employee</a>
-}
+}*@
 @section Scripts{
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#EmployeeTable").DataTable({
+                "processing": true,
+                "serverSide": true,
+                "filter": true,
+                "ajax": {
+                    "url": '/Employee/GetEmployees',
+                    "type": "POST",
+                    "datatype": "json"    
+                },
+                "columns": [
+                    { 
+                        "data": "name",
+                        "name": "Employee Name",
+                        
+                    },
+                    {
+                        "data": "id",
+                        "name": "Actions",
+                        "render": function(data){
+                            return `<a class="btn btn-outline-primary" href=/Employee/EditEmployee/${data} data-Id="data"><i class="bi bi-pencil-square"></i>Edit</a> |<a class="btn btn-outline-info" data-Id="Id" href="/Employee/Details/${data}" > <i class="bi bi-eye" > </i>Details</a>`
+                        }
+                    }
+                    
+                ]
+            });
+        });
+    </script>
 }
+
 
 
 

@@ -1,14 +1,18 @@
-﻿using Human_Resources.Data.Helpers;
+﻿using Human_Resources.Data;
+using Human_Resources.Data.Helpers;
 using Human_Resources.Data.Services;
 using Human_Resources.Data.Static;
 using Human_Resources.Data.ViewModels;
 using Human_Resources.Models;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Eventing.Reader;
 using X.PagedList;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Human_Resources.Controllers
 {
@@ -20,32 +24,43 @@ namespace Human_Resources.Controllers
         private readonly ILogger<EmployeeController> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly AppDbContext _context;
         public EmployeeController(IEmployeeService service, ILogger<EmployeeController> logger,
-            UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IPositionService posService)
+            UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
+            IPositionService posService, AppDbContext context)
         {
             _service = service;
             _logger = logger;
             _userManager = userManager;
             _signInManager = signInManager;
             _posService = posService;
+            _context = context;
         }
+        //[HttpGet]
+        //public async Task<IActionResult> Index(int? page = 1)
+        //{
+        //    var PageSize = 10;
+        //    var Employees = await _service.GetAll();
+        //    var Filter = new List<Employee>();
+        //    foreach (var i in Employees)
+        //    {
+        //        if (i.State == Data.Enum.State.Active)
+        //        {
+        //            Filter.Add(i);
+        //        }
+        //    }
+        //    var File = await Filter.ToPagedListAsync(page ?? 1, PageSize);
+        //    var filterVm = new FilterVM();
+        //    filterVm.Employees = File;
+        //    return View(filterVm);
+        //}
         [HttpGet]
-        public async Task<IActionResult> Index(int? page = 1)
+        public IActionResult Index()
         {
-            var PageSize = 10;
-            var Employees = await _service.GetAll();
-            var Filter = new List<Employee>();
-            foreach (var i in Employees)
-            {
-                if (i.State == Data.Enum.State.Active)
-                {
-                    Filter.Add(i);
-                }
-            }
-            var File = await Filter.ToPagedListAsync(page ?? 1, PageSize);
-            var filterVm = new FilterVM();
-            filterVm.Employees = File;
-            return View(filterVm);
+            //var employeeViewModel = new EmployeeTableViewModel();
+            //var request = new DataTableRequest { Start = 0, Length = 10 };
+            //employeeViewModel.Employees = await _service.SearchEmployees(request);
+            return View();
         }
         [HttpPost]
         public async Task<IActionResult> Index(FilterVM filterVm)
@@ -440,6 +455,44 @@ namespace Human_Resources.Controllers
             }
             return View(InactiveEmployees);
         }
+        [HttpPost]
+        [AllowAnonymous]
+        public async  Task<IActionResult> GetEmployees()
+        {
+            var draw = Request.Form["draw"].FirstOrDefault();
+            var start = Request.Form["start"].FirstOrDefault();
+            var length = Request.Form["length"].FirstOrDefault();
+            var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
+            var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
+            var searchValue = Request.Form["search[value]"].FirstOrDefault()?.Trim();
+            int pageSize = length != null ? Convert.ToInt32(length) : 0;
+            int skip = start != null ? Convert.ToInt32(start) : 0;
+            int recordsTotal = 0;
+            DataTableRequest dataTable = new DataTableRequest();
+            dataTable.SearchValue = searchValue;
+            if (Int32.TryParse(start, out int startValue))
+            {
+                dataTable.Start = startValue;
+            }
+            if (Int32.TryParse(length, out int lengthValue))
+            {
+                dataTable.Length = lengthValue;
+            }
+            if (Int32.TryParse(sortColumn, out int sortColumnValue))
+            {
+                dataTable.SortColumn = sortColumnValue;
+            }
+            dataTable.SortDirection = "asc";
+            if (Int32.TryParse(draw, out int drawValue))
+            {
+                dataTable.Draw = drawValue;
+            }
+
+            var result = await _service.SearchEmployees(dataTable);
+            
+            return Json( new { draw, recordsFiltered = result.Count, recordsTotal = recordsTotal, data = result });
+        }
+
 
     }
 }

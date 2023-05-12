@@ -1,7 +1,6 @@
 ﻿using Human_Resources.Data.ViewModels;
 using Human_Resources.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata.Ecma335;
 using X.PagedList;
 
 namespace Human_Resources.Data.Services
@@ -12,7 +11,7 @@ namespace Human_Resources.Data.Services
 
         public EmployeeService(AppDbContext context)
         {
-            _context = context;  
+            _context = context;
         }
         public async Task AddEmployee(EmployeeViewModel employeeViewModel)
         {
@@ -36,7 +35,7 @@ namespace Human_Resources.Data.Services
 
         public async Task DeleteEmployee(EmployeeViewModel employee)
         {
-            var toDelete  = await _context.Employees.FirstOrDefaultAsync(n => n.Id == employee.Id);
+            var toDelete = await _context.Employees.FirstOrDefaultAsync(n => n.Id == employee.Id);
             if (toDelete != null)
             {
                 _context.Employees.Remove(toDelete);
@@ -46,7 +45,7 @@ namespace Human_Resources.Data.Services
             {
                 throw new Exception("The described Employee doesn't Exist");
             }
-        
+
         }
 
         public async Task<List<Employee>> GetAll()
@@ -64,7 +63,7 @@ namespace Human_Resources.Data.Services
                 .Include(e => e.Department)
                 .Include(e => e.Position)
                 .Include(e => e.EducationalField)
-                .FirstOrDefaultAsync(n => n.Id ==id);
+                .FirstOrDefaultAsync(n => n.Id == id);
             if (retval != null)
             {
                 return retval;
@@ -82,7 +81,7 @@ namespace Human_Resources.Data.Services
             {
                 DbEmployee.Name = employee.Name;
                 DbEmployee.Email = employee.Email;
-                DbEmployee.PhotoURL =employee.PhotoURL.FileName;
+                DbEmployee.PhotoURL = employee.PhotoURL.FileName;
                 DbEmployee.DepartmentId = employee.DepartmentId;
                 DbEmployee.MaritalStatus = employee.MaritalStatus;
                 DbEmployee.Sex = employee.Sex;
@@ -110,7 +109,7 @@ namespace Human_Resources.Data.Services
             var response = new PositiondropdownViewModel()
             {
                 Positions = await _context.Positions.ToListAsync()
-        };
+            };
             return response;
         }
         public async Task<EducationalFielddropdownViewModel> GetEducationalFielddropdowns()
@@ -124,7 +123,7 @@ namespace Human_Resources.Data.Services
         public async Task<Employee> GetEmployeeByEmail(string email)
         {
             var employee = await _context.Employees.FirstOrDefaultAsync(n => n.Email == email);
-            if(employee != null)
+            if (employee != null)
             {
                 return employee;
             }
@@ -133,7 +132,7 @@ namespace Human_Resources.Data.Services
                 throw new Exception($"A user with {email} doesn't exist");
             }
         }
-        public async Task<IPagedList<Employee>> getEmployees(int? page =1)
+        public async Task<IPagedList<Employee>> getEmployees(int? page = 1)
         {
             if (page != null && page < 1)
             {
@@ -143,8 +142,74 @@ namespace Human_Resources.Data.Services
             var res = await _context.Employees.ToPagedListAsync(page ?? 1, PageSize);
             return res;
         }
+        public async Task<int> Count()
+        {
+            var count = await _context.Employees.CountAsync();
+            return count;
+
+        }
+        public async Task<List<Employee>> PaginatedEmployee(int val, int len)
+        {
+            var employees = await _context.Employees.Skip(val).Take(len).ToListAsync();
+            return employees;
+
+        }
+        public async Task<List<Employee>> SearchEmployees(DataTableRequest request)
+        {
+            IQueryable<Employee> employeesQuery = _context.Employees
+                .Include(e => e.Department)
+                .Include(e => e.Position)
+                .Include(e => e.EducationalField);
+
+            // Apply search filter
+            if (!string.IsNullOrEmpty(request.SearchValue))
+            {
+                employeesQuery = employeesQuery.Where(e =>
+                    e.Name.Contains(request.SearchValue) ||
+                    e.Email.Contains(request.SearchValue) ||
+                    e.Department.DepartmentName.Contains(request.SearchValue) ||
+                    e.Position.PositionName.Contains(request.SearchValue) ||
+                    e.EducationalField.Name.Contains(request.SearchValue));
+            }
+
+            // Apply sorting
+            switch (request.SortColumn)
+            {
+                case 0: // Sort by Name
+                    employeesQuery = request.SortDirection == "asc" ?
+                        employeesQuery.OrderBy(e => e.Name) :
+                        employeesQuery.OrderByDescending(e => e.Name);
+                    break;
+                case 1: // Sort by Email
+                    employeesQuery = (request.SortDirection == "asc" ?
+                        employeesQuery.OrderBy(e => e.Email) :
+                        employeesQuery.OrderByDescending(e => e.Email));
+                    break;
+                case 2: // Sort by Department
+                    employeesQuery = (request.SortDirection == "asc" ?
+                        employeesQuery.OrderBy(e => e.Department.DepartmentName) :
+                        employeesQuery.OrderByDescending(e => e.Department.DepartmentName));
+                    break;
+                case 3: // Sort by Position
+                    employeesQuery = (request.SortDirection == "asc" ?
+                        employeesQuery.OrderBy(e => e.Position.PositionName) :
+                        employeesQuery.OrderByDescending(e => e.Position.PositionName));
+                    break;
+                case 4: // Sort by Educational Field
+                    employeesQuery = (request.SortDirection == "asc" ?
+                        employeesQuery.OrderBy(e => e.EducationalField.Name) :
+                        employeesQuery.OrderByDescending(e => e.EducationalField.Name));
+                    break;
+            }
+
+            // Apply pagination
+            List<Employee> employees = await employeesQuery.Skip(request.Start).Take(request.Length).ToListAsync();
+            return employees;
+        }
+
+    }
 
 
 
     }
-}
+

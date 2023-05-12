@@ -415,3 +415,6 @@ C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsof
 C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Newtonsoft.Json.dll
 C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\System.Linq.Dynamic.Core.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\MediatR.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\MediatR.Contracts.dll
