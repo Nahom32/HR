@@ -21,7 +21,7 @@
             <input type="submit" class="btn btn-success">
         </div> 
     </form>*@
-    <table id="EmployeeTable" class="table">
+    <table id="EmployeeTable" class="table stripe hover">
         <thead>
             <tr>
                 <th style="padding-left: 30px;">Employee Name</th>
@@ -80,8 +80,10 @@ else
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    @*<link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>*@
+    <script src="~/lib/DataTable/datatables.min.js"></script>
+    <link href="~/lib/DataTable/datatables.min.css" />
     <partial name="_ValidationScriptsPartial" />
     <script type="text/javascript">
         $(document).ready(function () {

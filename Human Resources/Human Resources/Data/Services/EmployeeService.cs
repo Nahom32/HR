@@ -165,11 +165,11 @@ namespace Human_Resources.Data.Services
             if (!string.IsNullOrEmpty(request.SearchValue))
             {
                 employeesQuery = employeesQuery.Where(e =>
-                    e.Name.Contains(request.SearchValue) ||
-                    e.Email.Contains(request.SearchValue) ||
-                    e.Department.DepartmentName.Contains(request.SearchValue) ||
-                    e.Position.PositionName.Contains(request.SearchValue) ||
-                    e.EducationalField.Name.Contains(request.SearchValue));
+                    e.Name.ToLower().Contains(request.SearchValue.ToLower()) ||
+                    e.Email.ToLower().Contains(request.SearchValue.ToLower()) ||
+                    e.Department.DepartmentName.ToLower().Contains(request.SearchValue.ToLower()) ||
+                    e.Position.PositionName.ToLower().Contains(request.SearchValue.ToLower()) ||
+                    e.EducationalField.Name.ToLower().Contains(request.SearchValue.ToLower()));
             }
 
             // Apply sorting

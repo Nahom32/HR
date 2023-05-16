@@ -25,9 +25,10 @@ namespace Human_Resources.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly AppDbContext _context;
+        private readonly IEmailService _email;
         public EmployeeController(IEmployeeService service, ILogger<EmployeeController> logger,
             UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
-            IPositionService posService, AppDbContext context)
+            IPositionService posService, AppDbContext context, IEmailService email)
         {
             _service = service;
             _logger = logger;
@@ -35,6 +36,7 @@ namespace Human_Resources.Controllers
             _signInManager = signInManager;
             _posService = posService;
             _context = context;
+            _email = email;
         }
         //[HttpGet]
         //public async Task<IActionResult> Index(int? page = 1)
@@ -164,7 +166,9 @@ namespace Human_Resources.Controllers
                 TempData["username"] = username;
                 TempData["password"] = password;
                 _logger.LogInformation($"username: {username}, password: {password}");
-                return PartialView("~/Views/Shared/_LoginData.cshtml");
+                var mail = new EMessage(new string[] { employeeViewModel.Email },"Personal Information",$"username: {username}, password: {password}");
+                await _email.SendEmailAsync(mail);
+                return RedirectToAction("Index");
             }
             else
             {

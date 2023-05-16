@@ -418,3 +418,7 @@ C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Newtonso
 C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\System.Linq.Dynamic.Core.dll
 C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\MediatR.dll
 C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\MediatR.Contracts.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\BouncyCastle.Cryptography.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\MailKit.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\MimeKit.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\NETCore.MailKit.dll
