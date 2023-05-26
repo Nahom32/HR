@@ -78,17 +78,18 @@
         </div>
     </div>
 </div>
-@await Html.PartialAsync("~/Views/Shared/_LoginData.cshtml")
+
 
 @section Scripts{
     <script>
         $(document).ready(function () {
             var output = document.getElementById('ProfilePicturePreview');
-            output.src = "/../../images/" + $("#PhotoURL").val();
+            output.src = $("#PhotoURL").val();
+            
         })
         $("#PhotoURL").on("change", function () {
             var output = document.getElementById('ProfilePicturePreview');
-            output.src = $(this).val();
+            output.src = '/../images/'+$(this).val().split("\\")[2]
         })
         function validateFile(input) {
             var fileName = input.value;

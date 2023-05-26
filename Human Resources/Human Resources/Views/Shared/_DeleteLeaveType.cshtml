@@ -1,0 +1,39 @@
+﻿@model LeaveTypes
+@{
+    ViewData["Title"] = "Add Department";
+}
+
+<div class="modal fade" id="DeleteType-@Model.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" asp-action="DeleteLeaveType">
+                <div class="modal-body">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="LeaveName" class="form-label" ></label>
+                        <input asp-for="LeaveName" class="form-control" disabled />
+                        <span asp-validation-for="LeaveName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Days" class="form-label"></label>
+                        <input asp-for="Days" class="form-control form-control-lg" disabled />
+                        <span asp-validation-for="Days" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                    <input type="submit" class="btn btn-primary" value="Update">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

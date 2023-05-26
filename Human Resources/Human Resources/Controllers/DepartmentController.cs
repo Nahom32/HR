@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Human_Resources.Controllers
 {
-    [Authorize(Roles ="Admin,User,HRAdmin")]
+    [Authorize(Roles ="Admin,User,HRManager")]
     public class DepartmentController : Controller
     {
         private readonly IDepartmentService _service;

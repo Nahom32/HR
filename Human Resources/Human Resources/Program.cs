@@ -34,6 +34,8 @@ builder.Services.AddScoped<IRewardService, RewardService>();
 builder.Services.AddScoped<ILeaveService, LeaveService>();
 builder.Services.AddScoped<IRejectedLeaveService, RejectedLeaveService>();
 builder.Services.AddScoped<IConfirmedLeaveService, ConfirmedLeaveService>();
+builder.Services.AddScoped<ILeaveTypeService, LeaveTypeService>();
+builder.Services.AddScoped<ILeaveEncashmentService, LeaveEncashmentService>();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
@@ -92,6 +94,7 @@ app.MapControllerRoute(
 
 
 AppDbInitializer.SeedRole(app).Wait();
+AppDbInitializer.SeedEncashment(app).Wait();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapHub<MessageHub>("/messagehub");

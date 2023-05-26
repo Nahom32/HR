@@ -1,0 +1,48 @@
+﻿@model List<LeaveTypes>
+
+@using Human_Resources.Data.ViewModels;
+@{
+    ViewData["title"] = "Available Employees";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model.Count > 0)
+{
+    <table class="table bg-white">
+        <tr>
+            <th style="padding-left: 30px;">Leave Name</th>
+            <th style="padding-left: 30px;">Date</th>
+            <th style="padding-left: 30px;">Actions</th>
+        </tr>
+        @foreach (var leave in Model)
+        {
+            <tr>
+                <td class="align-middle" style="padding-left: 30px;">
+                    @leave.LeaveName
+                </td>
+                <td class="align-middle" style="padding-left: 30px;">
+                    @leave.Days
+                </td>
+                
+                <td class="align-middle" style="padding-left: 30px;">
+                    <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="@("#EditType-" + leave.Id)" data-bs-url="@Url.Action("/UpdateLeaveType/"+ leave.Id)"><i class="bi bi-pencil-square"></i>Edit</a> |
+                    <a href="#" class="btn btn-danger text-white" data-bs-toggle="modal" data-bs-target="@("#DeleteType-" + leave.Id)" data-bs-url="@Url.Action("/DeleteLeaveType/"+ leave.Id)"><i class="bi bi-trash"></i>Delete</a>
+                    @await Html.PartialAsync("~/Views/Shared/_UpdateLeaveType.cshtml", leave)
+                    @await Html.PartialAsync("~/Views/Shared/_DeleteLeaveType.cshtml", leave)
+                </td>
+            </tr>
+        }
+        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreateType">Create</a>
+    </table>
+}
+else
+{
+    <h4 class="text-danger align-content-center">No Leave Types are created till now</h4>
+    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreateType">Create</a>
+}
+@await Html.PartialAsync("~/Views/Shared/_AddLeaveType.cshtml",new LeaveTypes())
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}

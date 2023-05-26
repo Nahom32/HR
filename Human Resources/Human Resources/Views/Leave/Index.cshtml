@@ -9,7 +9,7 @@
     <table class="table bg-white">
         <tr>
             <th style="padding-left: 30px;">Employee Name</th>
-            <th style="padding-left: 30px;">Remark</th>
+            @*<th style="padding-left: 30px;">Remark</th>*@
             <th style="padding-left: 30px;">Actions</th>
         </tr>
         @foreach (var leave in Model)
@@ -18,9 +18,9 @@
                 <td class="align-middle" style="padding-left: 30px;">
                     @leave.Employee.Name
                 </td>
-                <td class="align-middle" style="padding-left: 30px;">
+                @*<td class="align-middle" style="padding-left: 30px;">
                     @leave.Remark
-                </td>
+                </td>*@
                 <td class="align-middle" style="padding-left: 30px;">
                     <a class="btn btn-outline-primary" asp-action="AcceptLeave" asp-route-Id="@leave.Id"><i class="bi bi-pencil-square"></i>Accept</a>|
                     <a class="btn btn-outline-info" asp-route-Id="@leave.Id" asp-action="Details"><i class="bi bi-eye"></i>Details</a> |

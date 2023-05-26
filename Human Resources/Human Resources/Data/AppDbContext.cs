@@ -65,5 +65,8 @@ namespace Human_Resources.Data
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<ConfirmedLeave> ConfirmedLeaves { get; set; }
         public DbSet<RejectedLeave> RejectedLeaves { get; set; }
+        public DbSet<LeaveTypes> LeaveType { get; set; }
+        public DbSet<LeaveEncashment> LeaveEncashments { get; set; }
+
     }
 }

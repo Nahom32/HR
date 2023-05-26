@@ -94,7 +94,7 @@ namespace Human_Resources.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LeaveType")
+                    b.Property<int>("LeaveTypesId")
                         .HasColumnType("int");
 
                     b.Property<string>("Remark")
@@ -104,6 +104,8 @@ namespace Human_Resources.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
+
+                    b.HasIndex("LeaveTypesId");
 
                     b.ToTable("ConfirmedLeaves");
                 });
@@ -262,7 +264,10 @@ namespace Human_Resources.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LeaveType")
+                    b.Property<int>("LeaveStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LeaveTypesId")
                         .HasColumnType("int");
 
                     b.Property<string>("Remark")
@@ -273,7 +278,50 @@ namespace Human_Resources.Migrations
 
                     b.HasIndex("EmployeeId");
 
+                    b.HasIndex("LeaveTypesId");
+
                     b.ToTable("Leaves");
+                });
+
+            modelBuilder.Entity("Human_Resources.Models.LeaveEncashment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Credit")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("LeaveEncashments");
+                });
+
+            modelBuilder.Entity("Human_Resources.Models.LeaveTypes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Days")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LeaveName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LeaveType");
                 });
 
             modelBuilder.Entity("Human_Resources.Models.Message", b =>
@@ -379,7 +427,7 @@ namespace Human_Resources.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LeaveType")
+                    b.Property<int>("LeaveTypesId")
                         .HasColumnType("int");
 
                     b.Property<string>("RefusalReason")
@@ -396,6 +444,8 @@ namespace Human_Resources.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
+
+                    b.HasIndex("LeaveTypesId");
 
                     b.ToTable("RejectedLeaves");
                 });
@@ -686,7 +736,15 @@ namespace Human_Resources.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Human_Resources.Models.LeaveTypes", "LeaveTypes")
+                        .WithMany()
+                        .HasForeignKey("LeaveTypesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Employee");
+
+                    b.Navigation("LeaveTypes");
                 });
 
             modelBuilder.Entity("Human_Resources.Models.Employee", b =>
@@ -739,6 +797,25 @@ namespace Human_Resources.Migrations
                 });
 
             modelBuilder.Entity("Human_Resources.Models.Leave", b =>
+                {
+                    b.HasOne("Human_Resources.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Human_Resources.Models.LeaveTypes", "LeaveTypes")
+                        .WithMany()
+                        .HasForeignKey("LeaveTypesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("LeaveTypes");
+                });
+
+            modelBuilder.Entity("Human_Resources.Models.LeaveEncashment", b =>
                 {
                     b.HasOne("Human_Resources.Models.Employee", "Employee")
                         .WithMany()
@@ -813,7 +890,15 @@ namespace Human_Resources.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Human_Resources.Models.LeaveTypes", "LeaveTypes")
+                        .WithMany()
+                        .HasForeignKey("LeaveTypesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Employee");
+
+                    b.Navigation("LeaveTypes");
                 });
 
             modelBuilder.Entity("Human_Resources.Models.Reward", b =>

@@ -16,7 +16,7 @@ namespace Human_Resources.Data.Services
             Leave persist = new Leave() 
             { 
                 Id = leave.Id,
-                LeaveType = leave.LeaveType,
+                LeaveTypesId = leave.LeaveTypesId,
                 Remark = leave.Remark,
                 EmployeeId = leave.EmployeeId,
 
@@ -78,8 +78,9 @@ namespace Human_Resources.Data.Services
             {
                 update.Id = leave.Id;
                 update.Remark = leave.Remark;
-                update.LeaveType = leave.LeaveType;
+                update.LeaveTypesId = leave.LeaveTypesId;
                 update.EmployeeId = leave.EmployeeId;
+                update.LeaveStatus = leave.LeaveStatus;
                 _context.Leaves.Update(update);
                 await _context.SaveChangesAsync();
             }
@@ -101,6 +102,15 @@ namespace Human_Resources.Data.Services
                 throw new Exception("The Leave doesn't exist");
             }
         }
+        public async Task<LeaveTypedropdownViewModel> GetLeaveTypedropdowns()
+        {
+            var leaveDropDown = new LeaveTypedropdownViewModel()
+            {
+                LeaveTypes = await _context.LeaveType.ToListAsync()
+            };
+            return leaveDropDown;
+        }
+
 
     }
 }

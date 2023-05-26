@@ -16,7 +16,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Human_Resources.Controllers
 {
-    [Authorize(Roles = "Admin, HRManager")]
+    [Authorize(Roles = "Admin,HRManager")]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _service;
@@ -26,9 +26,11 @@ namespace Human_Resources.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly AppDbContext _context;
         private readonly IEmailService _email;
+        private readonly IAppraisalService _appraisal;
+        private readonly ILeaveEncashmentService _encashment;
         public EmployeeController(IEmployeeService service, ILogger<EmployeeController> logger,
             UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
-            IPositionService posService, AppDbContext context, IEmailService email)
+            IPositionService posService, AppDbContext context, IEmailService email, IAppraisalService appraisal, ILeaveEncashmentService encashmentService)
         {
             _service = service;
             _logger = logger;
@@ -37,6 +39,8 @@ namespace Human_Resources.Controllers
             _posService = posService;
             _context = context;
             _email = email;
+            _appraisal = appraisal;
+            _encashment = encashmentService;
         }
         //[HttpGet]
         //public async Task<IActionResult> Index(int? page = 1)
@@ -167,7 +171,13 @@ namespace Human_Resources.Controllers
                 TempData["password"] = password;
                 _logger.LogInformation($"username: {username}, password: {password}");
                 var mail = new EMessage(new string[] { employeeViewModel.Email },"Personal Information",$"username: {username}, password: {password}");
+                
                 await _email.SendEmailAsync(mail);
+                await _encashment.AddLeaveEncashment(new LeaveEncashment()
+                {
+                    EmployeeId = employeeFromEmail.Id,
+                    Credit = 50
+                });
                 return RedirectToAction("Index");
             }
             else
@@ -185,7 +195,7 @@ namespace Human_Resources.Controllers
                 using (var stream = new FileStream("wwwroot/images/" + employee.PhotoURL, FileMode.Open))
                 {
                     // Create a new IFormFile object using the stream
-                    var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(employee.PhotoURL));
+                    var file = new FormFile(stream, 0, stream.Length, null,  Path.GetFileName(employee.PhotoURL));
 
                     // Use the file object as needed
                     // ...
@@ -255,7 +265,7 @@ namespace Human_Resources.Controllers
                 using (var stream = new FileStream("wwwroot/images/" + employee.PhotoURL, FileMode.Open))
                 {
                     // Create a new IFormFile object using the stream
-                    var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(employee.PhotoURL));
+                    var file = new FormFile(stream, 0, stream.Length, null, "wwwroot/images/"+ Path.GetFileName(employee.PhotoURL));
 
                     // Use the file object as needed
                     // ...
@@ -334,7 +344,7 @@ namespace Human_Resources.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles ="Admin,User,HRManager")]
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var employee = await _service.GetById(id);
@@ -496,6 +506,39 @@ namespace Human_Resources.Controllers
             
             return Json( new { draw, recordsFiltered = result.Count, recordsTotal = recordsTotal, data = result });
         }
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetGrades(int? id)
+        {
+            var grades = new List<Appraisal>();
+            var total = await _appraisal.GetAll();
+            foreach ( var item in total )
+            {
+                if(item.EmployeeId == id)
+                {
+                    grades.Add(item);
+                }
+            }
+            return View(grades);
+            
+        }
+        [HttpGet]
+        public async Task<IActionResult> InitEncash()
+        {
+            var All = await _service.GetAll();
+            foreach ( var item in All )
+            {
+                await _encashment.AddLeaveEncashment(new LeaveEncashment()
+                {
+                    EmployeeId = item.Id,
+                    Credit = 50
+                });
+
+            }
+            return RedirectToAction("success");
+
+        }
+
 
 
     }

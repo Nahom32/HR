@@ -132,11 +132,14 @@
             @if(User.Identity.IsAuthenticated)
             {
             <aside class="left-sidebar " id="sidebar" data-sidebarbg="skin6">
-                <!-- Sidebar scroll-->
-                <div class="scroll-sidebar">
-                    <!-- Sidebar navigation-->
+                
+                    <!-- Sidebar scroll-->
+                    <div class="scroll-sidebar">
+                        <!-- Sidebar navigation-->
                     <nav class="sidebar-nav">
                         <ul id="sidebarnav">
+                            @if (User.IsInRole("Admin"))
+                            {
                             <!-- User Profile-->
                             <li class="sidebar-item">
                                 <a class="sidebar-link waves-effect waves-dark sidebar-link text-secondary"
@@ -184,11 +187,57 @@
                                     <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                                     <span class="hide-menu">Appraisal</span>
                                 </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link text-secondary" asp-controller="LeaveTypes" asp-action="Index"
+                                       aria-expanded="false">
+                                        <i class="bi bi-box-arrow-left" aria-hidden="true"></i>
+                                        <span class="hide-menu">LeaveTypes</span>
+                                    </a>
+                                </li>
+                            }
+                            else if (User.IsInRole("HRManager") || User.IsInRole("User"))
+                            {
+                                var val = await UserManager.FindByNameAsync(User.Identity.Name);
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link text-secondary"
+                                        asp-area="" asp-controller="Employee" asp-action="Details" asp-route-id = "@val.EmployeeId">
+                                        <i class="bi bi-person" aria-hidden="true"></i>Profile
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link text-secondary"
+                               asp-area="" asp-controller="Employee" asp-action="GetGrades" asp-route-id="@val.EmployeeId">
+                                        <i class="bi bi-person" aria-hidden="true"></i>My Grades
+                                    </a>
+                                </li>
+                               
+                                
+
+                            }
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link text-secondary" asp-controller="Leave" asp-action="Index"
+                                   aria-expanded="false">
+                                    <i class="bi bi-box-arrow-left" aria-hidden="true"></i>
+                                    <span class="hide-menu">Leave</span>
+                                </a>
                             </li>
+                            @if (User.IsInRole("HRManager"))
+                            {
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link text-secondary" asp-controller="Employee" asp-action="Index"
+                                       aria-expanded="false">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        <span class="hide-menu">Employees</span>
+                                    </a>
+                                </li>
+                            }
                         </ul>
                     </nav>
                     <!-- End Sidebar navigation -->
-                </div>
+                    </div>
+               
+
                 <!-- End Sidebar scroll-->
             </aside>
            }
@@ -205,6 +254,7 @@
                                         <form asp-action="Logout" asp-controller="Account">
                                             <li>
                                                 <button type="submit" class="btn btn-danger" asp-controller="Account" asp-action="Logout" ><i class="fa fa-lock"></i></button>
+                                            </li>
                                         </form>
                                     }
                             </ol>

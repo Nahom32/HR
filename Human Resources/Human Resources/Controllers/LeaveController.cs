@@ -4,9 +4,12 @@ using Human_Resources.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Human_Resources.Data.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Human_Resources.Controllers
 {
+    
     public class LeaveController : Controller
     {
         private readonly ILeaveService leaveService;
@@ -17,11 +20,16 @@ namespace Human_Resources.Controllers
         private readonly ILogger<LeaveController> _logger;
         private readonly IRejectedLeaveService _rejectedLeaveService;
         private readonly IConfirmedLeaveService _confirmedLeaveService;
+        private readonly ILeaveEncashmentService _encashment;
+        private readonly ILeaveTypeService _leaveTypeService;
         public LeaveController(ILeaveService service,
             IHttpContextAccessor accessor, UserManager<ApplicationUser> userManager,
             IEmployeeService employeeService, IPositionService positionService,
             ILogger<LeaveController> logger,
-            IRejectedLeaveService rejLeave, IConfirmedLeaveService confirmedLeaveService)
+            IRejectedLeaveService rejLeave, 
+            IConfirmedLeaveService confirmedLeaveService,
+            ILeaveEncashmentService encashment,
+            ILeaveTypeService leaveTypeService)
         {
             leaveService = service;
             _accessor = accessor;
@@ -31,7 +39,8 @@ namespace Human_Resources.Controllers
             _logger = logger;
             _rejectedLeaveService = rejLeave;
             _confirmedLeaveService = confirmedLeaveService;
-
+            _encashment = encashment;
+            _leaveTypeService = leaveTypeService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -72,6 +81,8 @@ namespace Human_Resources.Controllers
         public async Task<IActionResult> RequestLeave()
         {
             var User = _accessor.HttpContext.User;
+            var leaveDropDowns = await leaveService.GetLeaveTypedropdowns();
+            ViewBag.leaveTypeDropDowns = new SelectList(leaveDropDowns.LeaveTypes, "Id", "LeaveName");
             var user = await _userManager.GetUserAsync(User);
             if(user != null)
             {
@@ -90,12 +101,28 @@ namespace Human_Resources.Controllers
         {
             if (!ModelState.IsValid)
             {
+                var leaveDropDowns = await leaveService.GetLeaveTypedropdowns();
+                ViewBag.leaveTypeDropDowns = new SelectList(leaveDropDowns.LeaveTypes, "Id", "LeaveName");
                 return View(leave);
             }
             else
             {
-                await leaveService.AddLeave(leave);
-                return RedirectToAction("Index");
+                var searchLeave = await _leaveTypeService.GetById(leave.LeaveTypesId);
+                var encashment = await _encashment.GetByEmployeeId(leave.EmployeeId);
+
+                if(searchLeave.Days <= encashment.Credit )
+                {
+                    await leaveService.AddLeave(leave);
+                    encashment.Credit = encashment.Credit - searchLeave.Days;
+                    await _encashment.UpdateLeaveEncashment(encashment);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+
+                    return RedirectToAction("Error");
+                }
+                
 
             }
         }
@@ -103,13 +130,14 @@ namespace Human_Resources.Controllers
         public async Task<IActionResult> AcceptLeave(int id)
         {
             var accept = await leaveService.GetById(id);
+            var leaveDropDowns = await leaveService.GetLeaveTypedropdowns();
+            ViewBag.leaveTypeDropDowns = new SelectList(leaveDropDowns.LeaveTypes, "Id", "LeaveName");
             if (accept != null)
             {
                 ConfirmedLeave confirmedLeave = new ConfirmedLeave();
                 confirmedLeave.EmployeeId = accept.EmployeeId;
                 confirmedLeave.Remark = accept.Remark;
-                confirmedLeave.LeaveType = accept.LeaveType;
-
+                confirmedLeave.LeaveTypesId = accept.LeaveTypesId;
                 return View(confirmedLeave);
             }
             else
@@ -124,6 +152,8 @@ namespace Human_Resources.Controllers
             confirmedLeave.Id = 0;
             if (!ModelState.IsValid)
             {
+                var leaveDropDowns = await leaveService.GetLeaveTypedropdowns();
+                ViewBag.leaveTypeDropDowns = new SelectList(leaveDropDowns.LeaveTypes, "Id", "LeaveName");
                 _logger.LogInformation("leave unsuccessful");
                 return View(confirmedLeave);
             }
@@ -135,12 +165,17 @@ namespace Human_Resources.Controllers
                 {
                     Id = value.Id,
                     Remark = value.Remark,
-                    LeaveType = value.LeaveType,
-                    EmployeeId = value.EmployeeId
+                    LeaveTypesId = value.LeaveTypesId,
+                    EmployeeId = value.EmployeeId,
+                    LeaveStatus = Data.Enum.LeaveStatus.Accepted
                 };
 
-                await leaveService.DeleteLeave(leaveView);
-               
+                await leaveService.UpdateLeave(leaveView);
+                var encashment = await _encashment.GetByEmployeeId(leaveView.EmployeeId);
+                var searchLeave = await _leaveTypeService.GetById(leaveView.LeaveTypesId); 
+                encashment.Credit = encashment.Credit - searchLeave.Days;
+                await _encashment.UpdateLeaveEncashment(encashment);
+
                 return View("index");
 
             }
@@ -149,13 +184,15 @@ namespace Human_Resources.Controllers
         public async Task<IActionResult> RejectedLeave(int id)
         {
             var reject = await leaveService.GetById(id);
+            var leaveDropDowns = await leaveService.GetLeaveTypedropdowns();
+            ViewBag.leaveTypeDropDowns = new SelectList(leaveDropDowns.LeaveTypes, "Id", "LeaveName");
             if (reject != null)
             {
                 RejectedLeave leave = new RejectedLeave()
                 {
                     Id = reject.Id,
                     Remark = reject.Remark,
-                    LeaveType = reject.LeaveType,
+                    LeaveTypesId = reject.LeaveTypesId,
                     EmployeeId = reject.EmployeeId
                 };
                 return View(leave);
@@ -171,6 +208,8 @@ namespace Human_Resources.Controllers
             leave.Id = 0;
             if(!ModelState.IsValid)
             {
+                var leaveDropDowns = await leaveService.GetLeaveTypedropdowns();
+                ViewBag.leaveTypeDropDowns = new SelectList(leaveDropDowns.LeaveTypes, "Id", "LeaveName");
 
                 return View(leave);
             }
@@ -182,10 +221,11 @@ namespace Human_Resources.Controllers
                 {
                     Id = toDelete.Id,
                     Remark = toDelete.Remark,
-                    LeaveType = toDelete.LeaveType,
-                    EmployeeId = toDelete.EmployeeId
+                    LeaveTypesId = toDelete.LeaveTypesId,
+                    EmployeeId = toDelete.EmployeeId,
+                    LeaveStatus = Data.Enum.LeaveStatus.Rejected
                 };
-                await leaveService.DeleteLeave(reg);
+                await leaveService.UpdateLeave(reg);
                 return RedirectToAction("index");
 
             }
@@ -204,6 +244,7 @@ namespace Human_Resources.Controllers
 
             }
         }
+        
 
     }
 }

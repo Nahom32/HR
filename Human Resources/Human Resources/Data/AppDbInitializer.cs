@@ -2,6 +2,7 @@
 using Human_Resources.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Human_Resources.Data
@@ -45,6 +46,24 @@ namespace Human_Resources.Data
                     }
                    
                    
+                }
+                
+            }
+        }
+        public static async Task SeedEncashment(IApplicationBuilder applicationBuilder)
+        {
+            using(var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
+                if(DateTime.Now.Month == 7 && DateTime.Now.Day == 7)
+                {
+                   var encashments = await context.LeaveEncashments.ToListAsync();
+                    foreach(var encashment in encashments)
+                    {
+                        encashment.Credit = encashment.Credit + 50;
+                        context.LeaveEncashments.Update(encashment);
+                        await context.SaveChangesAsync();
+                    }
                 }
             }
         }

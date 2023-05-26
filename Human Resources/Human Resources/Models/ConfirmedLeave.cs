@@ -1,5 +1,4 @@
-﻿using Human_Resources.Data.Enum;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Human_Resources.Models
@@ -9,7 +8,9 @@ namespace Human_Resources.Models
         [Key]
         public int Id { get; set; }
         public string Remark { get; set; }
-        public LeaveType LeaveType { get; set; }
+        public int LeaveTypesId { get; set; }
+        [ForeignKey("LeaveTypesId")]
+        public LeaveTypes? LeaveTypes { get; set; }
         public int EmployeeId { get; set; }
         [ForeignKey("EmployeeId")]
         public Employee? Employee { get; set; }

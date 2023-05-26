@@ -1,0 +1,69 @@
+﻿@model List<Appraisal>
+@{
+    ViewData["title"] = "Your Grades";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if(Model.Count > 0)
+{
+    @foreach(var item in Model)
+    {
+        <table class="table bg-white">
+
+            <tr>
+                <th style="padding-left: 30px;">Criteria</th>
+                <th style="padding-left: 30px;">Grade</th>
+            </tr>
+            <tr>
+                <td class="align-middle" style="padding-left: 30px;">
+                    Technical Skills
+                </td>
+                <td class="align-middle" style="padding-left: 30px;">
+                    @item.TechnicalSkills
+                </td>
+
+            </tr>
+            <tr>
+                <td class="align-middle" style="padding-left: 30px;">
+                    Collaborative Skills
+                </td>
+                <td class="align-middle" style="padding-left: 30px;">
+                    @item.CollaborativeSkills
+                </td>
+
+            </tr>
+            <tr>
+                <td class="align-middle" style="padding-left: 30px;">
+                    Group Work
+                </td>
+                <td class="align-middle" style="padding-left: 30px;">
+                    @item.GroupWork
+                </td>
+
+            </tr>
+            <tr>
+                <td class="align-middle" style="padding-left: 30px;">
+                    Punctuality
+                </td>
+                <td class="align-middle" style="padding-left: 30px;">
+                    @item.Punctuality
+                </td>
+
+            </tr>
+            <tr>
+                <td class="align-middle" style="padding-left: 30px;">
+                    Timeliness
+                </td>
+                <td class="align-middle" style="padding-left: 30px;">
+                    @item.Timeliness
+                </td>
+
+            </tr>
+        </table>
+        
+    }
+}
+else 
+{
+    <h2 class="text-danger">No grades have been entered for you.</h2>
+}
