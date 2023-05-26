@@ -80,6 +80,57 @@ namespace Human_Resources.Migrations
                     b.ToTable("Appraisals");
                 });
 
+            modelBuilder.Entity("Human_Resources.Models.Attendance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NoOfAbsentCheck")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NoOfLateCheck")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NoOnTimeCheck")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Attendances");
+                });
+
+            modelBuilder.Entity("Human_Resources.Models.CheckInTrackList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AttendanceId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CheckInTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("checkInStatus")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AttendanceId");
+
+                    b.ToTable("CheckInTrackLists");
+                });
+
             modelBuilder.Entity("Human_Resources.Models.ConfirmedLeave", b =>
                 {
                     b.Property<int>("Id")
@@ -726,6 +777,28 @@ namespace Human_Resources.Migrations
                         .IsRequired();
 
                     b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("Human_Resources.Models.Attendance", b =>
+                {
+                    b.HasOne("Human_Resources.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("Human_Resources.Models.CheckInTrackList", b =>
+                {
+                    b.HasOne("Human_Resources.Models.Attendance", "Attendance")
+                        .WithMany()
+                        .HasForeignKey("AttendanceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Attendance");
                 });
 
             modelBuilder.Entity("Human_Resources.Models.ConfirmedLeave", b =>
