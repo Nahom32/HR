@@ -7,13 +7,10 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 //using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
 using System.Security.Claims;
 using MailKit;
 
-
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
@@ -36,6 +33,8 @@ builder.Services.AddScoped<IRejectedLeaveService, RejectedLeaveService>();
 builder.Services.AddScoped<IConfirmedLeaveService, ConfirmedLeaveService>();
 builder.Services.AddScoped<ILeaveTypeService, LeaveTypeService>();
 builder.Services.AddScoped<ILeaveEncashmentService, LeaveEncashmentService>();
+builder.Services.AddScoped<ICheckInTrackListService, CheckInTrackListService>();
+builder.Services.AddScoped<IAttendanceService, AttendanceService>();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
