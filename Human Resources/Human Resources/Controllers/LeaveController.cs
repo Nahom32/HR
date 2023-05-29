@@ -125,6 +125,12 @@ namespace Human_Resources.Controllers
                 
 
             }
+            
+        }
+        [HttpGet]
+        public IActionResult Error()
+        {
+            return View();
         }
         [HttpGet]
         public async Task<IActionResult> AcceptLeave(int id)

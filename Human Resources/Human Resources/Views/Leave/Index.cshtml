@@ -21,11 +21,14 @@
                 @*<td class="align-middle" style="padding-left: 30px;">
                     @leave.Remark
                 </td>*@
-                <td class="align-middle" style="padding-left: 30px;">
-                    <a class="btn btn-outline-primary" asp-action="AcceptLeave" asp-route-Id="@leave.Id"><i class="bi bi-pencil-square"></i>Accept</a>|
-                    <a class="btn btn-outline-info" asp-route-Id="@leave.Id" asp-action="Details"><i class="bi bi-eye"></i>Details</a> |
-                    <a class="btn btn-danger text-white" asp-action="RejectedLeave" asp-route-Id="@leave.Id"><i class="bi bi-trash"></i>Reject</a>
-                </td>
+                @if (leave.LeaveStatus == Human_Resources.Data.Enum.LeaveStatus.Pending)
+                {
+                    <td class="align-middle" style="padding-left: 30px;">
+                        <a class="btn btn-outline-primary" asp-action="AcceptLeave" asp-route-Id="@leave.Id"><i class="bi bi-pencil-square"></i>Accept</a>|
+                        <a class="btn btn-outline-info" asp-route-Id="@leave.Id" asp-action="Details"><i class="bi bi-eye"></i>Details</a> |
+                        <a class="btn btn-danger text-white" asp-action="RejectedLeave" asp-route-Id="@leave.Id"><i class="bi bi-trash"></i>Reject</a>
+                    </td>
+                }
             </tr>
         }
         <a class="btn btn-primary" asp-action="RequestLeave">Request a Leave</a>
