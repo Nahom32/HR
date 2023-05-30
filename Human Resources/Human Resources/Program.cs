@@ -94,6 +94,7 @@ app.MapControllerRoute(
 
 AppDbInitializer.SeedRole(app).Wait();
 AppDbInitializer.SeedEncashment(app).Wait();
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapHub<MessageHub>("/messagehub");

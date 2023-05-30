@@ -10,5 +10,6 @@ namespace Human_Resources.Data.Services
         public Task AddAttendance(Attendance attendance);
         public Task UpdateAttendance(Attendance attendance);
         public Task DeleteAttendance(Attendance attendance);
+        public Task<Attendance> GetByEmployeeId(int EmployeeId);
     }
 }

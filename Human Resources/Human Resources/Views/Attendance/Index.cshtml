@@ -1,0 +1,58 @@
+﻿@using Human_Resources.Data.ViewModels;
+@model AttendanceViewModel
+<form asp-controller="Attendance" asp-action="Index">
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Three charts -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-lg-3 col-md-9">
+            <div class="white-box analytics-info">
+                <h3 class="box-title">OnTime Checkins</h3>
+                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                    <li>
+                        <div id="sparklinedash">
+                            <canvas width="@Model.Attendance.NoOnTimeCheck" height="@Model.Attendance.NoOnTimeCheck"
+                                    style="display: inline-block; width: @Model.Attendance.NoOnTimeCheck; height: @Model.Attendance.NoOnTimeCheck; vertical-align: top;"></canvas>
+                        </div>
+                    </li>
+                    <li class="ms-auto"><span class="counter text-success">@Model.Attendance.NoOnTimeCheck</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-9">
+            <div class="white-box analytics-info">
+                <h3 class="box-title">Late Checkins</h3>
+                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                    <li>
+                        <div id="sparklinedash2">
+                            <canvas width="@Model.Attendance.NoOfLateCheck" height="@Model.Attendance.NoOfLateCheck"
+                                    style="display: inline-block; width: @Model.Attendance.NoOfLateCheck px; height: @Model.Attendance.NoOfLateCheck px; vertical-align: top;"></canvas>
+                        </div>
+                    </li>
+                    <li class="ms-auto"><span class="counter text-purple">@Model.Attendance.NoOfLateCheck</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-9">
+            <div class="white-box analytics-info">
+                <h3 class="box-title">Absent Days</h3>
+                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                    <li>
+                        <div id="sparklinedash3">
+                            <canvas width="@Model.Attendance.NoOfAbsentCheck" height="@Model.Attendance.NoOfAbsentCheck"
+                                    style="display: inline-block; width: @Model.Attendance.NoOfAbsentCheck px; height: @Model.Attendance.NoOfAbsentCheck px; vertical-align: top;"></canvas>
+                        </div>
+                    </li>
+                    <li class="ms-auto">
+                        <span class="counter text-danger">@Model.Attendance.NoOfAbsentCheck</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+   
+        <input class="btn btn-dark" type="submit" value="CheckIn" />
+    
+</div>
+</form>

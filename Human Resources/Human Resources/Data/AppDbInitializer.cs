@@ -67,5 +67,23 @@ namespace Human_Resources.Data
                 }
             }
         }
+        public static async Task SeedAttendance(IApplicationBuilder applicationBuilder)
+        {
+            using(var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
+                var employees = await context.Employees.ToListAsync();
+                foreach(var employee in employees)
+                {
+                    var attendance = new Attendance()
+                    {
+                        EmployeeId = employee.Id,
+                        
+                    };
+                    await context.Attendances.AddAsync(attendance);
+                    await context.SaveChangesAsync();
+                }
+            }
+        }
     }
 }

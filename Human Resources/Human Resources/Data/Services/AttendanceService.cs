@@ -46,5 +46,17 @@ namespace Human_Resources.Data.Services
             _context.Attendances.Update(attendance);
             await _context.SaveChangesAsync();
         }
+        public async Task<Attendance> GetByEmployeeId(int EmployeeId)
+        {
+            var attendance = await _context.Attendances.FirstOrDefaultAsync(n => n.EmployeeId == EmployeeId);
+            if(attendance != null)
+            {
+                return attendance;
+            }
+            else
+            {
+                throw new Exception("The attendance doesn't exist");
+            }
+        }
     }
 }
