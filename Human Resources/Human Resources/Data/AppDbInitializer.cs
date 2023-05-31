@@ -1,9 +1,7 @@
 ﻿using Human_Resources.Data.Static;
 using Human_Resources.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Human_Resources.Data
 {
@@ -83,6 +81,49 @@ namespace Human_Resources.Data
                     await context.Attendances.AddAsync(attendance);
                     await context.SaveChangesAsync();
                 }
+            }
+        }
+        public static async Task CheckTruants(IApplicationBuilder applicationBuilder)
+        {
+            using(var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
+                var attendances = await context.Attendances.ToListAsync();
+                var checkins = await context.CheckInTrackLists.ToListAsync();
+                if(DateTime.Now.Hour <= 8)
+                {
+                    foreach (var attendance in attendances)
+                    {
+                        var lis = new List<CheckInTrackList>();
+                        foreach(var  check in checkins)
+                        {
+                            if(check.AttendanceId == attendance.Id)
+                            {
+                                lis.Add(check);
+                            }
+                        }
+                        if (lis.Count > 0)
+                        {
+
+
+                            lis = lis.OrderBy(n => n.CheckInTime).ToList();
+                            var diff = DateTime.Now - lis[lis.Count - 1].CheckInTime;
+                            if (diff.Days > 0)
+                            {
+                                attendance.NoOfAbsentCheck += 1;
+                                context.Attendances.Update(attendance);
+                                await context.SaveChangesAsync();
+                            }
+                        }
+                        else
+                        {
+                            attendance.NoOfAbsentCheck += 1;
+                            context.Attendances.Update(attendance);
+                            await context.SaveChangesAsync();
+                        }
+                    }
+                }
+                
             }
         }
     }

@@ -94,6 +94,7 @@ app.MapControllerRoute(
 
 AppDbInitializer.SeedRole(app).Wait();
 AppDbInitializer.SeedEncashment(app).Wait();
+AppDbInitializer.CheckTruants(app).Wait();
 
 app.UseEndpoints(endpoints =>
 {

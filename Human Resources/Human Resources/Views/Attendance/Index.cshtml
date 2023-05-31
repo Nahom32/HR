@@ -56,3 +56,44 @@
     
 </div>
 </form>
+<div id="chartContainer" class="container d-flex justify-content-center align-items-center" style="width: 400px; height: 400px;">
+    <canvas id="pieChart" ></canvas>
+</div>
+
+@{
+
+    // Define the dynamic data as variables
+    var labels = new[] { "On Time", "Late", "Absent" };
+    var values = new[] { Model.Attendance.NoOnTimeCheck, Model.Attendance.NoOfLateCheck, Model.Attendance.NoOfAbsentCheck };
+}
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve the dynamic data from the server-side variables
+            var labels = @Json.Serialize(labels);
+            var values = @Json.Serialize(values);
+
+            // Get the canvas element
+            var ctx = document.getElementById('pieChart').getContext('2d');
+
+            // Create the pie chart
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: [ '#FFCE56', '#36A2EB', '#FF6384'],
+                        hoverBackgroundColor: [ '#FFCE56', '#36A2EB', '#FF6384']
+                    }]
+                },
+                options: {
+                    aspectRatio: 1,
+                    responsive: true
+                }
+            });
+        });
+    </script>
+}

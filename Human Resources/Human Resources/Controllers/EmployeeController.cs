@@ -28,9 +28,12 @@ namespace Human_Resources.Controllers
         private readonly IEmailService _email;
         private readonly IAppraisalService _appraisal;
         private readonly ILeaveEncashmentService _encashment;
+        private readonly IAttendanceService _attendanceService;
         public EmployeeController(IEmployeeService service, ILogger<EmployeeController> logger,
             UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
-            IPositionService posService, AppDbContext context, IEmailService email, IAppraisalService appraisal, ILeaveEncashmentService encashmentService)
+            IPositionService posService, AppDbContext context, IEmailService email, 
+            IAppraisalService appraisal, ILeaveEncashmentService encashmentService, 
+            IAttendanceService attendanceService)
         {
             _service = service;
             _logger = logger;
@@ -41,6 +44,7 @@ namespace Human_Resources.Controllers
             _email = email;
             _appraisal = appraisal;
             _encashment = encashmentService;
+            _attendanceService = attendanceService;
         }
         //[HttpGet]
         //public async Task<IActionResult> Index(int? page = 1)
@@ -177,6 +181,10 @@ namespace Human_Resources.Controllers
                 {
                     EmployeeId = employeeFromEmail.Id,
                     Credit = 50
+                });
+                await _attendanceService.AddAttendance(new Attendance()
+                {
+                    EmployeeId = employeeFromEmail.Id
                 });
                 return RedirectToAction("Index");
             }
