@@ -1,5 +1,28 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Leave
 @{
+    ViewData["Title"] = "Leave Details";
 }
+
+<div class="modal fade" id="Leave-@Model.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Details</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                <div class="modal-body">
+                    @Model.Employee.Name
+                    @Model.LeaveTypes.LeaveName
+                    @Model.AskedAt
+                    @Model.Remark
+                </div>
+                <div class="modal-footer">
+                    <a @*asp-action="Index"*@ class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                    
+                </div>
+          
+        </div>
+    </div>
+</div>

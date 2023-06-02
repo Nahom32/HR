@@ -51,14 +51,23 @@
             </div>
         </div>
     </div>
-   
-        <input class="btn btn-dark" type="submit" value="CheckIn" />
+        @if((DateTime.Now - Model.LastTime).Hours > 12)
+        {
+            <input class="btn btn-dark justify-content-center" type="submit" value="CheckIn" />
+        }
+        else
+        {
+            <div id="chartContainer" class="container d-flex justify-content-center align-items-center" style="width: 400px; height: 400px;">
+                <canvas id="pieChart"></canvas>
+            </div>
+        }
+
     
 </div>
 </form>
-<div id="chartContainer" class="container d-flex justify-content-center align-items-center" style="width: 400px; height: 400px;">
+@*<div id="chartContainer" class="container d-flex justify-content-center align-items-center" style="width: 400px; height: 400px;">
     <canvas id="pieChart" ></canvas>
-</div>
+</div>*@
 
 @{
 

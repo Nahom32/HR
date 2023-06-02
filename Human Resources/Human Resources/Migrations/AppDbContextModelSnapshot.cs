@@ -145,7 +145,13 @@ namespace Human_Resources.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
+                    b.Property<int>("LeaveId")
+                        .HasColumnType("int");
+
                     b.Property<int>("LeaveTypesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NoOfDays")
                         .HasColumnType("int");
 
                     b.Property<string>("Remark")
@@ -321,6 +327,9 @@ namespace Human_Resources.Migrations
                     b.Property<int>("LeaveTypesId")
                         .HasColumnType("int");
 
+                    b.Property<int>("NoOfDays")
+                        .HasColumnType("int");
+
                     b.Property<string>("Remark")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -478,7 +487,13 @@ namespace Human_Resources.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
+                    b.Property<int>("LeaveId")
+                        .HasColumnType("int");
+
                     b.Property<int>("LeaveTypesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NoOfDays")
                         .HasColumnType("int");
 
                     b.Property<string>("RefusalReason")

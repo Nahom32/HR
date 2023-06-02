@@ -19,6 +19,7 @@ namespace Human_Resources.Data.Services
                 LeaveTypesId = leave.LeaveTypesId,
                 Remark = leave.Remark,
                 EmployeeId = leave.EmployeeId,
+                NoOfDays = leave.NoOfDays
 
             };
             await _context.Leaves.AddAsync(persist);
@@ -51,7 +52,10 @@ namespace Human_Resources.Data.Services
         {
             var leave = await _context.Leaves
                                        .Include(n => n.Employee)
+                                       .Include(n => n.LeaveTypes)
+                                       
                                        .FirstOrDefaultAsync(n => n.Id == id);
+            
             if(leave != null)
             {
                 return leave;
@@ -81,6 +85,7 @@ namespace Human_Resources.Data.Services
                 update.LeaveTypesId = leave.LeaveTypesId;
                 update.EmployeeId = leave.EmployeeId;
                 update.LeaveStatus = leave.LeaveStatus;
+                update.NoOfDays = leave.NoOfDays;
                 _context.Leaves.Update(update);
                 await _context.SaveChangesAsync();
             }

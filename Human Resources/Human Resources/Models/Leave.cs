@@ -20,6 +20,7 @@ namespace Human_Resources.Models
         [Required(ErrorMessage ="The number of days is Required")]
         public DateTime AskedAt { get; set; } = DateTime.Now;
         public LeaveStatus LeaveStatus { get; set; } = LeaveStatus.Pending;
+        public int NoOfDays { get; set; }
 
 
     }

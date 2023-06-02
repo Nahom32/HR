@@ -10,5 +10,6 @@ namespace Human_Resources.Data.ViewModels
         }
         public Attendance Attendance { get; set; }
         public List<CheckInTrackList> CheckInTracks { get; set; }
+        public DateTime LastTime { get; set; }
     }
 }

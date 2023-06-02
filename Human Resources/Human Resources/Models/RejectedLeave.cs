@@ -17,5 +17,8 @@ namespace Human_Resources.Models
         [ForeignKey("EmployeeId")]
         public Employee? Employee { get; set; }
         public DateTime RejectedAt { get; set; } = DateTime.Now;
+        public int NoOfDays { get; set; }
+        public int LeaveId { get; set; }
+
     }
 }

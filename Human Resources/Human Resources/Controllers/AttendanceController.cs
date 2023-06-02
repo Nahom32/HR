@@ -35,8 +35,18 @@ namespace Human_Resources.Controllers
             var attendance = await _service.GetByEmployeeId(User.EmployeeId);
             var checkInValues = await _checkInService.GetByAttendance(attendance.Id);
             AttendanceViewModel attendanceVm = new AttendanceViewModel();
+            
             attendanceVm.Attendance = attendance;
             attendanceVm.CheckInTracks = checkInValues;
+            var maxVal = new DateTime(2015, 12, 25);
+            foreach(var checkIn in attendanceVm.CheckInTracks)
+            {
+                if(checkIn.AttendanceId == attendanceVm.Attendance.Id && checkIn.CheckInTime > maxVal)
+                {
+                    maxVal = checkIn.CheckInTime;
+                }
+            }
+            attendanceVm.LastTime = maxVal;
             return View(attendanceVm);
         }
         [HttpPost, ActionName("Index")]
@@ -89,6 +99,6 @@ namespace Human_Resources.Controllers
                 }
             
         }
-        
+          
     }
 }

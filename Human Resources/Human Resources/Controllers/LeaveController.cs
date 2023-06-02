@@ -110,11 +110,11 @@ namespace Human_Resources.Controllers
                 var searchLeave = await _leaveTypeService.GetById(leave.LeaveTypesId);
                 var encashment = await _encashment.GetByEmployeeId(leave.EmployeeId);
 
-                if(searchLeave.Days <= encashment.Credit )
+                if(searchLeave.Days >= leave.NoOfDays  && leave.NoOfDays <= encashment.Credit)
                 {
                     await leaveService.AddLeave(leave);
-                    encashment.Credit = encashment.Credit - searchLeave.Days;
-                    await _encashment.UpdateLeaveEncashment(encashment);
+                    //encashment.Credit = encashment.Credit - searchLeave.Days;
+                    //await _encashment.UpdateLeaveEncashment(encashment);
                     return RedirectToAction("Index");
                 }
                 else
@@ -144,6 +144,8 @@ namespace Human_Resources.Controllers
                 confirmedLeave.EmployeeId = accept.EmployeeId;
                 confirmedLeave.Remark = accept.Remark;
                 confirmedLeave.LeaveTypesId = accept.LeaveTypesId;
+                confirmedLeave.NoOfDays = accept.NoOfDays;
+                confirmedLeave.LeaveId = accept.Id;
                 return View(confirmedLeave);
             }
             else
@@ -166,23 +168,24 @@ namespace Human_Resources.Controllers
             else
             {
                 await _confirmedLeaveService.AddConfirmedLeave(confirmedLeave);
-                var value = await leaveService.SearchByEmployeeId(confirmedLeave.EmployeeId);
+                var value = await leaveService.GetById(confirmedLeave.LeaveId);
                 LeaveViewModel leaveView = new LeaveViewModel()
                 {
                     Id = value.Id,
                     Remark = value.Remark,
                     LeaveTypesId = value.LeaveTypesId,
                     EmployeeId = value.EmployeeId,
-                    LeaveStatus = Data.Enum.LeaveStatus.Accepted
+                    LeaveStatus = Data.Enum.LeaveStatus.Accepted,
+                    NoOfDays = value.NoOfDays,
                 };
 
                 await leaveService.UpdateLeave(leaveView);
                 var encashment = await _encashment.GetByEmployeeId(leaveView.EmployeeId);
-                var searchLeave = await _leaveTypeService.GetById(leaveView.LeaveTypesId); 
-                encashment.Credit = encashment.Credit - searchLeave.Days;
+                //var searchLeave = await _leaveTypeService.GetById(leaveView.LeaveTypesId); 
+                encashment.Credit = encashment.Credit - confirmedLeave.NoOfDays;
                 await _encashment.UpdateLeaveEncashment(encashment);
 
-                return View("index");
+                return RedirectToAction("index");
 
             }
         }
@@ -199,7 +202,9 @@ namespace Human_Resources.Controllers
                     Id = reject.Id,
                     Remark = reject.Remark,
                     LeaveTypesId = reject.LeaveTypesId,
-                    EmployeeId = reject.EmployeeId
+                    EmployeeId = reject.EmployeeId,
+                    NoOfDays = reject.NoOfDays,
+                    LeaveId = reject.Id
                 };
                 return View(leave);
             }
@@ -222,7 +227,7 @@ namespace Human_Resources.Controllers
             else
             {
                 await _rejectedLeaveService.AddRejectedLeave(leave);
-                var toDelete = await leaveService.SearchByEmployeeId(leave.EmployeeId);
+                var toDelete = await leaveService.GetById(leave.LeaveId);
                 LeaveViewModel reg = new LeaveViewModel()
                 {
                     Id = toDelete.Id,
