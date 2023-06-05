@@ -274,7 +274,18 @@ namespace Human_Resources.Controllers
             foreach(var leave in leaves)
             {
                 var val = leave.LeaveTypes.LeaveName;
-                leaveView.BarGraphData[val] += 1;  
+                leaveView.BarGraphData[val] += 1; 
+                if(leave.LeaveStatus == Data.Enum.LeaveStatus.Pending)
+                {
+                    leaveView.PieChart[0] += 1;
+                }else if(leave.LeaveStatus == Data.Enum.LeaveStatus.Accepted)
+                {
+                    leaveView.PieChart[1] += 1;
+                }
+                else
+                {
+                    leaveView.PieChart[2] += 1;
+                }
             }
             foreach(var data in  leaveView.BarGraphData)
             {

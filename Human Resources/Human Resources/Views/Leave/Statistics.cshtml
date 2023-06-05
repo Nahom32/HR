@@ -1,7 +1,5 @@
 ﻿@using Human_Resources.Data.ViewModels
 @model StatisticsViewModel
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,13 +10,28 @@
     <div id="chartContainer" @*class="container"*@ style="width: 70%; height: 20%;">
         <canvas id="myChart"></canvas>
     </div>
-    <button onclick="exportChart('myChart')">Export Chart</button>
+    
+    <button onclick="exportChart('myChart')" class="btn btn-primary">Export Chart</button>
+    <div id="chartContainer" @*class="container"*@ style="width: 70%; height: 20%;">
+        <canvas id="PieChart"></canvas>
+    </div>
+    <button onclick="exportChart('myChart2')" class="btn btn-primary">Export Chart</button>
+    @{
+        var labelsPie = new [] {"Pending","Accepted","Rejected"};
+        var valuesPie = Model.PieChart;
+    }
 
     <script>
+        document.addEventListener("DOMContentLoaded",function(){
+
+        
         var chartData = @Html.Raw(Json.Serialize(Model.chartDatas));
+        //var labelsPieJson = Json.Serialize(labelsPie);
+        //var valuesPieJson = Json.Serialize(valuesPie);
         console.log(chartData)
         var labels = chartData.map(data => data.label);
         var values = chartData.map(data => data.value);
+        
 
         new Chart(document.getElementById("myChart"), {
             type: "bar",
@@ -47,7 +60,9 @@
                 }
             },
         });
-        // Export chart function
+    });
+        
+
         function exportChart(value) {
             domtoimage.toBlob(document.getElementById(value), {
                 bgcolor: 'transparent'
@@ -65,6 +80,27 @@
                     window.URL.revokeObjectURL(link.href);
                 });
         }
+
+    </script>
+    <script>
+        var labelsPieJson = @Json.Serialize(labelsPie);
+        var valuesPieJson = @Json.Serialize(valuesPie);
+      
+        new Chart(document.getElementById('PieChart').getContext('2d'), {
+                    type: 'pie',
+                    data: {
+                        labels: labelsPieJson,
+                        datasets: [{
+                            data: valuesPieJson,
+                            backgroundColor: ['#FFCE56', '#36A2EB', '#FF6384'],
+                            hoverBackgroundColor: ['#FFCE56', '#36A2EB', '#FF6384']
+                        }]
+                    },
+                    options: {
+                        aspectRatio: 1,
+                        responsive: true
+                    }
+                });
 
     </script>
 </body>
