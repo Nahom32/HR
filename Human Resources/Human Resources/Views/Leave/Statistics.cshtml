@@ -1,0 +1,71 @@
+﻿@using Human_Resources.Data.ViewModels
+@model StatisticsViewModel
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chart.js Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="chartContainer" @*class="container"*@ style="width: 70%; height: 20%;">
+        <canvas id="myChart"></canvas>
+    </div>
+    <button onclick="exportChart('myChart')">Export Chart</button>
+
+    <script>
+        var chartData = @Html.Raw(Json.Serialize(Model.chartDatas));
+        console.log(chartData)
+        var labels = chartData.map(data => data.label);
+        var values = chartData.map(data => data.value);
+
+        new Chart(document.getElementById("myChart"), {
+            type: "bar",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Leave Frequency Table",
+                    data: values
+                }]
+            },
+            options: {
+                aspectRatio: 1,
+                responsive: true,
+                plugins: {
+                    datalabels: {
+                        anchor: "end",
+                        align: "top",
+                        color: "#333",
+                        font: {
+                            weight: "bold"
+                        },
+                        formatter: function (value, context) {
+                            return value;
+                        }
+                    }
+                }
+            },
+        });
+        // Export chart function
+        function exportChart(value) {
+            domtoimage.toBlob(document.getElementById(value), {
+                bgcolor: 'transparent'
+            })
+                .then(function (blob) {
+                    // Create a temporary link element
+                    var link = document.createElement("a");
+                    link.download = "chart.png";
+                    link.href = window.URL.createObjectURL(blob);
+
+                    // Simulate a click on the link to trigger the download
+                    link.click();
+
+                    // Cleanup
+                    window.URL.revokeObjectURL(link.href);
+                });
+        }
+
+    </script>
+</body>
+</html>

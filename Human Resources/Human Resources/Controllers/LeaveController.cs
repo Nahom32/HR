@@ -255,6 +255,39 @@ namespace Human_Resources.Controllers
 
             }
         }
+        [HttpGet]
+        [Authorize(Roles = "Admin, HRManager")]
+        public async Task<IActionResult> Statistics()
+        {
+            var leaveView = new StatisticsViewModel();
+            var leaveTypes = await _leaveTypeService.GetAll();
+            var leaves = await leaveService.GetAll();
+            var chartDatas = new List<ChartData>();
+            foreach (var leaveType in leaveTypes)
+            {
+                if (!leaveView.BarGraphData.ContainsKey(leaveType.LeaveName))
+                {
+                    leaveView.BarGraphData.Add(leaveType.LeaveName, 0);
+                }
+
+            }
+            foreach(var leave in leaves)
+            {
+                var val = leave.LeaveTypes.LeaveName;
+                leaveView.BarGraphData[val] += 1;  
+            }
+            foreach(var data in  leaveView.BarGraphData)
+            {
+                chartDatas.Add(new ChartData
+                {
+                    Label = data.Key,
+                    Value = data.Value
+                });
+            }
+            leaveView.chartDatas = chartDatas;
+            return View(leaveView);
+        }
+
         
 
     }

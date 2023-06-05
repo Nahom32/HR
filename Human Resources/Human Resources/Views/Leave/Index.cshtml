@@ -27,7 +27,7 @@
                         <a class="btn btn-outline-primary" asp-action="AcceptLeave" asp-route-Id="@leave.Id"><i class="bi bi-pencil-square"></i>Accept</a>|
                         <a class="btn btn-outline-info" href="#" data-bs-toggle="modal" data-bs-target="@("#Leave-" + leave.Id)" data-bs-url="@Url.Action("/Details/"+ leave.Id)"><i class="bi bi-eye"></i>Details</a> |
                         <a class="btn btn-danger text-white" asp-action="RejectedLeave" asp-route-Id="@leave.Id"><i class="bi bi-trash"></i>Reject</a>
-                        @*@await Html.PartialAsync("~/Views/Shared/_LeaveDetails.cshtml", leave)*@
+                        @await Html.PartialAsync("~/Views/Shared/_LeaveDetails.cshtml", leave)
                     </td>
                 }
             </tr>
