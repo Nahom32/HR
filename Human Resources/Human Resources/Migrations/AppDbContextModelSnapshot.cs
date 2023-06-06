@@ -107,6 +107,39 @@ namespace Human_Resources.Migrations
                     b.ToTable("Attendances");
                 });
 
+            modelBuilder.Entity("Human_Resources.Models.Certification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CertificationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CertificationName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CertifyingCompany")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CredentialLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Certifications");
+                });
+
             modelBuilder.Entity("Human_Resources.Models.CheckInTrackList", b =>
                 {
                     b.Property<int>("Id")
@@ -795,6 +828,17 @@ namespace Human_Resources.Migrations
                 });
 
             modelBuilder.Entity("Human_Resources.Models.Attendance", b =>
+                {
+                    b.HasOne("Human_Resources.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("Human_Resources.Models.Certification", b =>
                 {
                     b.HasOne("Human_Resources.Models.Employee", "Employee")
                         .WithMany()

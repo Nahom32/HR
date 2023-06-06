@@ -69,6 +69,7 @@ namespace Human_Resources.Data
         public DbSet<LeaveEncashment> LeaveEncashments { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<CheckInTrackList> CheckInTrackLists { get; set;}
+        public DbSet<Certification> Certifications { get; set; }
 
     }
 }
