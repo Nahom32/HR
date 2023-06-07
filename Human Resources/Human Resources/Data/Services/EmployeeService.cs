@@ -206,6 +206,18 @@ namespace Human_Resources.Data.Services
             List<Employee> employees = await employeesQuery.Skip(request.Start).Take(request.Length).ToListAsync();
             return employees;
         }
+        public List<Position> GetPositionsByDepartment(int departmentId)
+        {
+            var values =  _context.Positions.Where(n => n.DepartmentId == departmentId).ToList();
+            if (values != null)
+            {
+                return values;
+            }
+            else
+            {
+                return new List<Position>();
+            }
+        }
 
     }
 

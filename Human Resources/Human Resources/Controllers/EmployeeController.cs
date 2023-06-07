@@ -546,6 +546,12 @@ namespace Human_Resources.Controllers
             return RedirectToAction("success");
 
         }
+        [HttpGet]
+        public  JsonResult GetPositionsByDepartment(int DepartmentId)
+        {
+            var value = _service.GetPositionsByDepartment(DepartmentId);
+            return Json(value);
+        }
 
 
 

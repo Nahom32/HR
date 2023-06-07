@@ -51,7 +51,7 @@
             </div>
         </div>
     </div>
-        @if((DateTime.Now - Model.LastTime).Hours > 12)
+        @if((DateTime.Now - Model.LastTime).TotalHours > 15)
         {
             <input class="btn btn-dark justify-content-center" type="submit" value="CheckIn" />
         }
