@@ -96,6 +96,12 @@ namespace Human_Resources.Controllers
                 return View(certification);
             }
         }
+        [HttpGet]
+        public async Task<IActionResult>FindCertificates(int EmployeeId)
+        {
+            var certificates = await _service.FindByEmployeeId(EmployeeId);
+            return View(certificates);
+        }
 
     }
 }

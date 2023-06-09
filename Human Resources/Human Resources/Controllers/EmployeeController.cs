@@ -489,7 +489,7 @@ namespace Human_Resources.Controllers
             var searchValue = Request.Form["search[value]"].FirstOrDefault()?.Trim();
             int pageSize = length != null ? Convert.ToInt32(length) : 0;
             int skip = start != null ? Convert.ToInt32(start) : 0;
-            int recordsTotal = 0;
+            int recordsTotal = _context.Employees.Count();
             DataTableRequest dataTable = new DataTableRequest();
             dataTable.SearchValue = searchValue;
             if (Int32.TryParse(start, out int startValue))
@@ -500,10 +500,10 @@ namespace Human_Resources.Controllers
             {
                 dataTable.Length = lengthValue;
             }
-            if (Int32.TryParse(sortColumn, out int sortColumnValue))
-            {
-                dataTable.SortColumn = sortColumnValue;
-            }
+            //if (Int32.TryParse(sortColumn, out int sortColumnValue))
+            //{
+            //    dataTable.SortColumn = sortColumnValue;
+            //}
             dataTable.SortDirection = "asc";
             if (Int32.TryParse(draw, out int drawValue))
             {
