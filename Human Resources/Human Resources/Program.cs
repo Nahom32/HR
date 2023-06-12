@@ -35,6 +35,7 @@ builder.Services.AddScoped<ILeaveTypeService, LeaveTypeService>();
 builder.Services.AddScoped<ILeaveEncashmentService, LeaveEncashmentService>();
 builder.Services.AddScoped<ICheckInTrackListService, CheckInTrackListService>();
 builder.Services.AddScoped<IAttendanceService, AttendanceService>();
+builder.Services.AddScoped<IHolidayService, HolidayService>();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();

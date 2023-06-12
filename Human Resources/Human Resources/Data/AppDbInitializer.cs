@@ -83,14 +83,42 @@ namespace Human_Resources.Data
                 }
             }
         }
+        
         public static async Task CheckTruants(IApplicationBuilder applicationBuilder)
         {
             using(var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
+                int multiplier = 1;
+                bool isHoliday = false;
+
+                if(DateTime.Now.DayOfWeek == DayOfWeek.Monday)
+                {
+                    multiplier = 3;
+                }
                 var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
                 var attendances = await context.Attendances.ToListAsync();
                 var checkins = await context.CheckInTrackLists.ToListAsync();
-                if(DateTime.Now.Hour <= 8)
+                var holidays = await context.Holidays.ToListAsync();
+                foreach(var holiday in holidays)
+                {
+                    int day = DateTime.Now.Day;
+                    int month = DateTime.Now.Month; //checking if the date is 1 from the 31 entries.
+                    if(day == 1)
+                    {
+                        day = 31;
+                        month -= 1;
+                    }
+                    else
+                    {
+                        day -= 1;      
+                    }
+                    if(holiday.Month == month && holiday.Date == day)
+                    {
+                        isHoliday = true;
+                        break;
+                    }
+                }
+                if(DateTime.Now.Hour <= 8 && isHoliday == false)
                 {
                     foreach (var attendance in attendances)
                     {
@@ -108,7 +136,7 @@ namespace Human_Resources.Data
 
                             lis = lis.OrderBy(n => n.CheckInTime).ToList();
                             var diff = DateTime.Now - lis[lis.Count - 1].CheckInTime;
-                            if (diff.Days > 0)
+                            if (diff.TotalHours > 24*multiplier) //Multiplier to check for weekends
                             {
                                 attendance.NoOfAbsentCheck += 1;
                                 context.Attendances.Update(attendance);

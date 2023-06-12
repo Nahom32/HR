@@ -1,0 +1,50 @@
+﻿@model List<Holiday>
+
+@using Human_Resources.Data.ViewModels;
+@{
+    ViewData["title"] = "Available Employees";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Months = new List<string> { "January", "February", "March", "April", "May", "June", "July", 
+    "August", "September", "October", "November", "December" };
+}
+@if (Model.Count > 0)
+{
+    <table class="table bg-white">
+        <tr>
+            <th style="padding-left: 30px;"> Holiday</th>
+            <th style="padding-left: 30px;">Date</th>
+            <th style="padding-left: 30px;">Actions</th>
+        </tr>
+        @foreach (var holiday in Model)
+        {
+            <tr>
+                <td class="align-middle" style="padding-left: 30px;">
+                    @holiday.HolidayName
+                </td>
+                <td class="align-middle" style="padding-left: 30px;">
+                    @Months[holiday.Month-1] @holiday.Date, @DateTime.Now.Year
+                </td>
+
+                <td class="align-middle" style="padding-left: 30px;">
+                    <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="@("#EditHoliday-" + holiday.Id)" data-bs-url="@Url.Action("/UpdateHoliday/"+ holiday.Id)"><i class="bi bi-pencil-square"></i>Edit</a> |
+                    <a href="#" class="btn btn-danger text-white" data-bs-toggle="modal" data-bs-target="@("#DeleteHoliday-" + holiday.Id)" data-bs-url="@Url.Action("/DeleteHoliday/"+ holiday.Id)"><i class="bi bi-trash"></i>Delete</a>
+                    @await Html.PartialAsync("~/Views/Shared/_EditHoliday.cshtml", holiday)
+                    @await Html.PartialAsync("~/Views/Shared/_DeleteHoliday.cshtml", holiday)
+                </td>
+            </tr>
+        }
+        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreateType">Create</a>
+    </table>
+}
+else
+{
+    <h4 class="text-danger align-content-center">No Holidays are created till now</h4>
+    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreateType">Create</a>
+}
+@await Html.PartialAsync("~/Views/Shared/_AddHoliday.cshtml",new Holiday())
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}
