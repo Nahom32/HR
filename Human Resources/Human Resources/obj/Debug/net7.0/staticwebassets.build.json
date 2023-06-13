@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Eq1ncnjJSyt4P65bForZAJc/aI9i98YQelm7V8bVF08=",
+  "Hash": "Huzxey2iwvFuVNA3zGtfrRshMmG0X2M2QNee6PxxAEw=",
   "Source": "Human Resources",
   "BasePath": "_content/Human Resources",
   "Mode": "Default",
@@ -848,6 +848,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\style.min.css"
+    },
+    {
+      "Identity": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\css\\styles_custom.css",
+      "SourceId": "Human Resources",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\",
+      "BasePath": "_content/Human Resources",
+      "RelativePath": "css/styles_custom.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\styles_custom.css"
     },
     {
       "Identity": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\favicon.ico",

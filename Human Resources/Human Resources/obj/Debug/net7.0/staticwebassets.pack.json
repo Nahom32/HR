@@ -193,6 +193,10 @@
       "PackagePath": "staticwebassets\\css\\style.min.css"
     },
     {
+      "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\css\\styles_custom.css",
+      "PackagePath": "staticwebassets\\css\\styles_custom.css"
+    },
+    {
       "Id": "C:\\Users\\hp\\Desktop\\HR\\Human Resources\\Human Resources\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },

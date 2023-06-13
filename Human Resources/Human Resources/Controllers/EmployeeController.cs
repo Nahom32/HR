@@ -29,11 +29,12 @@ namespace Human_Resources.Controllers
         private readonly IAppraisalService _appraisal;
         private readonly ILeaveEncashmentService _encashment;
         private readonly IAttendanceService _attendanceService;
+        private readonly ICheckInTrackListService _checkInTrackListService;
         public EmployeeController(IEmployeeService service, ILogger<EmployeeController> logger,
             UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
             IPositionService posService, AppDbContext context, IEmailService email, 
             IAppraisalService appraisal, ILeaveEncashmentService encashmentService, 
-            IAttendanceService attendanceService)
+            IAttendanceService attendanceService, ICheckInTrackListService checkInTrackListService)
         {
             _service = service;
             _logger = logger;
@@ -45,6 +46,7 @@ namespace Human_Resources.Controllers
             _appraisal = appraisal;
             _encashment = encashmentService;
             _attendanceService = attendanceService;
+            _checkInTrackListService = checkInTrackListService;
         }
         //[HttpGet]
         //public async Task<IActionResult> Index(int? page = 1)
@@ -186,6 +188,7 @@ namespace Human_Resources.Controllers
                 {
                     EmployeeId = employeeFromEmail.Id
                 });
+                
                 return RedirectToAction("Index");
             }
             else

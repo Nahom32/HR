@@ -97,8 +97,6 @@ AppDbInitializer.SeedRole(app).Wait();
 AppDbInitializer.SeedEncashment(app).Wait();
 AppDbInitializer.CheckTruants(app).Wait();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapHub<MessageHub>("/messagehub");
-});
+app.MapHub<MessageHub>("/messageHub");
+
 app.Run();

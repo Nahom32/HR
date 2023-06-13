@@ -1,0 +1,22 @@
+﻿.dataTables_filter {
+    position: relative; /* Set the position to relative */
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.dataTables_filter input {
+    width: 200px;
+    margin-left: 10px;
+}
+
+.dataTables_wrapper {
+    position: relative; /* Set the position to relative */
+}
+
+.dataTables_filter {
+    position: absolute; /* Set the position to absolute */
+    top: 10px; /* Adjust the top position */
+    right: 10px; /* Adjust the right position */
+    transform: translateX(50%); /* Optional: Center the search bar horizontally */
+}
+
