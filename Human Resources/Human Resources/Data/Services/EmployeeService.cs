@@ -204,6 +204,7 @@ namespace Human_Resources.Data.Services
 
             // Apply pagination
             List<Employee> employees = await employeesQuery.Skip(request.Start).Take(request.Length).ToListAsync();
+            //List<Employee> employees = await employeesQuery.Skip(request.Start).ToListAsync();
             return employees;
         }
         public List<Position> GetPositionsByDepartment(int departmentId)

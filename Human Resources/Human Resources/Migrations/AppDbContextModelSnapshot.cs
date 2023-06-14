@@ -164,6 +164,27 @@ namespace Human_Resources.Migrations
                     b.ToTable("CheckInTrackLists");
                 });
 
+            modelBuilder.Entity("Human_Resources.Models.CheckOutTrackList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CheckInTrackListId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CheckOutTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CheckInTrackListId");
+
+                    b.ToTable("CheckOutTrackLists");
+                });
+
             modelBuilder.Entity("Human_Resources.Models.ConfirmedLeave", b =>
                 {
                     b.Property<int>("Id")
@@ -881,6 +902,17 @@ namespace Human_Resources.Migrations
                         .IsRequired();
 
                     b.Navigation("Attendance");
+                });
+
+            modelBuilder.Entity("Human_Resources.Models.CheckOutTrackList", b =>
+                {
+                    b.HasOne("Human_Resources.Models.CheckInTrackList", "CheckInTrackList")
+                        .WithMany()
+                        .HasForeignKey("CheckInTrackListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CheckInTrackList");
                 });
 
             modelBuilder.Entity("Human_Resources.Models.ConfirmedLeave", b =>

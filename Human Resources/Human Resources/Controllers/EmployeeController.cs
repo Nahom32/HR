@@ -492,7 +492,7 @@ namespace Human_Resources.Controllers
             var searchValue = Request.Form["search[value]"].FirstOrDefault()?.Trim();
             int pageSize = length != null ? Convert.ToInt32(length) : 0;
             int skip = start != null ? Convert.ToInt32(start) : 0;
-            int recordsTotal = _context.Employees.Count();
+            int recordsTotal = 0;
             DataTableRequest dataTable = new DataTableRequest();
             dataTable.SearchValue = searchValue;
             if (Int32.TryParse(start, out int startValue))
@@ -514,8 +514,10 @@ namespace Human_Resources.Controllers
             }
 
             var result = await _service.SearchEmployees(dataTable);
+            recordsTotal = result.Count();
             
-            return Json( new { draw, recordsFiltered = result.Count, recordsTotal = recordsTotal, data = result });
+            return Json( new { draw, recordsFiltered = result.Count, recordsTotal = recordsTotal, data = result,
+                sortColumn = sortColumn, sortColumnDirection = sortColumnDirection});
         }
         [HttpGet]
         [AllowAnonymous]

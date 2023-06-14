@@ -71,6 +71,7 @@ namespace Human_Resources.Data
         public DbSet<CheckInTrackList> CheckInTrackLists { get; set;}
         public DbSet<Certification> Certifications { get; set; }
         public DbSet<Holiday> Holidays { get; set; }
+        public DbSet<CheckOutTrackList> CheckOutTrackLists { get; set; }
 
     }
 }
