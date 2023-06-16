@@ -41,6 +41,7 @@ namespace Human_Resources.Controllers
             }
         }
         [HttpGet]
+        [Authorize(Roles ="User")]
         public async Task<IActionResult> AddCertification()
         {
             var User = _contextAccessor.HttpContext.User;
@@ -97,9 +98,15 @@ namespace Human_Resources.Controllers
             }
         }
         [HttpGet]
-        public async Task<IActionResult>FindCertificates(int EmployeeId)
+        public async Task<IActionResult>FindCertificates()
         {
-            var certificates = await _service.FindByEmployeeId(EmployeeId);
+            var User = _contextAccessor.HttpContext.User;
+            var AppUser = await _userManager.GetUserAsync(User);
+            var certificates = await _service.FindByEmployeeId(AppUser.EmployeeId);
+            if(certificates == null)
+            {
+                return View(new List<Certification>());
+            }
             return View(certificates);
         }
 

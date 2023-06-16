@@ -6,11 +6,20 @@
     <table>
         <thead>
             <tr>
-                <th></th>
+                <th>Certification</th>
+            </tr>
+            <tr>
+                <th>Options</th>
             </tr>
         </thead>
     @foreach(var cert in Model)
     {
+        <tr>
+            <td>@cert.CertificationName+(@cert.CertifyingCompany)</td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
         
     }
     </table>
