@@ -263,5 +263,18 @@ namespace Human_Resources.Controllers
                 return View("The object doesn't exist");
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> PromotionDetails(int promotionId)
+        {
+            var promotion = await _service.GetById(promotionId);
+            if (promotion != null)
+            {
+                return PartialView("~/Views/Shared/_PromotionDetails",promotion);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }

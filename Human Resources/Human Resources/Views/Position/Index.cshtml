@@ -22,7 +22,7 @@
                 </td>
                 <td class="align-middle" style="padding-left: 30px;">
                     <a class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="@("#EditPosition-" + position.Id)" data-bs-url="@Url.Action("/EditPosition/"+ position.Id)"><i class="bi bi-pencil-square"></i>Edit</a> |
-                    <a class="btn btn-outline-info"><i class="bi bi-eye"></i>Details</a> |
+                    @*<a class="btn btn-outline-info"><i class="bi bi-eye"></i>Details</a> |*@
                     <a class="btn btn-danger text-white" data-bs-toggle="modal" data-bs-target="@("#DeletePosition-" + position.Id)" data-bs-url="@Url.Action("/DeletePosition/"+ position.Id)"><i class="bi bi-trash"></i>Delete</a>
                 </td>
             </tr>

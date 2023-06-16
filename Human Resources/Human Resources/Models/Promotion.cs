@@ -25,6 +25,7 @@ namespace Human_Resources.Models
         public int EmployeeId { get; set; }
         [ForeignKey("EmployeeId")]
         public Employee? Employee { get; set; }
+        public DateTime PromotedAt { get; set; } = DateTime.Now;
 
     }
 }

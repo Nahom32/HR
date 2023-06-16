@@ -59,12 +59,19 @@
         {
             <div id="chartContainer" class="container d-flex justify-content-center align-items-center" style="width: 400px; height: 400px;">
                 <canvas id="pieChart"></canvas>
+
             </div>
         }
 
     
 </div>
 </form>
+@if((DateTime.Now - Model.LastTime).TotalHours < 15)
+{
+    <form asp-controller="Attendance" asp-action="CheckOutPost">
+        <input class="btn btn-dark justify-content-center" type="submit" value="CheckOut" />
+    </form>
+}
 @*<div id="chartContainer" class="container d-flex justify-content-center align-items-center" style="width: 400px; height: 400px;">
     <canvas id="pieChart" ></canvas>
 </div>*@

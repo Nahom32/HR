@@ -104,5 +104,17 @@ namespace Human_Resources.Data.Services
             }
             return departments;
         }
+        public async Task<List<Employee>> GetEmployeeByPosition(int positionId)
+        {
+            var employeeList = await _context.Employees.Where(n => n.PositionId == positionId).ToListAsync();
+            if(employeeList == null)
+            {
+                return new List<Employee>();
+            }
+            else
+            {
+                return employeeList;
+            }
+        }
     }
 }

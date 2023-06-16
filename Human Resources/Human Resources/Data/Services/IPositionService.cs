@@ -12,5 +12,6 @@ namespace Human_Resources.Data.Services
         public Task DeletePosition(PositionViewModel position);
         public Task<PositiondropdownViewModel> GetPositiondropdowns();
         public Task<DepartmentdropdownViewModel> GetDepartmentdropdowns();
+        public Task<List<Employee>> GetEmployeeByPosition(int positionId);
     }
 }

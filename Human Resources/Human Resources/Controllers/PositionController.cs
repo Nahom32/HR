@@ -11,12 +11,15 @@ namespace Human_Resources.Controllers
     public class PositionController : Controller
     {
         private readonly IPositionService _service;
+        private readonly IEmployeeService _employeeService;
         private readonly ILogger<PositionController> _logger;
-        public PositionController(IPositionService service, ILogger<PositionController> logger)
+        public PositionController(IPositionService service, 
+            ILogger<PositionController> logger,
+            IEmployeeService employeeService)
         {
             _service = service;
             _logger = logger;
-
+           _employeeService = employeeService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -149,6 +152,7 @@ namespace Human_Resources.Controllers
                     PositionSalary = position.PositionSalary,
                     PositionId = position.PositionId
                 };
+
                 await _service.DeletePosition(positionVm);
                 return RedirectToAction("Index");
             }
@@ -167,5 +171,6 @@ namespace Human_Resources.Controllers
                 return View(position);
             }
         }
+
     }
 }

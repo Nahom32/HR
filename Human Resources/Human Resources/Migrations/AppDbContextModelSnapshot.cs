@@ -532,6 +532,9 @@ namespace Human_Resources.Migrations
                     b.Property<int>("PositionChange")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("PromotedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Reason")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
