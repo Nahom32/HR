@@ -25,10 +25,10 @@ namespace Human_Resources.Models
         [Required(ErrorMessage ="Sex is Required")]
         public Sex Sex { get; set; }
         public EducationalLevel EducationalLevel { get; set; }
-        public int DepartmentId { get; set; }
-        [ForeignKey("DepartmentId")]
+        //public int DepartmentId { get; set; }
+        //[ForeignKey("DepartmentId")]
 
-        public Department Department { get; set; }
+        //public Department Department { get; set; }
         public int PositionId { get; set; }
         [ForeignKey("PositionId")]
         public Position Position { get; set; }

@@ -116,5 +116,10 @@ namespace Human_Resources.Data.Services
                 return employeeList;
             }
         }
+        public async Task<Position> GetPositionByName(string name)
+        {
+            var position = await _context.Positions.FirstOrDefaultAsync(n => n.PositionName ==  name);
+            return position;
+        }
     }
 }

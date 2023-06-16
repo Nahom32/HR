@@ -267,9 +267,6 @@ namespace Human_Resources.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
-
                     b.Property<int>("EducationalFieldId")
                         .HasColumnType("int");
 
@@ -304,8 +301,6 @@ namespace Human_Resources.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
 
                     b.HasIndex("EducationalFieldId");
 
@@ -939,12 +934,6 @@ namespace Human_Resources.Migrations
 
             modelBuilder.Entity("Human_Resources.Models.Employee", b =>
                 {
-                    b.HasOne("Human_Resources.Models.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Human_Resources.Models.EducationalField", "EducationalField")
                         .WithMany()
                         .HasForeignKey("EducationalFieldId")
@@ -956,8 +945,6 @@ namespace Human_Resources.Migrations
                         .HasForeignKey("PositionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("Department");
 
                     b.Navigation("EducationalField");
 

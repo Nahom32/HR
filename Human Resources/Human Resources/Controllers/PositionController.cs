@@ -142,6 +142,7 @@ namespace Human_Resources.Controllers
         public async Task<IActionResult> DeletePositionConfirmed(int id)
         {
             var position = await _service.GetById(id);
+            var unassigned = await _service.GetPositionByName("Unassigned");
             if (position != null)
             {
                 PositionViewModel positionVm = new PositionViewModel()
@@ -152,7 +153,35 @@ namespace Human_Resources.Controllers
                     PositionSalary = position.PositionSalary,
                     PositionId = position.PositionId
                 };
+                var employees = await _service.GetEmployeeByPosition(id);
+                if (employees != null)
+                {
+                    foreach (var employee in employees)
+                    {
+                        using (var stream = new FileStream("wwwroot/images/" + employee.PhotoURL, FileMode.Open))
+                        {
+                            // Create a new IFormFile object using the stream
+                            var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(employee.PhotoURL));
 
+                            // Use the file object as needed
+                            // ...
+                            var EmployeeVm = new EmployeeViewModel()
+                            {
+                                Id = employee.Id,
+                                //DepartmentId = employee.DepartmentId,
+                                PositionId = unassigned.Id,
+                                Sex = employee.Sex,
+                                Name = employee.Name,
+                                PhotoURL = file,
+                                EducationalFieldId = employee.EducationalFieldId,
+                                Email = employee.Email,
+                                EducationalLevel = employee.EducationalLevel,
+                                Roles = employee.Roles
+                            };
+                           await _employeeService.UpdateEmployee(EmployeeVm);
+                        }
+                    }
+                }
                 await _service.DeletePosition(positionVm);
                 return RedirectToAction("Index");
             }

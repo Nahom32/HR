@@ -105,7 +105,7 @@ namespace Human_Resources.Controllers
             var result = new List<Employee>();
             foreach (var employee in all)
             {
-                if (id == employee.DepartmentId)
+                if (id == employee.Position.DepartmentId)
                 {
                     result.Add(employee);
                 }

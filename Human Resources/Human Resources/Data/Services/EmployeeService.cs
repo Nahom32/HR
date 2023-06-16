@@ -23,7 +23,7 @@ namespace Human_Resources.Data.Services
                 PhotoURL = employeeViewModel.PhotoURL.FileName,
                 Sex = employeeViewModel.Sex,
                 MaritalStatus = employeeViewModel.MaritalStatus,
-                DepartmentId = employeeViewModel.DepartmentId,
+                //DepartmentId = employeeViewModel.DepartmentId,
                 PositionId = employeeViewModel.PositionId,
                 EducationalLevel = employeeViewModel.EducationalLevel,
                 EducationalFieldId = employeeViewModel.EducationalFieldId,
@@ -50,7 +50,7 @@ namespace Human_Resources.Data.Services
 
         public async Task<List<Employee>> GetAll()
         {
-            var retLis = await _context.Employees.Include(n => n.Department)
+            var retLis = await _context.Employees
                 .Include(n => n.Position)
                 .Include(n => n.EducationalField)
                 .ToListAsync();
@@ -60,8 +60,8 @@ namespace Human_Resources.Data.Services
         public async Task<Employee> GetById(int id)
         {
             var retval = await _context.Employees
-                .Include(e => e.Department)
                 .Include(e => e.Position)
+                .Include(e => e.Position.Department)
                 .Include(e => e.EducationalField)
                 .FirstOrDefaultAsync(n => n.Id == id);
             if (retval != null)
@@ -82,7 +82,7 @@ namespace Human_Resources.Data.Services
                 DbEmployee.Name = employee.Name;
                 DbEmployee.Email = employee.Email;
                 DbEmployee.PhotoURL = employee.PhotoURL.FileName;
-                DbEmployee.DepartmentId = employee.DepartmentId;
+                //DbEmployee.DepartmentId = employee.DepartmentId;
                 DbEmployee.MaritalStatus = employee.MaritalStatus;
                 DbEmployee.Sex = employee.Sex;
                 DbEmployee.EducationalFieldId = employee.EducationalFieldId;
@@ -157,7 +157,7 @@ namespace Human_Resources.Data.Services
         public async Task<List<Employee>> SearchEmployees(DataTableRequest request)
         {
             IQueryable<Employee> employeesQuery = _context.Employees
-                .Include(e => e.Department)
+                //.Include(e => e.Department)
                 .Include(e => e.Position)
                 .Include(e => e.EducationalField);
 
@@ -167,7 +167,7 @@ namespace Human_Resources.Data.Services
                 employeesQuery = employeesQuery.Where(e =>
                     e.Name.ToLower().Contains(request.SearchValue.ToLower()) ||
                     e.Email.ToLower().Contains(request.SearchValue.ToLower()) ||
-                    e.Department.DepartmentName.ToLower().Contains(request.SearchValue.ToLower()) ||
+                    //e.Department.DepartmentName.ToLower().Contains(request.SearchValue.ToLower()) ||
                     e.Position.PositionName.ToLower().Contains(request.SearchValue.ToLower()) ||
                     e.EducationalField.Name.ToLower().Contains(request.SearchValue.ToLower()));
             }
@@ -185,11 +185,11 @@ namespace Human_Resources.Data.Services
                         employeesQuery.OrderBy(e => e.Email) :
                         employeesQuery.OrderByDescending(e => e.Email));
                     break;
-                case 2: // Sort by Department
-                    employeesQuery = (request.SortDirection == "asc" ?
-                        employeesQuery.OrderBy(e => e.Department.DepartmentName) :
-                        employeesQuery.OrderByDescending(e => e.Department.DepartmentName));
-                    break;
+                //case 2: // Sort by Department
+                //    employeesQuery = (request.SortDirection == "asc" ?
+                //        employeesQuery.OrderBy(e => e.Department.DepartmentName) :
+                //        employeesQuery.OrderByDescending(e => e.Department.DepartmentName));
+                //    break;
                 case 3: // Sort by Position
                     employeesQuery = (request.SortDirection == "asc" ?
                         employeesQuery.OrderBy(e => e.Position.PositionName) :

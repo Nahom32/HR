@@ -13,5 +13,6 @@ namespace Human_Resources.Data.Services
         public Task<PositiondropdownViewModel> GetPositiondropdowns();
         public Task<DepartmentdropdownViewModel> GetDepartmentdropdowns();
         public Task<List<Employee>> GetEmployeeByPosition(int positionId);
+        public Task<Position> GetPositionByName(string name);
     }
 }

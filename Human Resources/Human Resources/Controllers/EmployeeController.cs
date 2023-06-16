@@ -213,7 +213,7 @@ namespace Human_Resources.Controllers
                     var EmployeeVm = new EmployeeViewModel()
                     {
                         Id = employee.Id,
-                        DepartmentId = employee.DepartmentId,
+                        //DepartmentId = employee.DepartmentId,
                         PositionId = employee.PositionId,
                         Sex = employee.Sex,
                         Name = employee.Name,
@@ -283,7 +283,7 @@ namespace Human_Resources.Controllers
                     var EmployeeVm = new EmployeeViewModel()
                     {
                         Id = employee.Id,
-                        DepartmentId = employee.DepartmentId,
+                        //DepartmentId = employee.DepartmentId,
                         PositionId = employee.PositionId,
                         Sex = employee.Sex,
                         Name = employee.Name,
@@ -323,7 +323,7 @@ namespace Human_Resources.Controllers
                 var EmployeeVm = new EmployeeViewModel()
                 {
                     Id = employee.Id,
-                    DepartmentId = employee.DepartmentId,
+                    //DepartmentId = employee.DepartmentId,
                     PositionId = employee.PositionId,
                     Sex = employee.Sex,
                     Name = employee.Name,
@@ -391,7 +391,7 @@ namespace Human_Resources.Controllers
                     var EmployeeVm = new EmployeeViewModel()
                     {
                         Id = employee.Id,
-                        DepartmentId = employee.DepartmentId,
+                        //DepartmentId = employee.DepartmentId,
                         PositionId = employee.PositionId,
                         Sex = employee.Sex,
                         Name = employee.Name,
@@ -434,7 +434,7 @@ namespace Human_Resources.Controllers
                     var empvm = new EmployeeViewModel()
                     {
                         Id = employee.Id,
-                        DepartmentId = employee.DepartmentId,
+                       // DepartmentId = employee.DepartmentId,
                         PositionId = employee.PositionId,
                         Sex = employee.Sex,
                         Name = employee.Name,
