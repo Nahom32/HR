@@ -1,4 +1,5 @@
-﻿using Human_Resources.Data;
+﻿using ClosedXML.Excel;
+using Human_Resources.Data;
 using Human_Resources.Data.Helpers;
 using Human_Resources.Data.Services;
 using Human_Resources.Data.Static;
@@ -30,11 +31,13 @@ namespace Human_Resources.Controllers
         private readonly ILeaveEncashmentService _encashment;
         private readonly IAttendanceService _attendanceService;
         private readonly ICheckInTrackListService _checkInTrackListService;
+        private readonly IRewardService _rewardService;
         public EmployeeController(IEmployeeService service, ILogger<EmployeeController> logger,
             UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
             IPositionService posService, AppDbContext context, IEmailService email, 
             IAppraisalService appraisal, ILeaveEncashmentService encashmentService, 
-            IAttendanceService attendanceService, ICheckInTrackListService checkInTrackListService)
+            IAttendanceService attendanceService, ICheckInTrackListService checkInTrackListService,
+            IRewardService rewardService)
         {
             _service = service;
             _logger = logger;
@@ -47,6 +50,7 @@ namespace Human_Resources.Controllers
             _encashment = encashmentService;
             _attendanceService = attendanceService;
             _checkInTrackListService = checkInTrackListService;
+            _rewardService = rewardService;
         }
         //[HttpGet]
         //public async Task<IActionResult> Index(int? page = 1)
@@ -556,6 +560,47 @@ namespace Human_Resources.Controllers
         {
             var value = _service.GetPositionsByDepartment(DepartmentId);
             return Json(value);
+        }
+        public async Task<IActionResult> ExcelExport()
+        {
+            var employees = await _service.FilterEmployeeState();
+
+            using(var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("employees");
+                var currentRow = 1;
+                worksheet.Cell(currentRow, 1).Value = "Name";
+                worksheet.Cell(currentRow, 2).Value = "Department";
+                worksheet.Cell(currentRow, 3).Value = "Position";
+                worksheet.Cell(currentRow, 4).Value = "Initial Salary";
+                worksheet.Cell(currentRow, 5).Value = "Final Salary(birr)";
+                foreach(var employee in employees)
+                {
+                    currentRow++;
+                    worksheet.Cell(currentRow, 1).Value = employee.Name;
+                    worksheet.Cell(currentRow, 2).Value = employee.Position.Department.DepartmentName;
+                    worksheet.Cell(currentRow, 3).Value = employee.Position.PositionName;
+                    worksheet.Cell(currentRow, 4).Value = employee.Position.PositionSalary;
+                    var attendanceStatistics = await _attendanceService.GetByEmployeeId(employee.Id);
+                    worksheet.Cell(currentRow, 5).Value = employee.Position.PositionSalary - (0.01 * attendanceStatistics.NoOfLateCheck * employee.Position.PositionSalary) - (0.05 * attendanceStatistics.NoOfAbsentCheck * employee.Position.PositionSalary);
+
+                }
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var content = stream.ToArray();
+
+                    return File(
+                        content,
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        "employees.xlsx");
+                }
+
+
+
+            }
+            
+
         }
 
 

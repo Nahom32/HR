@@ -219,6 +219,15 @@ namespace Human_Resources.Data.Services
                 return new List<Position>();
             }
         }
+        public async Task<List<Employee>> FilterEmployeeState()
+        {
+            var employees = await _context.Employees
+                                          .Where(n => n.State == Enum.State.Active)
+                                          .Include(n=>n.Position)
+                                          .Include(n => n.Position.Department)
+                                          .ToListAsync();
+            return employees;
+        }
 
     }
 

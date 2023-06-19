@@ -20,6 +20,7 @@ namespace Human_Resources.Data.Services
         public Task<List<Employee>> PaginatedEmployee(int val, int len);
         public Task<List<Employee>> SearchEmployees(DataTableRequest request);
         public List<Position> GetPositionsByDepartment(int departmentId);
+        public Task<List<Employee>> FilterEmployeeState();
 
     }
 }

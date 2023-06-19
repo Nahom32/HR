@@ -298,7 +298,7 @@ namespace Human_Resources.Controllers
             leaveView.chartDatas = chartDatas;
             return View(leaveView);
         }
-
+        
         
 
     }

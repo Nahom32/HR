@@ -422,3 +422,10 @@ C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\BouncyCa
 C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\MailKit.dll
 C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\MimeKit.dll
 C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\NETCore.MailKit.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\ClosedXML.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\DocumentFormat.OpenXml.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\ExcelNumberFormat.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\Irony.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\SixLabors.Fonts.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\System.IO.Packaging.dll
+C:\Users\hp\Desktop\HR\Human Resources\Human Resources\bin\Debug\net7.0\XLParser.dll
