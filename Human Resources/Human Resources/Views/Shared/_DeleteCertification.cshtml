@@ -1,5 +1,49 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Certification
+
 @{
+    ViewData["Title"] = "Delete Certification";
 }
+
+<div class="modal fade" id="DeleteCert-@Model.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">@ViewData["Title"]</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="create-cert-form" method="post" asp-controller="Certification" asp-action="DeleteCertification">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input asp-for="EmployeeId" hidden />
+                        <label asp-for="CertifyingCompany" class="form-label"></label>
+                        <input asp-for="CertifyingCompany" class="form-control" data-bv-notempty="true" data-bv-notempty-message="The certification company field is required field is required" />
+                        <span asp-validation-for="CertifyingCompany" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="CertificationName" class="form-label"></label>
+                        <input asp-for="CertificationName" class="form-control form-control-lg" data-bv-notempty="true" data-bv-notempty-message="The names field is required">
+                        <span asp-validation-for="CertificationName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="CredentialLink" class="form-label"></label>
+                        <input asp-for="CredentialLink" class="form-control form-control-lg" data-bv-notempty="true" data-bv-notempty-message="The The certification field is required field is required">
+                        <span asp-validation-for="CredentialLink" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="CertificationDate" class="form-label"></label>
+                        <input asp-for="CertificationDate" type="datetime" class="form-control form-control-lg" data-bv-notempty="true" data-bv-notempty-message="The certification field is required">
+                        <span asp-validation-for="CertificationDate" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <a asp-action="Index" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                    <input type="submit" class="btn btn-primary" value="Create">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

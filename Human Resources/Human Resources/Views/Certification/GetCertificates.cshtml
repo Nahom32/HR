@@ -1,24 +1,29 @@
-﻿@model List<Certification>
+﻿@using Human_Resources.Data.ViewModels
+@model CertificationListViewModel
 @using Human_Resources.Models;
 
-@if(Model !=null && Model.Count > 0)
+@if(Model !=null && Model.Certifications.Count > 0)
 {
-    <table>
+    <table class="table bg-white">
         <thead>
             <tr>
                 <th>Certification</th>
-            </tr>
-            <tr>
-                <th>Options</th>
+               @* <th>Options</th>*@
             </tr>
         </thead>
-    @foreach(var cert in Model)
+    @foreach(var cert in Model.Certifications)
     {
         <tr>
-            <td>@cert.CertificationName+(@cert.CertifyingCompany)</td>
+            <td>@cert.CertificationName (@cert.CertifyingCompany)</td>
         </tr>
         <tr>
-            <td></td>
+            <td>
+                    <a class="btn btn-primary" href="@cert.CredentialLink">View Credential</a>
+                    <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="@("#EditCert-" + cert.Id)" data-bs-url="@Url.Action("/EditCertification/"+ cert.Id)"><i class="bi bi-pencil-square"></i>Edit</a> |
+                    <a href="#" class="btn btn-danger text-white" data-bs-toggle="modal" data-bs-target="@("#DeleteCert-" + cert.Id)" data-bs-url="@Url.Action("/DeleteCertification/"+ cert.Id)"><i class="bi bi-trash"></i>Delete</a>
+                    @await Html.PartialAsync("~/Views/Shared/_EditCertification.cshtml", cert)
+                    @await Html.PartialAsync("~/Views/Shared/_DeleteCertification.cshtml", cert)
+            </td>
         </tr>
         
     }
@@ -29,4 +34,13 @@ else
     <h3 class="text text-danger">You donot have any certificates</h3>
     
 }
-<a class="btn btn-info" asp-controller="Certification" asp-action="AddCertification">Add Certificate</a>
+<a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreateType">Add Certificate</a>
+@await Html.PartialAsync("~/Views/Shared/_AddCertification.cshtml",new Certification(){
+    EmployeeId = Model.EmployeeId
+})
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -37,6 +37,7 @@ builder.Services.AddScoped<ICheckInTrackListService, CheckInTrackListService>();
 builder.Services.AddScoped<IAttendanceService, AttendanceService>();
 builder.Services.AddScoped<IHolidayService, HolidayService>();
 builder.Services.AddScoped<ICheckOutTrackListService, CheckOutTrackListService>();
+builder.Services.AddScoped<ICertificationService, CertificationService>();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();

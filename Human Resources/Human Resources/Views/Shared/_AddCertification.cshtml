@@ -16,7 +16,7 @@
             <form id="create-cert-form" method="post" asp-controller="Certification" asp-action="AddCertification">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input asp-for="EmployeeId" hidden />
+                        <input asp-for="EmployeeId" hidden/>
                         <label asp-for="CertifyingCompany" class="form-label"></label>
                         <input asp-for="CertifyingCompany" class="form-control" data-bv-notempty="true" data-bv-notempty-message="The certification company field is required field is required" />
                         <span asp-validation-for="CertifyingCompany" class="text-danger"></span>
@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label asp-for="CertificationDate" class="form-label"></label>
-                        <input asp-for="CertificationDate" type="datetime" class="form-control form-control-lg" data-bv-notempty="true" data-bv-notempty-message="The certification field is required">
+                        <input asp-for="CertificationDate" type="date" class="form-control form-control-lg" data-bv-notempty="true" data-bv-notempty-message="The certification field is required">
                         <span asp-validation-for="CertificationDate" class="text-danger"></span>
                     </div>
 

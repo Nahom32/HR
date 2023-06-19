@@ -44,6 +44,7 @@ namespace Human_Resources.Data.Services
         {
             var tabs = await _context.Leaves
                                      .Include(n=>n.Employee)
+                                     .Include(n=>n.LeaveTypes)
                                      .ToListAsync();
             return tabs;
         }

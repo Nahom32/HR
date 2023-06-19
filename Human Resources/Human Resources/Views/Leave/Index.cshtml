@@ -30,9 +30,21 @@
                         @await Html.PartialAsync("~/Views/Shared/_LeaveDetails.cshtml", leave)
                     </td>
                 }
+                else
+                {
+
+                    <td class="align-middle" style="padding-left: 30px;">
+                    
+                        <a class="btn btn-outline-info" href="#" data-bs-toggle="modal" data-bs-target="@("#Leave-" + leave.Id)" data-bs-url="@Url.Action("/Details/"+ leave.Id)"><i class="bi bi-eye"></i>Details</a>
+                        @await Html.PartialAsync("~/Views/Shared/_LeaveDetails.cshtml", leave)
+                    </td>
+                }
             </tr>
         }
-        <a class="btn btn-primary" asp-action="RequestLeave">Request a Leave</a>
+        @if (!User.IsInRole("Admin"))
+        {
+            <a class="btn btn-primary" asp-action="RequestLeave">Request a Leave</a>
+        }
     </table>
 }
 else

@@ -13,13 +13,22 @@
                 </button>
             </div>
                 <div class="modal-body">
-                    @Model.Employee.Name
-                    @Model.LeaveTypes.LeaveName
-                    @Model.AskedAt
-                    @Model.Remark
+                    <input asp-for="Id" hidden />
+                    <div class="form-group">
+                       Employee Name:  @Model.Employee.Name
+                    </div>
+                    <div class="form-group">
+                        Leave Type: @Model.LeaveTypes.LeaveName
+                    </div>
+                    <div class="form-group">
+                        Asked at: @Model.AskedAt
+                    </div>
+                    <div class="form-group">
+                        Remark: @Model.Remark
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <a @*asp-action="Index"*@ class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                    <a  class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
                     
                 </div>
           

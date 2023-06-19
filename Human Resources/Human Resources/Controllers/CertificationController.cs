@@ -1,4 +1,5 @@
 ﻿using Human_Resources.Data.Services;
+using Human_Resources.Data.ViewModels;
 using Human_Resources.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -37,7 +38,10 @@ namespace Human_Resources.Controllers
             else
             {
                 var certificates = await _service.FindByEmployeeId(FindUser.EmployeeId);
-                return View(certificates);
+                var certContainer = new CertificationListViewModel();
+                certContainer.Certifications = certificates;
+                certContainer.EmployeeId = FindUser.EmployeeId;
+                return View(certContainer);
             }
         }
         [HttpGet]
@@ -50,7 +54,7 @@ namespace Human_Resources.Controllers
             {
                 Certification certificate = new Certification();
                 certificate.EmployeeId = FindUser.EmployeeId;
-                return View(certificate);
+                return PartialView("~/Views/Shared/_AddCertification",certificate);
             }
             else
             {
@@ -61,14 +65,21 @@ namespace Human_Resources.Controllers
         [HttpPost]
         public async Task<IActionResult> AddCertification(Certification certification)
         {
-            if (ModelState.IsValid)
+            var User = _contextAccessor.HttpContext.User;
+            var FindUser = await _userManager.GetUserAsync(User);
+            if (FindUser != null)
+            {
+                
+                certification.EmployeeId = FindUser.EmployeeId;
+            }
+                if (ModelState.IsValid)
             {
                 await _service.AddCertification(certification);
                 return RedirectToAction("GetCertificates");
             }
             else
             {
-                return View(certification);
+                return PartialView("~/Views/Shared/_AddCertification.cshtml", certification);
             }
         }
         [HttpGet]
@@ -77,7 +88,7 @@ namespace Human_Resources.Controllers
             var data = await _service.GetById(CertificationId);
             if(data != null)
             {
-                return View(data);
+                return PartialView("~/Views/Shared/_EditCertification.cshtml", data);
             }
             else
             {
@@ -94,9 +105,37 @@ namespace Human_Resources.Controllers
             }
             else
             {
-                return View(certification);
+                return PartialView("~/Views/Shared/_EditCertification.cshtml", certification);
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> DeleteCertification(int CertificationId)
+        {
+            var data = await _service.GetById(CertificationId);
+            if (data != null)
+            {
+                return PartialView("~/Views/Shared/_EditCertification.cshtml", data);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+        [HttpPost, ActionName("DeleteCertificate")]
+        public async Task<IActionResult> DeleteCertificationConfirmed(int certificationId)
+        {
+            var certification = await _service.GetById(certificationId);
+            if (certification != null)
+            {
+                await _service.DeleteCertification(certification);
+                return RedirectToAction("GetCertificate");
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
         [HttpGet]
         public async Task<IActionResult>FindCertificates()
         {
