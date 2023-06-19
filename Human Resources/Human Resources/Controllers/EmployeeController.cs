@@ -572,8 +572,13 @@ namespace Human_Resources.Controllers
                 worksheet.Cell(currentRow, 1).Value = "Name";
                 worksheet.Cell(currentRow, 2).Value = "Department";
                 worksheet.Cell(currentRow, 3).Value = "Position";
-                worksheet.Cell(currentRow, 4).Value = "Initial Salary";
+                worksheet.Cell(currentRow, 4).Value = "Initial Salary(birr)";
                 worksheet.Cell(currentRow, 5).Value = "Final Salary(birr)";
+                worksheet.Column("A").Width = 20;
+                worksheet.Column("B").Width = 20;
+                worksheet.Column("C").Width = 20;
+                worksheet.Column("D").Width = 20;
+                worksheet.Column("E").Width = 20;
                 foreach(var employee in employees)
                 {
                     currentRow++;

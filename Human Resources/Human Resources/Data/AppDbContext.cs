@@ -1,4 +1,5 @@
-﻿using Human_Resources.Models;
+﻿using Human_Resources.Data.Helpers;
+using Human_Resources.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -72,6 +73,8 @@ namespace Human_Resources.Data
         public DbSet<Certification> Certifications { get; set; }
         public DbSet<Holiday> Holidays { get; set; }
         public DbSet<CheckOutTrackList> CheckOutTrackLists { get; set; }
+        public DbSet<AttendanceLock> AttendanceLocks { get; set; }
+        public DbSet<LeaveLock> LeaveLocks { get; set; }
 
     }
 }
