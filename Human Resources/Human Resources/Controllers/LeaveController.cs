@@ -48,6 +48,8 @@ namespace Human_Resources.Controllers
             var leaves = await leaveService.GetAll();
             var User = _accessor.HttpContext.User;
             var user = await _userManager.GetUserAsync(User);
+            var encashment = await _encashment.GetByEmployeeId(user.EmployeeId);
+            TempData["encashment"] = encashment.Credit;
             var bucket = new List<Leave>();
             if(leaves == null)
             {

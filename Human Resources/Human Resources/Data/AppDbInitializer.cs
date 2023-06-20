@@ -123,6 +123,7 @@ namespace Human_Resources.Data
                 var checkins = await context.CheckInTrackLists.ToListAsync();
                 var holidays = await context.Holidays.ToListAsync();
                 var locks = await context.AttendanceLocks.ToListAsync();
+                var configData = await context.Configurations.FirstOrDefaultAsync(n => n.Id == 1);
                 var maxValTime = DateTime.MinValue;
                 if (locks != null)
                 {
@@ -153,7 +154,7 @@ namespace Human_Resources.Data
                         break;
                     }
                 }
-                if (DateTime.Now.Hour <= 8 && isHoliday == false && (locks==null || (DateTime.Now - maxValTime).TotalHours > 24))
+                if (DateTime.Now.Hour <= configData.AttendanceSyncTime.Hour && isHoliday == false && (locks==null || (DateTime.Now - maxValTime).TotalHours >= 24))
                 {
                     foreach (var attendance in attendances)
                     {
@@ -185,6 +186,12 @@ namespace Human_Resources.Data
                             await context.SaveChangesAsync();
                         }
                     }
+                    await context.AttendanceLocks.AddAsync(new AttendanceLock
+                    {
+                        lockTime = DateTime.Now,
+                    });
+                    await context.SaveChangesAsync();
+
                 }
 
             }

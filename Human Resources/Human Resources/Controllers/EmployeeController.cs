@@ -11,9 +11,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Security;
 using System.Diagnostics.Eventing.Reader;
 using X.PagedList;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace Human_Resources.Controllers
 {
@@ -32,12 +34,13 @@ namespace Human_Resources.Controllers
         private readonly IAttendanceService _attendanceService;
         private readonly ICheckInTrackListService _checkInTrackListService;
         private readonly IRewardService _rewardService;
+        private readonly IConfigurationService _configurationService;
         public EmployeeController(IEmployeeService service, ILogger<EmployeeController> logger,
             UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
             IPositionService posService, AppDbContext context, IEmailService email, 
             IAppraisalService appraisal, ILeaveEncashmentService encashmentService, 
             IAttendanceService attendanceService, ICheckInTrackListService checkInTrackListService,
-            IRewardService rewardService)
+            IRewardService rewardService, IConfigurationService configurationService)
         {
             _service = service;
             _logger = logger;
@@ -51,6 +54,7 @@ namespace Human_Resources.Controllers
             _attendanceService = attendanceService;
             _checkInTrackListService = checkInTrackListService;
             _rewardService = rewardService;
+            _configurationService = configurationService;
         }
         //[HttpGet]
         //public async Task<IActionResult> Index(int? page = 1)
@@ -564,6 +568,7 @@ namespace Human_Resources.Controllers
         public async Task<IActionResult> ExcelExport()
         {
             var employees = await _service.FilterEmployeeState();
+            var configData = await _configurationService.GetById(1);
 
             using(var workbook = new XLWorkbook())
             {
@@ -587,7 +592,7 @@ namespace Human_Resources.Controllers
                     worksheet.Cell(currentRow, 3).Value = employee.Position.PositionName;
                     worksheet.Cell(currentRow, 4).Value = employee.Position.PositionSalary;
                     var attendanceStatistics = await _attendanceService.GetByEmployeeId(employee.Id);
-                    worksheet.Cell(currentRow, 5).Value = employee.Position.PositionSalary - (0.01 * attendanceStatistics.NoOfLateCheck * employee.Position.PositionSalary) - (0.05 * attendanceStatistics.NoOfAbsentCheck * employee.Position.PositionSalary);
+                    worksheet.Cell(currentRow, 5).Value = employee.Position.PositionSalary - ((configData.percentDecreaseLate)/100 * attendanceStatistics.NoOfLateCheck * employee.Position.PositionSalary) - ((configData.percentDecreaseAbsent)/100 * attendanceStatistics.NoOfAbsentCheck * employee.Position.PositionSalary);
 
                 }
                 using (var stream = new MemoryStream())

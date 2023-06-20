@@ -4,8 +4,10 @@
     ViewData["title"] = "Available Leaves";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<h4 class="text text-info">Leave credit Available: @TempData["encashment"]</h4>
 @if (Model != null && Model.Count > 0)
 {
+    
     <table class="table bg-white">
         <tr>
             <th style="padding-left: 30px;">Employee Name</th>
