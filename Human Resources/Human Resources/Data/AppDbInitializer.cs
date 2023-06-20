@@ -54,15 +54,36 @@ namespace Human_Resources.Data
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
-                if (DateTime.Now.Month == 7 && DateTime.Now.Day == 7)
+                var locks = await context.LeaveLocks.ToListAsync();
+                var configData = await context.Configurations.FirstOrDefaultAsync(n => n.Id == 1);
+                var maxValTime = DateTime.MinValue;
+                if (locks != null)
                 {
-                    var encashments = await context.LeaveEncashments.ToListAsync();
-                    foreach (var encashment in encashments)
+                    foreach(var loc in locks)
                     {
-                        encashment.Credit = encashment.Credit + 50;
-                        context.LeaveEncashments.Update(encashment);
-                        await context.SaveChangesAsync();
+                        if(maxValTime < loc.lockTime)
+                        {
+                            maxValTime = loc.lockTime;
+                        }
                     }
+                }
+                if (locks == null || (DateTime.Now - maxValTime).TotalHours > 24)
+                {
+                    if (DateTime.Now.Month == configData.LeaveEncashmentSyncDate.Month && DateTime.Now.Day == configData.LeaveEncashmentSyncDate.Day)
+                    {
+                        var encashments = await context.LeaveEncashments.ToListAsync();
+                        foreach (var encashment in encashments)
+                        {
+                            encashment.Credit = encashment.Credit + 50;
+                            context.LeaveEncashments.Update(encashment);
+                            await context.SaveChangesAsync();
+                        }
+                    }
+                    await context.LeaveLocks.AddAsync(new LeaveLock
+                    {
+                        lockTime = DateTime.Now
+                    });
+                    await context.SaveChangesAsync();
                 }
             }
         }
@@ -92,6 +113,7 @@ namespace Human_Resources.Data
                 int multiplier = 1;
                 bool isHoliday = false;
 
+
                 if (DateTime.Now.DayOfWeek == DayOfWeek.Monday)
                 {
                     multiplier = 3;
@@ -100,6 +122,18 @@ namespace Human_Resources.Data
                 var attendances = await context.Attendances.ToListAsync();
                 var checkins = await context.CheckInTrackLists.ToListAsync();
                 var holidays = await context.Holidays.ToListAsync();
+                var locks = await context.AttendanceLocks.ToListAsync();
+                var maxValTime = DateTime.MinValue;
+                if (locks != null)
+                {
+                    foreach (var loc in locks)
+                    {
+                        if (maxValTime < loc.lockTime)
+                        {
+                            maxValTime = loc.lockTime;
+                        }
+                    }
+                }
                 foreach (var holiday in holidays)
                 {
                     int day = DateTime.Now.Day;
@@ -119,7 +153,7 @@ namespace Human_Resources.Data
                         break;
                     }
                 }
-                if (DateTime.Now.Hour <= 8 && isHoliday == false)
+                if (DateTime.Now.Hour <= 8 && isHoliday == false && (locks==null || (DateTime.Now - maxValTime).TotalHours > 24))
                 {
                     foreach (var attendance in attendances)
                     {
