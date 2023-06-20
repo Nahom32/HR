@@ -38,6 +38,34 @@ namespace Human_Resources.Migrations
                     b.ToTable("AttendanceLocks");
                 });
 
+            modelBuilder.Entity("Human_Resources.Data.Helpers.Configuration", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("AttendanceSyncTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("HoursOfWork")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LeaveEncashmentSyncDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("percentDecreaseAbsent")
+                        .HasColumnType("float");
+
+                    b.Property<double>("percentDecreaseLate")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Configurations");
+                });
+
             modelBuilder.Entity("Human_Resources.Data.Helpers.LeaveLock", b =>
                 {
                     b.Property<int>("Id")

@@ -1,0 +1,55 @@
+﻿@using Human_Resources.Data.Helpers
+@model Configuration
+
+@{
+    ViewData["Title"] = "Configure Services";
+}
+
+<div class="modal fade" id="EditConf-@Model.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">@ViewData["Title"]</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="create-cert-form" method="post" asp-controller="Configuration" asp-action="EditConfiguration">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input asp-for="Id" hidden />
+                        <label asp-for="percentDecreaseAbsent" class="form-label"></label>
+                        <input asp-for="percentDecreaseAbsent" class="form-control" data-bv-notempty="true" data-bv-notempty-message="The certification company field is required field is required" />
+                        <span asp-validation-for="percentDecreaseAbsent" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="percentDecreaseLate" class="form-label"></label>
+                        <input asp-for="percentDecreaseLate" class="form-control form-control-lg" data-bv-notempty="true" data-bv-notempty-message="The names field is required">
+                        <span asp-validation-for="percentDecreaseLate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="HoursOfWork" class="form-label"></label>
+                        <input asp-for="HoursOfWork" class="form-control form-control-lg" data-bv-notempty="true" data-bv-notempty-message="The The certification field is required field is required">
+                        <span asp-validation-for="HoursOfWork" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="AttendanceSyncTime" class="form-label"></label>
+                        <input asp-for="AttendanceSyncTime" type="datetime" class="form-control form-control-lg" data-bv-notempty="true" data-bv-notempty-message="The certification field is required">
+                        <span asp-validation-for="AttendanceSyncTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="LeaveEncashmentSyncDate" class="form-label"></label>
+                        <input asp-for="LeaveEncashmentSyncDate" type="datetime" class="form-control form-control-lg" data-bv-notempty="true" data-bv-notempty-message="The certification field is required">
+                        <span asp-validation-for="LeaveEncashmentSyncDate" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <a asp-action="Index" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                    <input type="submit" class="btn btn-primary" value="Update">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

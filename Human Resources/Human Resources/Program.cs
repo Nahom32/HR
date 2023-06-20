@@ -38,6 +38,7 @@ builder.Services.AddScoped<IAttendanceService, AttendanceService>();
 builder.Services.AddScoped<IHolidayService, HolidayService>();
 builder.Services.AddScoped<ICheckOutTrackListService, CheckOutTrackListService>();
 builder.Services.AddScoped<ICertificationService, CertificationService>();
+builder.Services.AddScoped<IConfigurationService, ConfigurationService>();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
@@ -98,7 +99,7 @@ app.MapControllerRoute(
 AppDbInitializer.SeedRole(app).Wait();
 AppDbInitializer.SeedEncashment(app).Wait();
 AppDbInitializer.CheckTruants(app).Wait();
-
+AppDbInitializer.SeedConfiguration(app).Wait();
 app.MapHub<MessageHub>("/messageHub");
 
 app.Run();

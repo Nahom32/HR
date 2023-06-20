@@ -75,6 +75,7 @@ namespace Human_Resources.Data
         public DbSet<CheckOutTrackList> CheckOutTrackLists { get; set; }
         public DbSet<AttendanceLock> AttendanceLocks { get; set; }
         public DbSet<LeaveLock> LeaveLocks { get; set; }
+        public DbSet<Configuration> Configurations { get; set; }
 
     }
 }

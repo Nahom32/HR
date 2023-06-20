@@ -1,4 +1,5 @@
-﻿using Human_Resources.Data.Static;
+﻿using Human_Resources.Data.Helpers;
+using Human_Resources.Data.Static;
 using Human_Resources.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +8,7 @@ namespace Human_Resources.Data
 {
     public class AppDbInitializer
     {
-        
+
         public static async Task SeedRole(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
@@ -34,29 +35,29 @@ namespace Human_Resources.Data
                         EmailConfirmed = true,
                         SecurityStamp = Guid.NewGuid().ToString(),
                         PositionName = "Admin"
-                       
+
                     };
-                    var result = await userManager.CreateAsync(newAdminUser,"Afri@1298!");
+                    var result = await userManager.CreateAsync(newAdminUser, "Afri@1298!");
                     if (result.Succeeded)
                     {
                         await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
 
                     }
-                   
-                   
+
+
                 }
-                
+
             }
         }
         public static async Task SeedEncashment(IApplicationBuilder applicationBuilder)
         {
-            using(var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
-                if(DateTime.Now.Month == 7 && DateTime.Now.Day == 7)
+                if (DateTime.Now.Month == 7 && DateTime.Now.Day == 7)
                 {
-                   var encashments = await context.LeaveEncashments.ToListAsync();
-                    foreach(var encashment in encashments)
+                    var encashments = await context.LeaveEncashments.ToListAsync();
+                    foreach (var encashment in encashments)
                     {
                         encashment.Credit = encashment.Credit + 50;
                         context.LeaveEncashments.Update(encashment);
@@ -67,31 +68,31 @@ namespace Human_Resources.Data
         }
         public static async Task SeedAttendance(IApplicationBuilder applicationBuilder)
         {
-            using(var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
                 var employees = await context.Employees.ToListAsync();
-                foreach(var employee in employees)
+                foreach (var employee in employees)
                 {
                     var attendance = new Attendance()
                     {
                         EmployeeId = employee.Id,
-                        
+
                     };
                     await context.Attendances.AddAsync(attendance);
                     await context.SaveChangesAsync();
                 }
             }
         }
-        
+
         public static async Task CheckTruants(IApplicationBuilder applicationBuilder)
         {
-            using(var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
                 int multiplier = 1;
                 bool isHoliday = false;
 
-                if(DateTime.Now.DayOfWeek == DayOfWeek.Monday)
+                if (DateTime.Now.DayOfWeek == DayOfWeek.Monday)
                 {
                     multiplier = 3;
                 }
@@ -99,33 +100,33 @@ namespace Human_Resources.Data
                 var attendances = await context.Attendances.ToListAsync();
                 var checkins = await context.CheckInTrackLists.ToListAsync();
                 var holidays = await context.Holidays.ToListAsync();
-                foreach(var holiday in holidays)
+                foreach (var holiday in holidays)
                 {
                     int day = DateTime.Now.Day;
                     int month = DateTime.Now.Month; //checking if the date is 1 from the 31 entries.
-                    if(day == 1)
+                    if (day == 1)
                     {
                         day = 31;
                         month -= 1;
                     }
                     else
                     {
-                        day -= 1;      
+                        day -= 1;
                     }
-                    if(holiday.Month == month && holiday.Date == day)
+                    if (holiday.Month == month && holiday.Date == day)
                     {
                         isHoliday = true;
                         break;
                     }
                 }
-                if(DateTime.Now.Hour <= 8 && isHoliday == false)
+                if (DateTime.Now.Hour <= 8 && isHoliday == false)
                 {
                     foreach (var attendance in attendances)
                     {
                         var lis = new List<CheckInTrackList>();
-                        foreach(var  check in checkins)
+                        foreach (var check in checkins)
                         {
-                            if(check.AttendanceId == attendance.Id)
+                            if (check.AttendanceId == attendance.Id)
                             {
                                 lis.Add(check);
                             }
@@ -136,7 +137,7 @@ namespace Human_Resources.Data
 
                             lis = lis.OrderBy(n => n.CheckInTime).ToList();
                             var diff = DateTime.Now - lis[lis.Count - 1].CheckInTime;
-                            if (diff.TotalHours > 24*multiplier) //Multiplier to check for weekends
+                            if (diff.TotalHours > 24 * multiplier) //Multiplier to check for weekends
                             {
                                 attendance.NoOfAbsentCheck += 1;
                                 context.Attendances.Update(attendance);
@@ -151,7 +152,30 @@ namespace Human_Resources.Data
                         }
                     }
                 }
-                
+
+            }
+        }
+        public static async Task SeedConfiguration(IApplicationBuilder applicationBuilder)
+        {
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
+
+                context.Database.EnsureCreated();
+
+                //Cinema
+                if (!context.Configurations.Any())
+                {
+                    context.Configurations.Add(new Configuration()
+                    {
+                        HoursOfWork = 7,
+                        percentDecreaseAbsent = 5,
+                        percentDecreaseLate = 3,
+                        AttendanceSyncTime =  new DateTime(2023,6,20,8,0,0),
+                        LeaveEncashmentSyncDate = new DateTime(2023,7,7,0,0,0),
+                    });
+                    await context.SaveChangesAsync();
+                }
             }
         }
     }

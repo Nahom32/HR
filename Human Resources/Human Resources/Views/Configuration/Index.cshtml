@@ -1,0 +1,41 @@
+﻿@using Human_Resources.Data.Helpers
+@model Configuration
+
+<table class="table bg-white">
+    <thead>
+        <tr>
+            <th>Properties</th>
+            <th>Values</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Hours of Work Required</td>
+            <td>@Model.HoursOfWork</td>
+        </tr>
+        <tr>
+            <td>% cut for absence</td>
+            <td>@Model.percentDecreaseAbsent</td>
+        </tr>
+        <tr>
+            <td>% cut for late</td>
+            <td>@Model.percentDecreaseLate</td>
+        </tr>
+        <tr>
+            <td>Absent check Time</td>
+            <td>@Model.AttendanceSyncTime</td>
+        </tr>
+        <tr>
+            <td>Encashment sync Date</td>
+            <td>@Model.LeaveEncashmentSyncDate</td>
+        </tr>
+    </tbody>
+</table>
+<a href="#" data-bs-toggle="modal" data-bs-target="@("#EditConf-" + Model.Id)" data-bs-url="@Url.Action("/EditConfiguration/"+ Model.Id)" class="btn btn-outline-primary"><i class="bi bi-gear"></i>Configure</a>
+@await Html.PartialAsync("~/Views/Shared/_EditConfiguration.cshtml", Model)
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}
