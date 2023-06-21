@@ -22,6 +22,7 @@ namespace Human_Resources.Controllers
         private readonly IConfirmedLeaveService _confirmedLeaveService;
         private readonly ILeaveEncashmentService _encashment;
         private readonly ILeaveTypeService _leaveTypeService;
+        private readonly IEmailService _emailService;
         public LeaveController(ILeaveService service,
             IHttpContextAccessor accessor, UserManager<ApplicationUser> userManager,
             IEmployeeService employeeService, IPositionService positionService,
@@ -29,7 +30,7 @@ namespace Human_Resources.Controllers
             IRejectedLeaveService rejLeave, 
             IConfirmedLeaveService confirmedLeaveService,
             ILeaveEncashmentService encashment,
-            ILeaveTypeService leaveTypeService)
+            ILeaveTypeService leaveTypeService, IEmailService emailService)
         {
             leaveService = service;
             _accessor = accessor;
@@ -41,6 +42,7 @@ namespace Human_Resources.Controllers
             _confirmedLeaveService = confirmedLeaveService;
             _encashment = encashment;
             _leaveTypeService = leaveTypeService;
+            _emailService = emailService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -48,8 +50,12 @@ namespace Human_Resources.Controllers
             var leaves = await leaveService.GetAll();
             var User = _accessor.HttpContext.User;
             var user = await _userManager.GetUserAsync(User);
-            var encashment = await _encashment.GetByEmployeeId(user.EmployeeId);
-            TempData["encashment"] = encashment.Credit;
+            if (!User.IsInRole("Admin"))
+            {
+                var encashment = await _encashment.GetByEmployeeId(user.EmployeeId);
+
+                TempData["encashment"] = encashment.Credit;
+            }
             var bucket = new List<Leave>();
             if(leaves == null)
             {
@@ -186,7 +192,10 @@ namespace Human_Resources.Controllers
                 //var searchLeave = await _leaveTypeService.GetById(leaveView.LeaveTypesId); 
                 encashment.Credit = encashment.Credit - confirmedLeave.NoOfDays;
                 await _encashment.UpdateLeaveEncashment(encashment);
-
+                var employee = await _employeeService.GetById(confirmedLeave.EmployeeId);
+                var leaveValue = await _leaveTypeService.GetById(confirmedLeave.LeaveTypesId);
+                var mail = new EMessage(new string[] { employee.Email }, "Leave Confirmation Mail", $"Your Request for {leaveValue.LeaveName} leave for {confirmedLeave.NoOfDays} has been accepted");
+                await _emailService.SendEmailAsync(mail);
                 return RedirectToAction("index");
 
             }
@@ -239,6 +248,10 @@ namespace Human_Resources.Controllers
                     LeaveStatus = Data.Enum.LeaveStatus.Rejected
                 };
                 await leaveService.UpdateLeave(reg);
+                var employee = await _employeeService.GetById(leave.EmployeeId);
+                var leaveValue = await _leaveTypeService.GetById(leave.LeaveTypesId);
+                var mail = new EMessage(new string[] { employee.Email }, "Leave Rejection Mail", $"Your Request for {leaveValue.LeaveName} leave for {leave.NoOfDays} has been rejected");
+                await _emailService.SendEmailAsync(mail);
                 return RedirectToAction("index");
 
             }

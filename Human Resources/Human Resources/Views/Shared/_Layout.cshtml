@@ -203,6 +203,13 @@
                                         <span class="hide-menu">LeaveTypes</span>
                                     </a>
                                 </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link text-secondary" asp-controller="Configuration" asp-action="Index"
+                                       aria-expanded="false">
+                                        <i class="bi bi-gear" aria-hidden="true"></i>
+                                        <span class="hide-menu">Configuration</span>
+                                    </a>
+                                </li>
                             }
                             else if (User.IsInRole("HRManager") || User.IsInRole("User"))
                             {

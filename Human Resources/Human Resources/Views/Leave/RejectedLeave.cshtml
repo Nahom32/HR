@@ -7,6 +7,7 @@
             <h1>@ViewData["Title"]</h1>
             <form method="post" asp-action="RejectedLeave">
                 <input asp-for="EmployeeId" class="form-control" type="hidden">
+                <input asp-for="LeaveId" class="form-control" type="hidden" />
                 <div class="form-group mb-3">
                     <label asp-for="LeaveTypesId" class="control-label"></label>
                     <select asp-for="LeaveTypesId" class="form-control" asp-items="ViewBag.leaveTypeDropDowns">
@@ -19,7 +20,7 @@
                     <span asp-validation-for="Remark" class="text-danger"></span>
                 </div>
                 <div class="form-group mb-3">
-                    <label asp-for="RefusalReason" class="control-label"></label>
+                    <label asp-for="NoOfDays" class="control-label"></label>
                     <input type="text" asp-for="NoOfDays" class="form-control">
                     <span asp-validation-for="NoOfDays" class="text-danger"></span>
                 </div>

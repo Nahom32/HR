@@ -12,7 +12,7 @@ namespace Human_Resources.Models
         public string RefusalReason { get; set; }
         public int LeaveTypesId { get; set; }
         [ForeignKey("LeaveTypesId")]
-        public LeaveTypes LeaveTypes { get; set; }
+        public LeaveTypes? LeaveTypes { get; set; }
         public int EmployeeId { get; set; }
         [ForeignKey("EmployeeId")]
         public Employee? Employee { get; set; }

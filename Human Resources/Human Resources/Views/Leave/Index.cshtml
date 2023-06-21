@@ -4,7 +4,11 @@
     ViewData["title"] = "Available Leaves";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h4 class="text text-info">Leave credit Available: @TempData["encashment"]</h4>
+@if (!User.IsInRole("Admin"))
+{
+
+    <h4 class="text text-info">Leave credit Available: @TempData["encashment"]</h4>
+}
 @if (Model != null && Model.Count > 0)
 {
     
@@ -53,4 +57,9 @@ else
 {
     <h4 class="text-danger align-content-center">No Request till now</h4>
     <a asp-action="RequestLeave" class="btn btn-primary">Request a Leave</a>
+}
+@if(User.IsInRole("Admin") || User.IsInRole("HRManager"))
+{
+   <a class="btn btn-primary" asp-action="Statistics" asp-controller="Leave">Statistics</a>
+    
 }
