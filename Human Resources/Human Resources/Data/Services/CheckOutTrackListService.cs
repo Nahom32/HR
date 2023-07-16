@@ -46,11 +46,11 @@ namespace Human_Resources.Data.Services
             _context.CheckOutTrackLists.Update(checkOutTrackList);
             await _context.SaveChangesAsync();
         }
-        //public async Task<List<CheckInTrackList>> GetByCheckInTrackList(int checkInId)
-        //{
-        //    var total = await _context.CheckOutTrackLists.Where(n=>n.Id == checkInId).ToListAsync();
-        //    return total;
-        //}
+        public async Task<List<CheckOutTrackList>> GetByCheckInTrackList(int checkInId)
+        {
+            var total = await _context.CheckOutTrackLists.Where(n => n.Id == checkInId).ToListAsync();
+            return total;
+        }
 
     }
 }

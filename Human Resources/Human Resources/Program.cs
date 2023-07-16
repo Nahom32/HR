@@ -9,8 +9,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using MailKit;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+//var EmailConfiguration = builder.Configuration["EmailConfiguration"];
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
@@ -45,6 +48,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 builder.Services.AddCors();
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -62,7 +66,6 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 builder.Services.AddSignalR();
 builder.Services.AddTransient<IEmailService, EmailService>();
-
 
 
 var app = builder.Build();
@@ -90,6 +93,7 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 app.UseMiddleware<AuthenticationMiddleware>();
+//app.UseMiddleware<RoleBasedMiddleWare>();
 app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Department}/{action=Index}/{id?}");

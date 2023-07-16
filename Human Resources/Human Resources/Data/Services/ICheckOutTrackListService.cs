@@ -9,6 +9,6 @@ namespace Human_Resources.Data.Services
         public Task AddCheckOutTrackList(CheckOutTrackList checkInTrackList);
         public Task UpdateCheckOutTrackList(CheckOutTrackList checkInTrackList);
         public Task DeleteCheckOutTrackList(CheckOutTrackList checkInTrackList);
-        //public Task<List<CheckInTrackList>> GetByCheckInTrackList(int checkInId);
+        public Task<List<CheckOutTrackList>> GetByCheckInTrackList(int checkInId);
     }
 }

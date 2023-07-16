@@ -1,13 +1,12 @@
 ﻿
 using Human_Resources.Models;
-using Microsoft.AspNetCore.Identity;
 
 namespace Human_Resources.Middlewares
 {
     public class AuthenticationMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly UserManager<ApplicationUser> _userManager;
+        
 
         public AuthenticationMiddleware(RequestDelegate next)
         {

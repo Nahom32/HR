@@ -47,7 +47,7 @@ namespace Human_Resources.Controllers
             }
         }
         [HttpGet]
-        [Authorize(Roles ="User")]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> EditAppraisal(int id)
         {
             var appraisal = await _service.GetById(id);
